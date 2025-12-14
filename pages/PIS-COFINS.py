@@ -39,5 +39,3 @@ st.markdown("---")
 
 
 
-
-st.dataframe(df.style.format({"VLR_PIS": "{:,.2f}", "VLR_BASE_PIS": "{:,.2f}"}))
