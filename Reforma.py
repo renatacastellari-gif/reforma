@@ -17,10 +17,7 @@ if "logged_in" not in st.session_state:
 
 # 🔒 Esconde a barra lateral com CSS se não estiver logado
 if not st.session_state.logged_in:
-    st.markdown(
-        "<style>[data-testid='stSidebar'] {display: none;}</style>",
-        unsafe_allow_html=True
-    )
+    st.markdown("<style>[data-testid='stSidebar']{display:none;}</style>", unsafe_allow_html=True)
 
 # =========================
 # TELA DE LOGIN
@@ -40,40 +37,28 @@ else:
     # CONTEÚDO PROTEGIDO
     # =========================
 
-    # --- LOGO: tenta hines.svg, hines.png, hines.jpg, hines.jpeg ---
+    # ---- LOGO HINES (hines.svg/png/jpg/jpeg) ----
     candidatos = [Path("hines.svg"), Path("hines.png"), Path("hines.jpg"), Path("hines.jpeg")]
     logo_path = next((p for p in candidatos if p.exists()), None)
 
-    if logo_path is not None:
+    if logo_path:
         try:
             st.image(str(logo_path), width=220)
         except Exception as e:
             st.warning(f"Não foi possível exibir a imagem '{logo_path.name}'. Detalhe: {e}")
             st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
     else:
-        st.info("Logo 'hines' não encontrado. Coloque hines.svg/png/jpg na mesma pasta do app.")
+        st.info("Logo 'hines' não encontrado. Coloque hines.svg/png/jpg/jpeg na mesma pasta do app.")
         st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
 
-    # Título principal estilizado
-    st.markdown("""
-    <h2 style="
-        color:#9B4DCC;
-        font-family:'Montserrat',sans-serif;
-        font-weight:700;
-        text-align:center;
-        border-bottom:2px solid #FFA500;
-        padding-bottom:8px;
-        margin-bottom:20px;">
-    Conciliações dos Impostos
-    </h2>
-    """, unsafe_allow_html=True)
-
-    # Marcador
+    # ---- Título ----
+    st.markdown(
+        "<h2 style='color:#9B4DCC;font-family:Montserrat,sans-serif;font-weight:700;text-align:center;border-bottom:2px solid #FFA500;padding-bottom:8px;margin-bottom:20px;'>Conciliações dos Impostos</h2>",
+        unsafe_allow_html=True
+    )
     st.markdown("**`REFORMA TRIBUTÁRIA`**")
 
-    # -------------------------
-    # Abas principais (SEM a aba Conciliações)
-    # -------------------------
+    # ---- Abas (SEM Conciliações) ----
     tab_resumo, tab_hines, tab_venda_locacao, tab_transicao, tab_simulador, tab_fontes = st.tabs([
         "📌 Resumo", "🏢 Impactos na Hines", "🏠 Venda & Locação", "⏱️ Transição", "🧮 Simulador de Carga", "📎 Avisos & Fontes"
     ])
@@ -87,12 +72,12 @@ else:
             "**O que muda com a Reforma Tributária**  \n"
             "- Substituição de **PIS/COFINS** pela **CBS** (federal).  \n"
             "- Substituição de **ICMS/ISS** pelo **IBS** (estadual/municipal).  \n"
-            "- Estrutura **não cumulativa** com apropriação de créditos ao longo da cadeia.  \n"
+            "- Estrutura **não cumulativa** com apropriação de créditos.  \n"
             "- Introdução do **Imposto Seletivo (IS)** para produtos específicos.  \n\n"
             "**Por que isso importa para Hines (setor imobiliário)**  \n"
-            "- Maior necessidade de **gestão de créditos** em insumos/serviços de obras e incorporação.  \n"
-            "- Revisão de contratos e cronogramas para mitigar impactos em fases intermediárias e transição.  \n"
-            "- **Planejamento tributário** contínuo para decisão entre **Lucro Presumido** e **Lucro Real** (IRPJ/CSLL fora do escopo da reforma)."
+            "- Maior necessidade de **gestão de créditos** em obras/incorporação.  \n"
+            "- Revisão de contratos e cronogramas na transição.  \n"
+            "- **Planejamento tributário** contínuo entre **Lucro Presumido** e **Lucro Real** (IRPJ/CSLL fora do escopo da reforma)."
         )
         st.info("Dica: detalhe custos por obra para capturar créditos de CBS/IBS.")
 
@@ -104,13 +89,13 @@ else:
         st.markdown(
             "**Créditos e Regimes**  \n"
             "- Após a reforma, **Lucro Presumido** e **Lucro Real** poderão apropriar **créditos de CBS/IBS**.  \n"
-            "- Diferenças permanecem em **IRPJ/CSLL** (bases e ajustes).  \n\n"
+            "- Diferenças permanecem em **IRPJ/CSLL**.  \n\n"
             "**Gestão Operacional**  \n"
-            "- Ajustes de regimes e redução de créditos presumidos exigem acurácia por obra.  \n"
+            "- Ajustes de regimes e menor crédito presumido exigem acurácia por obra.  \n"
             "- Fortalecer **compliance** e rastreabilidade (CIB/SINTER).  \n\n"
             "**Ações Práticas**  \n"
             "1) Simular cenários (créditos vs. alíquotas).  \n"
-            "2) Revisar contratos e cronogramas.  \n"
+            "2) Revisar contratos/cronogramas.  \n"
             "3) Implementar controles por obra e integração contábil."
         )
 
@@ -131,12 +116,12 @@ else:
             "- Incidência na **diferença** entre custo de venda e valor do terreno, com redutor social para imóveis populares.  \n"
             "- **Crédito** sobre materiais e serviços da obra.  \n\n"
             "**Locação**  \n"
-            "- PF com atividade habitual/profissional pode recolher **CBS/IBS** além do **IRPF**.  \n"
+            "- PF habitual/profissional pode recolher **CBS/IBS** além do **IRPF**.  \n"
             "- Pequenas locações: permanece **IRPF** tradicional."
         )
         with st.expander("Notas operacionais"):
             st.markdown(
-                "- Avaliar estrutura PJ em locações profissionais para aproveitar créditos.  \n"
+                "- Estrutura PJ em locações profissionais pode aproveitar créditos.  \n"
                 "- Temporada/serviços pode ter carga maior por classificação."
             )
 
@@ -174,7 +159,7 @@ else:
             creditos = st.number_input("Créditos recuperáveis (%)", min_value=0.0, max_value=100.0, value=60.0, step=1.0)
 
         carga_atual = 0.65 + 3.00 + 4.80 + 2.88  # 11,33%
-        carga_nova = (cbs + ibs) * (1 - creditos/100.0) + 4.80 + 2.88  # didático
+        carga_nova = (cbs + ibs) * (1 - creditos/100.0) + 4.80 + 2.88
 
         colA, colB = st.columns(2)
         with colA:
@@ -203,9 +188,6 @@ else:
             "- Lucro Presumido vs. Lucro Real (créditos): https://netcpa.com.br/colunas/principais-impactos-da-reforma-tributaria-para-empresas-do-lucro-real-lucro-presumido-e-simples-nacional/24146  \n"
             "- Planejamento pós-reforma: https://blog.camargoevieira.adv.br/planejamento-tributario-na-reforma-tributaria/  \n"
             "- Imobiliário e transição: https://www.controllercontabil.com.br/setor-imobiliario-e-construcao-civil-os-impactos-da-reforma-tributaria-de-2025-para-empresas-e-investidores/  \n"
-            "- CIB/SINTER: https://jornalcontabil.ig.com.br/noticia/entenda-o-impacto-que-a-reforma-tributaria-tera-nas-atividades-imobiliarias/"
+            "- CIB/SINTER: https://jornalcontabil.ig.com            "- CIB/SINTER: https://jornalcontabil.ig.com.br/noticia/entenda-o-impacto-que-a-reforma-tributaria-tera-nas-atividades-imobiliarias/"
         )
-        # Mantenha esta linha curta para não quebrar:
-        st.info("Use as fontes como apoio e acompanhe normas complementares.")
-``
 
