@@ -1,6 +1,7 @@
 
 import streamlit as st
 import pandas as pd
+from pathlib import Path
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
@@ -41,8 +42,19 @@ else:
     # CONTEÚDO PROTEGIDO
     # =========================
 
-    # LOGO/IMAGEM (opcional)
-    st.image("hines.svg", width=220)
+    # --- LOGO: tenta hines.svg, hines.png, hines.jpg ---
+    candidatos = [Path("hines.svg"), Path("hines.png"), Path("hines.jpg"), Path("hines.jpeg")]
+    logo_path = next((p for p in candidatos if p.exists()), None)
+
+    if logo_path is not None:
+        try:
+            st.image(str(logo_path), width=220)
+        except Exception as e:
+            st.warning(f"Não foi possível exibir a imagem '{logo_path.name}'. Detalhe: {e}")
+            st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
+    else:
+        st.info("Logo 'hines' não encontrado (aceitos: hines.svg, hines.png, hines.jpg). Coloque o arquivo na mesma pasta do app.")
+        st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
 
     # Título principal estilizado
     st.markdown("""
@@ -58,7 +70,7 @@ else:
     </h2>
     """, unsafe_allow_html=True)
 
-    # Competência ou marcador
+    # Marcador
     st.markdown("**`REFORMA TRIBUTÁRIA`**")
 
     # -------------------------
@@ -108,7 +120,7 @@ else:
         3) Implementar **controles por obra** e integração contábil para segregação de créditos.  
         """)
 
-        # Gráfico simples: Carga atual (placeholders) para visualização
+        # Gráfico simples: Carga atual (exemplo informado)
         st.markdown("**Carga tributária atual (exemplo informado):**")
         atual = pd.DataFrame({
             "Tributo": ["PIS", "COFINS", "IRRF", "CSLL"],
@@ -135,7 +147,7 @@ else:
         with st.expander("Notas operacionais"):
             st.markdown("""
             - Avaliar a estrutura societária para locações profissionais, considerando **direito a créditos** via PJ.  
-            - Short-term (temporada) tende a ter maior carga efetiva por ser classificados como **serviços**.  
+            - Short-term (temporada) tende a ter maior carga efetiva por ser classificado como **serviço**.  
             """)
 
     # =========================
@@ -202,7 +214,7 @@ else:
             """)
 
     # =========================
-    # 🗂️ CONCILIAÇÕES (seu bloco original)
+    # 🗂️ CONCILIAÇÕES (bloco original)
     # =========================
     with tab_conciliacoes:
         st.subheader("Conciliações dos Impostos – Razão vs. Fiscal")
@@ -252,7 +264,7 @@ else:
 
         - Artigos sobre **Lucro Presumido vs. Lucro Real** pós-reforma e créditos não cumulativos:  
           https://netcpa.com.br/colunas/principais-impactos-da-reforma-tributaria-para-empresas-do-lucro-real-lucro-presumido-e-simples-nacional/24146  
-          https://blog.camargoevieira.adv. br/planejamento-tributario-na-reforma-tributaria/
+          https://blog.camargoevieira.adv.br/planejamento-tributario-na-reforma-tributaria/
 
         - **Imobiliário**: impactos práticos, fim de regimes especiais e transição:  
           https://www.controllercontabil.com.br/setor-imobiliario-e-construcao-civil-os-impactos-da-reforma-tributaria-de-2025-para-empresas-e-investidores/
@@ -261,8 +273,5 @@ else:
           https://jornalcontabil.ig.com.br/noticia/entenda-o-impacto-que-a-reforma-tributaria-tera-nas-atividades-imobiliarias/
         """)
 
-        st.info("""
-        Use essas referências como apoio. 
-        Acompanhe normas complementares, decretos e        Acompanhe normas complementares, 
-        decretos e portarias para parâmetros finais de alíquotas e obrigações acessórias.
+        st.info("Use essas referências como apoio. Acompanhe normas complementares, decretos e portarias para parâmetros finais de alíquotas e
 
