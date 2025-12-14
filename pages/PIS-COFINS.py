@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 
 # Configuração da página
-st.set_page_config(page_title="PIS", page_icon="🟣", layout="wide")
+st.set_page_config(page_title="PIS", page_icon="🟣")
 
 # Cabeçalho com logo
 col1, col2, col3 = st.columns([1, 2, 1])
