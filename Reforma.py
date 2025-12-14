@@ -53,7 +53,7 @@ else:
 
     # ---- Título ----
     st.markdown(
-        "<h2 style='color:#9B4DCC;font-family:Montserrat,sans-serif;font-weight:700;text-align:center;border-bottom:2px solid #FFA500;padding-bottom:8px;margin-bottom:20px;'>Conciliações dos Impostos</h2>",
+        "<h2 style='color:#9B4DCC;font-family:Montserrat,sans-serif;font-weight:700;text-align:center;border-bottom:2px solid #FFA500;padding-bottom:8px;margin-bottom:20px;'>Reforma Tributária</h2>",
         unsafe_allow_html=True
     )
     st.markdown("**`REFORMA TRIBUTÁRIA`**")
