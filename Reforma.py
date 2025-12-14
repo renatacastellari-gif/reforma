@@ -263,5 +263,6 @@ else:
 
         st.info("""
         Use essas referências como apoio. 
-        Acompanhe normas complementares, decretos e        Acompanhe normas complementares, decretos e portarias para parâmetros finais de alíquotas e obrigações acessórias.
-""")
+        Acompanhe normas complementares, decretos e        Acompanhe normas complementares, 
+        decretos e portarias para parâmetros finais de alíquotas e obrigações acessórias.
+
