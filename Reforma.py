@@ -252,7 +252,7 @@ else:
 
         - Artigos sobre **Lucro Presumido vs. Lucro Real** pós-reforma e créditos não cumulativos:  
           https://netcpa.com.br/colunas/principais-impactos-da-reforma-tributaria-para-empresas-do-lucro-real-lucro-presumido-e-simples-nacional/24146  
-          https://blog.camargoevieira.adv.br/planejamento-tributario-na-reforma-tributaria/
+          https://blog.camargoevieira.adv. br/planejamento-tributario-na-reforma-tributaria/
 
         - **Imobiliário**: impactos práticos, fim de regimes especiais e transição:  
           https://www.controllercontabil.com.br/setor-imobiliario-e-construcao-civil-os-impactos-da-reforma-tributaria-de-2025-para-empresas-e-investidores/
@@ -261,4 +261,7 @@ else:
           https://jornalcontabil.ig.com.br/noticia/entenda-o-impacto-que-a-reforma-tributaria-tera-nas-atividades-imobiliarias/
         """)
 
-        st.info("Use essas referências como apoio. Acompanhe normas complementares, decretos e portarias para parâmetros finais de alíquotas e
+        st.info("""
+        Use essas referências como apoio. 
+        Acompanhe normas complementares, decretos e        Acompanhe normas complementares, decretos e portarias para parâmetros finais de alíquotas e obrigações acessórias.
+
