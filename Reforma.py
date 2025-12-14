@@ -42,7 +42,7 @@ else:
     # =========================
 
     # LOGO/IMAGEM (opcional)
-    st.image("teste.svg", width=220)
+    st.image("hines.svg", width=220)
 
     # Título principal estilizado
     st.markdown("""
