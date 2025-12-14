@@ -124,5 +124,5 @@ st.bar_chart(df_comp.set_index("Cenário"))
 
 # Observação final (curta para evitar quebra de string)
 st.info("No Lucro Real, há créditos atuais de PIS/COFINS; a CBS tende a uniformizar créditos para todos. A carga efetiva dependerá do mix de despesas elegíveis e da eficiência nos créditos.")
-``
+
 
