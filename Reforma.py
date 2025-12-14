@@ -42,7 +42,7 @@ else:
     # =========================
 
     # LOGO/IMAGEM (opcional)
-    st.image("hines.svg", width=220)
+    st.image("teste.svg", width=220)
 
     # Título principal estilizado
     st.markdown("""
@@ -264,4 +264,4 @@ else:
         st.info("""
         Use essas referências como apoio. 
         Acompanhe normas complementares, decretos e        Acompanhe normas complementares, decretos e portarias para parâmetros finais de alíquotas e obrigações acessórias.
-
+""")
