@@ -6,7 +6,7 @@ from pathlib import Path
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
 # =========================
-st.set_page_config(page_title="Conciliações dos Impostos", page_icon="🟪", layout="wide")
+st.set_page_config(page_title="Reforma Tributária", page_icon="🟪", layout="wide")
 
 # =========================
 # SENHA FIXA / LOGIN
@@ -74,10 +74,10 @@ else:
     st.markdown("**`REFORMA TRIBUTÁRIA`**")
 
     # -------------------------
-    # Abas principais
+    # Abas principais (REMOVIDA a aba 🗂️ Conciliações)
     # -------------------------
-    tab_resumo, tab_hines, tab_venda_locacao, tab_transicao, tab_simulador, tab_conciliacoes, tab_fontes = st.tabs([
-        "📌 Resumo", "🏢 Impactos na Hines", "🏠 Venda & Locação", "⏱️ Transição", "🧮 Simulador de Carga", "🗂️ Conciliações", "📎 Avisos & Fontes"
+    tab_resumo, tab_hines, tab_venda_locacao, tab_transicao, tab_simulador, tab_fontes = st.tabs([
+        "📌 Resumo", "🏢 Impactos na Hines", "🏠 Venda & Locação", "⏱️ Transição", "🧮 Simulador de Carga", "📎 Avisos & Fontes"
     ])
 
     # =========================
@@ -85,42 +85,37 @@ else:
     # =========================
     with tab_resumo:
         st.subheader("Visão Geral")
-        st.markdown("""
-        **O que muda com a Reforma Tributária**  
-        - Substituição de **PIS/COFINS** pela **CBS** (federal).  
-        - Substituição de **ICMS/ISS** pelo **IBS** (estadual/municipal).  
-        - Estrutura **não cumulativa** com apropriação de créditos ao longo da cadeia.  
-        - Introdução do **Imposto Seletivo (IS)** para produtos específicos.  
-        
-        **Por que isso importa para Hines (setor imobiliário)**  
-        - Maior necessidade de **gestão de créditos** em insumos/serviços de obras e incorporação.  
-        - Revisão de contratos e cronogramas para mitigar impactos em fases intermediárias e transição.  
-        - **Planejamento tributário** contínuo para decisão entre **Lucro Presumido** e **Lucro Real** (IRPJ/CSLL permanecem fora do escopo da reforma).  
-        """)
-
-        st.info("Dica rápida: traga os custos de insumos e serviços com granularidade por obra para capturar créditos da CBS/IBS e reduzir o custo efetivo.")
+        st.markdown(
+            "**O que muda com a Reforma Tributária**  \n"
+            "- Substituição de **PIS/COFINS** pela **CBS** (federal).  \n"
+            "- Substituição de **ICMS/ISS** pelo **IBS** (estadual/municipal).  \n"
+            "- Estrutura **não cumulativa** com apropriação de créditos ao longo da cadeia.  \n"
+            "- Introdução do **Imposto Seletivo (IS)** para produtos específicos.  \n\n"
+            "**Por que isso importa para Hines (setor imobiliário)**  \n"
+            "- Maior necessidade de **gestão de créditos** em insumos/serviços de obras e incorporação.  \n"
+            "- Revisão de contratos e cronogramas para mitigar impactos em fases intermediárias e transição.  \n"
+            "- **Planejamento tributário** contínuo para decisão entre **Lucro Presumido** e **Lucro Real** (IRPJ/CSLL permanecem fora do escopo da reforma)."
+        )
+        st.info("Dica rápida: detalhe custos por obra para capturar créditos de CBS/IBS e reduzir o custo efetivo.")
 
     # =========================
     # 🏢 IMPACTOS NA HINES
     # =========================
     with tab_hines:
         st.subheader("Impactos específicos para Hines")
-        st.markdown("""
-        **Créditos e Regimes**  
-        - Após a reforma, tanto **Lucro Presumido** quanto **Lucro Real** poderão apropriar **créditos de CBS/IBS**.  
-        - A diferença entre os regimes permanece principalmente em **IRPJ e CSLL** (bases de cálculo e ajustes fiscais).  
+        st.markdown(
+            "**Créditos e Regimes**  \n"
+            "- Após a reforma, tanto **Lucro Presumido** quanto **Lucro Real** poderão apropriar **créditos de CBS/IBS**.  \n"
+            "- A diferença entre os regimes permanece em **IRPJ e CSLL** (bases de cálculo e ajustes fiscais).  \n\n"
+            "**Gestão Operacional**  \n"
+            "- Ajustes de regimes e redução de créditos presumidos exigem maior acurácia contábil por obra.  \n"
+            "- Rastreabilidade de custos e **compliance** fortalecidos (ex.: CIB/SINTER).  \n\n"
+            "**Ações Práticas**  \n"
+            "1) Simular cenários (créditos vs. alíquotas CBS/IBS).  \n"
+            "2) Revisar contratos e cronogramas.  \n"
+            "3) Implementar controles por obra e integração contábil."
+        )
 
-        **Gestão Operacional**  
-        - Fim/ajustes de regimes especiais (como RET) e redução de créditos presumidos exigem maior acurácia contábil por obra.  
-        - Rastreabilidade de custos e **compliance** fortalecidos (ex.: CIB/SINTER no segmento imobiliário).  
-
-        **Ações Práticas**  
-        1) **Simular cenários** (volumetria de créditos vs. alíquotas CBS/IBS).  
-        2) **Revisar contratos** e cronogramas de obras (antecipar etapas quando benéfico).  
-        3) Implementar **controles por obra** e integração contábil para segregação de créditos.  
-        """)
-
-        # Gráfico simples: Carga atual (exemplo informado)
         st.markdown("**Carga tributária atual (exemplo informado):**")
         atual = pd.DataFrame({
             "Tributo": ["PIS", "COFINS", "IRRF", "CSLL"],
@@ -133,49 +128,45 @@ else:
     # =========================
     with tab_venda_locacao:
         st.subheader("Venda e Locação de Imóveis")
-        st.markdown("""
-        **Venda (incorporações)**  
-        - A incidência foca na **diferença** entre o **custo de venda** e o **valor do terreno**.  
-        - Há **redutor social** (por exemplo, R$ 100 mil) para tornar a tributação progressiva – beneficiando imóveis populares.  
-        - **Crédito amplo** sobre materiais e serviços utilizados na obra, reduzindo custo efetivo.  
-
-        **Locação**  
-        - Pessoas físicas com atividade **habitual/profissional** (e/ou volume relevante) podem tornar-se contribuintes de **CBS/IBS**, além do **IRPF**.  
-        - Para pequenas locações pontuais, permanece o **IRPF** tradicional.  
-        """)
-
+        st.markdown(
+            "**Venda (incorporações)**  \n"
+            "- Incidência na **diferença** entre custo de venda e valor do terreno.  \n"
+            "- **Redutor social** para imóveis populares.  \n"
+            "- **Crédito** sobre materiais e serviços da obra.  \n\n"
+            "**Locação**  \n"
+            "- PF com atividade habitual/profissional pode recolher **CBS/IBS** além do **IRPF**.  \n"
+            "- Pequenas locações: permanece IRPF tradicional."
+        )
         with st.expander("Notas operacionais"):
-            st.markdown("""
-            - Avaliar a estrutura societária para locações profissionais, considerando **direito a créditos** via PJ.  
-            - Short-term (temporada) tende a ter maior carga efetiva por ser classificado como **serviço**.  
-            """)
+            st.markdown(
+                "- Avaliar estrutura PJ em locações profissionais para aproveitar créditos.  \n"
+                "- Aluguéis de temporada tendem a ter maior carga por classificação como serviço."
+            )
 
     # =========================
     # ⏱️ TRANSIÇÃO
     # =========================
     with tab_transicao:
         st.subheader("Linha do Tempo de Transição")
-        st.markdown("""
-        - **2026**: início da transição, aplicação de **alíquotas teste** de CBS/IBS; coexistência com tributos atuais.  
-        - **2026–2032**: fases escalonadas com convivência de sistemas antigo e novo.  
-        - **2033**: implementação plena do modelo CBS/IBS; extinção dos antigos tributos de consumo.  
-        """)
-
-        st.warning("Planeje sistemas e processos para convivência de dois modelos. Testes de crédito, conciliação e auditoria interna são essenciais.")
+        st.markdown(
+            "- **2026**: início da transição; alíquotas teste; coexistência de sistemas.  \n"
+            "- **2026–2032**: fases escalonadas.  \n"
+            "- **2033**: modelo CBS/IBS pleno."
+        )
+        st.warning("Prepare processos para convivência dos dois modelos e auditoria interna de créditos.")
 
     # =========================
-    # 🧮 SIMULADOR DE CARGA
+    # 🧮 SIMULADOR
     # =========================
     with tab_simulador:
-        st.subheader("Simulador – Carga Atual vs. Pós-Reforma (cenário hipotético)")
-        st.markdown("""
-        **Como usar**  
-        - Ajuste as alíquotas **CBS/IBS** estimadas (não cumulativo).  
-        - Informe o **percentual de créditos** recuperáveis (insumos/serviços).  
-        - Compare com a **carga atual** (PIS+COFINS+IRRF+CSLL = 11,33%).  
-
-        > **Atenção**: Este simulador é **didático** e **não substitui** análise oficial/regulamentação. Use para sensibilizar cenários internos.
-        """)
+        st.subheader("Simulador – Carga Atual vs. Pós-Reforma (didático)")
+        st.markdown(
+            "**Como usar**  \n"
+            "- Ajuste alíquotas **CBS/IBS**.  \n"
+            "- Informe **créditos recuperáveis**.  \n"
+            "- Compare com a **carga atual** (11,33%).  \n\n"
+            "> Este simulador é didático e não substitui análise oficial."
+        )
 
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -185,93 +176,37 @@ else:
         with col3:
             creditos = st.number_input("Créditos recuperáveis (%)", min_value=0.0, max_value=100.0, value=60.0, step=1.0)
 
-        # Carga atual
         carga_atual = 0.65 + 3.00 + 4.80 + 2.88  # 11,33%
+        carga_nova = (cbs + ibs) * (1 - creditos/100.0) + 4.80 + 2.88  # fórmula didática
 
-        # Carga pós-reforma (didática): CBS+IBS líquidos de créditos + IRRF+CSLL (mantidos)
-        # Fórmula simplificada: carga_nova = (CBS+IBS) * (1 - creditos%) + IRRF + CSLL
-        carga_nova = (cbs + ibs) * (1 - creditos/100.0) + 4.80 + 2.88
-
-        # Apresentação
         colA, colB = st.columns(2)
         with colA:
             st.metric("Carga Atual (%)", f"{carga_atual:.2f}")
         with colB:
-            st.metric("Cenário Pós-Reforma (%)", f"{carga_nova:.2f}")
+            st.metric("Pós-Reforma (simulado) (%)", f"{carga_nova:.2f}")
 
-        # Gráfico comparativo
-        df_comp = pd.DataFrame({
-            "Cenário": ["Atual", "Pós-Reforma (simulado)"],
-            "Carga_%": [carga_atual, carga_nova]
-        })
+        df_comp = pd.DataFrame({"Cenário": ["Atual", "Pós-Reforma (simulado)"], "Carga_%": [carga_atual, carga_nova]})
         st.bar_chart(df_comp.set_index("Cenário"))
 
-        with st.expander("Parâmetros e suposições do simulador"):
-            st.markdown("""
-            - **CBS/IBS** aqui são parâmetros ajustáveis para estudos internos.  
-            - O **percentual de créditos** reflete a fração dos tributos recuperáveis via insumos/serviços.  
-            - **IRRF** e **CSLL** são mantidos para comparação (a reforma não altera IRPJ/CSLL).  
-            """)
+        with st.expander("Parâmetros e suposições"):
+            st.markdown(
+                "- **CBS/IBS** são parâmetros ajustáveis.  \n"
+                "- **Créditos** refletem insumos/serviços.  \n"
+                "- **IRRF/CSLL** mantidos para comparação."
+            )
 
     # =========================
-    # 🗂️ CONCILIAÇÕES (bloco original)
-    # =========================
-    with tab_conciliacoes:
-        st.subheader("Conciliações dos Impostos – Razão vs. Fiscal")
-        st.markdown("<p style='font-size:28px; font-weight:bold; color:#FFA500;'>Seja bem-vindo(a)!</p>", unsafe_allow_html=True)
-
-        st.markdown("""
-        Esta aplicação apresenta as **demonstrações das conciliações entre os saldos fiscais e contábeis (Razão)**, destacando as **diferenças identificadas** e seus respectivos detalhes.
-
-        O objetivo é oferecer uma visão clara e organizada para apoiar os departamentos fiscal e contábil:
-        - **Conciliação dos impostos**
-        - **Validação dos lançamentos contábeis**
-        - **Identificação de ajustes necessários**
-
-        ✅ Navegue pelas abas para consultar as diferenças do mês.
-
-        ---
-        > **Objetivo:** Garantir o alinhamento entre os saldos fiscais e contábeis, prevenindo divergências nos registros.  
-        <span style="color:#FFD700;">Desenvolvemos essa página para proporcionar acesso rápido e facilidade na visualização das conciliações.</span>
-        """, unsafe_allow_html=True)
-
-        # Dados como strings (códigos de contas), alinhados
-        dados = [
-            ("IPI a Recolher", "2300390"),
-            ("ICMS a Recolher", "2300391"),
-            ("COFINS a Recolher", "2300394"),
-            ("PIS a Recolher", "2300395"),
-            ("IPI a Recuperar", "1280342"),
-            ("PIS a Recuperar", "1280343"),
-            ("COFINS a Recuperar", "1280344"),
-            ("ICMS a Recuperar", "1280345"),
-            ("VENDAS", "4000000"),
-        ]
-        linhas_formatadas = [f"{nome:<25} {codigo:>10}" for nome, codigo in dados]
-        st.code("\n".join(linhas_formatadas))
-
-    # =========================
-    # 📎 AVISOS & FONTES
+    # 📎 FONTES
     # =========================
     with tab_fontes:
         st.subheader("Avisos & Fontes (consultar antes de decisões)")
-        st.markdown("""
-        - Ministério da Fazenda – **Impactos da Reforma** (CBS/IBS, princípio do destino, transição):  
-          https://www.gov.br/fazenda/pt-br/acesso-a-informacao/acoes-e-programas/futuro-seguro/reforma-tributaria/impactos-da-reforma
-
-        - Nota à imprensa – **Setor Imobiliário** (redutor social, base de incidência nas incorporações):  
-          https://www.gov.br/fazenda/pt-br/canais_atendimento/imprensa/notas-a-imprensa/2025/abril/reforma-tributaria-sera-positiva-para-o-setor-imobiliario
-
-        - Artigos sobre **Lucro Presumido vs. Lucro Real** pós-reforma e créditos não cumulativos:  
-          https://netcpa.com.br/colunas/principais-impactos-da-reforma-tributaria-para-empresas-do-lucro-real-lucro-presumido-e-simples-nacional/24146  
-          https://blog.camargoevieira.adv.br/planejamento-tributario-na-reforma-tributaria/
-
-        - **Imobiliário**: impactos práticos, fim de regimes especiais e transição:  
-          https://www.controllercontabil.com.br/setor-imobiliario-e-construcao-civil-os-impactos-da-reforma-tributaria-de-2025-para-empresas-e-investidores/
-
-        - **CIB/SINTER** e reforço de controle sobre transações imobiliárias:  
-          https://jornalcontabil.ig.com.br/noticia/entenda-o-impacto-que-a-reforma-tributaria-tera-nas-atividades-imobiliarias/
-               """)
-
-        # *** Linha única para evitar quebra de string ***
+        st.markdown(
+            "- Ministério da Fazenda – Impactos da Reforma: https://www.gov.br/fazenda/pt-br/acesso-a-informacao/acoes-e-programas/futuro-seguro/reforma-tributaria/impactos-da-reforma  \n"
+            "- Nota à imprensa – Setor Imobiliário: https://www.gov.br/fazenda/pt-br/canais_atendimento/imprensa/notas-a-imprensa/2025/abril/reforma-tributaria-sera-positiva-para-o-setor-imobiliario  \n"
+            "- Lucro Presumido vs. Lucro Real (créditos): https://netcpa.com.br/colunas/principais-impactos-da-reforma-tributaria-para-empresas-do-lucro-real-lucro-presumido-e-simples-nacional/24146  \n"
+            "- Planejamento pós-reforma: https://blog.camargoevieira.adv.br/planejamento-tributario-na-reforma-tributaria/  \n"
+            "- Imobiliário e transição: https://www.controllercontabil.com.br/setor-imobiliario-e-construcao-civil-os-impactos-da-reforma-tributaria-de-2025-para-empresas-e-investidores/  \n"
+            "- CIB/SINTER: https://jornalcontabil.ig.com.br/noticia/entenda-o-impacto-que-a-reforma-tributaria-tera-nas-atividades-imobiliarias/"
+        )
+        st.info("Use essas referências como apoio. Acompanhe normas complementares, decretos e portarias para parâmetros finais de al
 
