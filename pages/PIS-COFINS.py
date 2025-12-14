@@ -27,12 +27,14 @@ with col2:
         st.markdown("<h3>Hines</h3>", unsafe_allow_html=True)
 
 # ---------------------------
-# Título principal estilizado
+# Título principal estilizado (vermelho serifado, igual ao Hines)
 # ---------------------------
- st.markdown(
-        "<h2 style='color:#B22222;font-family:Times New Roman,sans-serif;font-weight:700;text-align:center;border-bottom:2px solid #B22222;padding-bottom:8px;margin-bottom:20px;'>Reforma Tributária</h2>",
-        unsafe_allow_html=True
-    )
+st.markdown(
+    "<h2 style='color:#B22222; font-family:Times New Roman, Georgia, serif; font-weight:700; "
+    "text-align:center; border-bottom:2px solid #B22222; padding-bottom:8px; margin-bottom:20px;'>"
+    "Reforma Tributária</h2>",
+    unsafe_allow_html=True
+)
 st.markdown("**`REFORMA TRIBUTÁRIA`**")
 
 # ---------------------------
@@ -42,50 +44,50 @@ cA, cB = st.columns(2)
 
 with cA:
     st.markdown(
-        "<div style='background-color:#1f1f1f;border:1px solid #333;border-radius:12px;"
-        "padding:18px;box-shadow:0 0 0 1px rgba(255,255,255,0.04) inset;'>"
-        "<h3 style='color:#EEE4EF;font-family:Montserrat,sans-serif;margin-top:0;'>"
+        "<div style='background-color:#1f1f1f; border:1px solid #333; border-radius:12px; "
+        "padding:18px; box-shadow:0 0 0 1px rgba(255,255,255,0.04) inset;'>"
+        "<h3 style='color:#EEE4EF; font-family:Montserrat, sans-serif; margin-top:0;'>"
         "Resumo – PIS e COFINS (situação atual)</h3>"
-        "<p style='color:#cfcfcf;font-size:15px;line-height:1.6;'>"
+        "<p style='color:#cfcfcf; font-size:15px; line-height:1.6;'>"
         "<b>PIS</b> e <b>COFINS</b> incidem sobre a receita das empresas.<br>"
         "• <b>Lucro Presumido (cumulativo):</b> PIS 0,65% + COFINS 3,00% = <b>3,65%</b> sobre a receita.<br>"
         "• <b>Lucro Real (não cumulativo):</b> PIS 1,65% / COFINS 7,60%, com <b>créditos</b> de insumos/serviços.<br><br>"
-        "Para empresas patrimoniais/imobiliárias, incidem sobre <b>receitas de locação</b> e, conforme o caso, sobre <b>receitas de venda</b>."
+        "No contexto patrimonial/imobiliário, incidem sobre <b>receitas de locação</b> e, conforme o caso, sobre <b>receitas de venda</b>."
         "</p></div>",
         unsafe_allow_html=True
     )
 
 with cB:
     st.markdown(
-        "<div style='background-color:#1f1f1f;border:1px solid #333;border-radius:12px;"
-        "padding:18px;box-shadow:0 0 0 1px rgba(255,255,255,0.04) inset;'>"
-        "<h3 style='color:#EEE4EF;font-family:Montserrat,sans-serif;margin-top:0;'>"
+        "<div style='background-color:#1f1f1f; border:1px solid #333; border-radius:12px; "
+        "padding:18px; box-shadow:0 0 0 1px rgba(255,255,255,0.04) inset;'>"
+        "<h3 style='color:#EEE4EF; font-family:Montserrat, sans-serif; margin-top:0;'>"
         "O que muda com a Reforma (CBS)</h3>"
-        "<p style='color:#cfcfcf;font-size:15px;line-height:1.6;'>"
+        "<p style='color:#cfcfcf; font-size:15px; line-height:1.6;'>"
         "• <b>PIS/COFINS</b> serão substituídos pela <b>CBS</b> (não cumulativa).<br>"
-        "• <b>Créditos</b> de insumos/serviços passam a ser amplos para todos os regimes.<br>"
-        "• Alíquota da CBS será <b>única</b> (definição final depende de regulamentação).<br><br>"
-        "<b>Transição:</b> coexistência entre sistema atual e CBS ao longo de 2026–2032; é essencial simular cenários."
+        "• <b>Créditos</b> de insumos/serviços passam a ser amplos para todos os regimes, inclusive empresas no Presumido.<br>"
+        "• A alíquota da CBS será <b>única</b> (definição final depende de regulamentação).<br><br>"
+        "<b>Transição:</b> coexistência entre sistema atual e CBS em 2026–2032; simular cenários e mapear despesas elegíveis é essencial."
         "</p></div>",
         unsafe_allow_html=True
     )
 
 # ---------------------------
-# Impacto prático para a Hines
+# Impacto prático para a Hines (patrimonial/imobiliária)
 # ---------------------------
 st.markdown(
-    "<div style='background-color:#101010;border:1px solid #333;border-radius:12px;"
-    "padding:18px;margin-top:18px;'>"
-    "<h3 style='color:#EEE4EF;font-family:Montserrat,sans-serif;margin-top:0;'>"
-    "Impacto prático para a Hines (patrimonial/imobiliária)</h3>"
-    "<ul style='color:#cfcfcf;font-size:15px;line-height:1.6;'>"
+    "<div style='background-color:#101010; border:1px solid #333; border-radius:12px; "
+    "padding:18px; margin-top:18px;'>"
+    "<h3 style='color:#EEE4EF; font-family:Montserrat, sans-serif; margin-top:0;'>"
+    "Impacto prático para a Hines</h3>"
+    "<ul style='color:#cfcfcf; font-size:15px; line-height:1.6;'>"
     "<li><b>Locação:</b> receita com CBS e <b>direito a crédito</b> sobre despesas vinculadas (manutenção, serviços, gestão).</li>"
     "<li><b>Venda de imóveis:</b> foco na <b>diferença</b> entre preço de venda e custo do terreno; créditos de obra reduzem custo efetivo.</li>"
-    "<li><b>Regimes:</b> a escolha entre <b>Presumido x Real</b> continua por <b>IRPJ/CSLL</b>; a CBS equaliza créditos, então avalie a margem e o perfil de custos.</li>"
+    "<li><b>Regimes:</b> a escolha entre <b>Presumido x Real</b> segue afetando <b>IRPJ/CSLL</b>; a CBS equaliza créditos, então avalie margem e perfil de custos.</li>"
     "<li><b>Governança:</b> mapear <b>despesas elegíveis</b> e reforçar a <b>rastreabilidade por ativo/obra</b> para maximizar créditos.</li>"
     "</ul>"
-    "<p style='color:#aaa;font-size:13px;margin-top:8px;'>"
-    "<i>Dica:</i> detalhe custos por empreendimento/ativo e formalize contratos de serviços para documentar créditos da CBS."
+    "<p style='color:#aaa; font-size:13px; margin-top:8px;'>"
+    "<i>Dica:</i> detalhe custos por empreendimento/ativo e formalize contratos para documentar créditos da CBS."
     "</p></div>",
     unsafe_allow_html=True
 )
@@ -94,10 +96,11 @@ st.markdown(
 # Mini-simulador didático (carga atual vs. CBS líquida de créditos)
 # ---------------------------
 st.markdown(
-    "<h3 style='color:#EEE4EF;font-family:Montserrat,sans-serif;margin-top:24px;'>"
+    "<h3 style='color:#EEE4EF; font-family:Montserrat, sans-serif; margin-top:24px;'>"
     "Comparativo didático – Carga atual vs. CBS</h3>"
-    "<p style='color:#cfcfcf;font-size:14px;'>"
-    "Ajuste os parâmetros para ver o efeito potencial. <b>Observação:</b> este simulador é ilustrativo; a alíquota final depende de regulamentação."
+    "<p style='color:#cfcfcf; font-size:14px;'>"
+    "Ajuste os parâmetros para ver o efeito potencial. "
+    "<b>Observação:</b> este simulador é ilustrativo; a alíquota final depende de regulamentação."
     "</p>",
     unsafe_allow_html=True
 )
@@ -112,14 +115,13 @@ with col_sim3:
     st.metric("Carga atual (PIS+COFINS)", f"{carga_atual:.2f}%")
 
 carga_cbs_liquida = cbs * (1 - creditos/100.0)
-
 df_comp = pd.DataFrame({
     "Cenário": ["Atual (PIS+COFINS)", "CBS (líquida de créditos)"],
     "Carga_%": [carga_atual, carga_cbs_liquida]
 })
 st.bar_chart(df_comp.set_index("Cenário"))
 
-# Observação final (curta para evitar quebra de string)
-st.info("No Lucro Real, há créditos atuais de PIS/COFINS; a CBS tende a uniformizar créditos para todos. A carga efetiva dependerá do mix de despesas elegíveis e da eficiência nos créditos.")
-
+# Observação final curta
+st.info("No Lucro Real já existem créditos de PIS/COFINS; a CBS tende a uniformizar créditos para todos. A carga efetiva dependerá do mix de despesas elegíveis e da eficiência na tomada de créditos.")
+``
 
