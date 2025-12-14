@@ -17,12 +17,10 @@ if "logged_in" not in st.session_state:
 
 # 🔒 Esconde a barra lateral com CSS se não estiver logado
 if not st.session_state.logged_in:
-    hide_sidebar = """
-        <style>
-        [data-testid="stSidebar"] {display: none;}
-        </style>
-    """
-    st.markdown(hide_sidebar, unsafe_allow_html=True)
+    st.markdown(
+        "<style>[data-testid='stSidebar'] {display: none;}</style>",
+        unsafe_allow_html=True
+    )
 
 # =========================
 # TELA DE LOGIN
@@ -53,7 +51,7 @@ else:
             st.warning(f"Não foi possível exibir a imagem '{logo_path.name}'. Detalhe: {e}")
             st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
     else:
-        st.info("Logo 'hines' não encontrado (aceitos: hines.svg, hines.png, hines.jpg, hines.jpeg). Coloque o arquivo na mesma pasta do app.")
+        st.info("Logo 'hines' não encontrado. Coloque hines.svg/png/jpg na mesma pasta do app.")
         st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
 
     # Título principal estilizado
@@ -74,7 +72,7 @@ else:
     st.markdown("**`REFORMA TRIBUTÁRIA`**")
 
     # -------------------------
-    # Abas principais (REMOVIDA a aba 🗂️ Conciliações)
+    # Abas principais (SEM a aba Conciliações)
     # -------------------------
     tab_resumo, tab_hines, tab_venda_locacao, tab_transicao, tab_simulador, tab_fontes = st.tabs([
         "📌 Resumo", "🏢 Impactos na Hines", "🏠 Venda & Locação", "⏱️ Transição", "🧮 Simulador de Carga", "📎 Avisos & Fontes"
@@ -94,9 +92,9 @@ else:
             "**Por que isso importa para Hines (setor imobiliário)**  \n"
             "- Maior necessidade de **gestão de créditos** em insumos/serviços de obras e incorporação.  \n"
             "- Revisão de contratos e cronogramas para mitigar impactos em fases intermediárias e transição.  \n"
-            "- **Planejamento tributário** contínuo para decisão entre **Lucro Presumido** e **Lucro Real** (IRPJ/CSLL permanecem fora do escopo da reforma)."
+            "- **Planejamento tributário** contínuo para decisão entre **Lucro Presumido** e **Lucro Real** (IRPJ/CSLL fora do escopo da reforma)."
         )
-        st.info("Dica rápida: detalhe custos por obra para capturar créditos de CBS/IBS e reduzir o custo efetivo.")
+        st.info("Dica: detalhe custos por obra para capturar créditos de CBS/IBS.")
 
     # =========================
     # 🏢 IMPACTOS NA HINES
@@ -105,13 +103,13 @@ else:
         st.subheader("Impactos específicos para Hines")
         st.markdown(
             "**Créditos e Regimes**  \n"
-            "- Após a reforma, tanto **Lucro Presumido** quanto **Lucro Real** poderão apropriar **créditos de CBS/IBS**.  \n"
-            "- A diferença entre os regimes permanece em **IRPJ e CSLL** (bases de cálculo e ajustes fiscais).  \n\n"
+            "- Após a reforma, **Lucro Presumido** e **Lucro Real** poderão apropriar **créditos de CBS/IBS**.  \n"
+            "- Diferenças permanecem em **IRPJ/CSLL** (bases e ajustes).  \n\n"
             "**Gestão Operacional**  \n"
-            "- Ajustes de regimes e redução de créditos presumidos exigem maior acurácia contábil por obra.  \n"
-            "- Rastreabilidade de custos e **compliance** fortalecidos (ex.: CIB/SINTER).  \n\n"
+            "- Ajustes de regimes e redução de créditos presumidos exigem acurácia por obra.  \n"
+            "- Fortalecer **compliance** e rastreabilidade (CIB/SINTER).  \n\n"
             "**Ações Práticas**  \n"
-            "1) Simular cenários (créditos vs. alíquotas CBS/IBS).  \n"
+            "1) Simular cenários (créditos vs. alíquotas).  \n"
             "2) Revisar contratos e cronogramas.  \n"
             "3) Implementar controles por obra e integração contábil."
         )
@@ -130,17 +128,16 @@ else:
         st.subheader("Venda e Locação de Imóveis")
         st.markdown(
             "**Venda (incorporações)**  \n"
-            "- Incidência na **diferença** entre custo de venda e valor do terreno.  \n"
-            "- **Redutor social** para imóveis populares.  \n"
+            "- Incidência na **diferença** entre custo de venda e valor do terreno, com redutor social para imóveis populares.  \n"
             "- **Crédito** sobre materiais e serviços da obra.  \n\n"
             "**Locação**  \n"
             "- PF com atividade habitual/profissional pode recolher **CBS/IBS** além do **IRPF**.  \n"
-            "- Pequenas locações: permanece IRPF tradicional."
+            "- Pequenas locações: permanece **IRPF** tradicional."
         )
         with st.expander("Notas operacionais"):
             st.markdown(
                 "- Avaliar estrutura PJ em locações profissionais para aproveitar créditos.  \n"
-                "- Aluguéis de temporada tendem a ter maior carga por classificação como serviço."
+                "- Temporada/serviços pode ter carga maior por classificação."
             )
 
     # =========================
@@ -149,7 +146,7 @@ else:
     with tab_transicao:
         st.subheader("Linha do Tempo de Transição")
         st.markdown(
-            "- **2026**: início da transição; alíquotas teste; coexistência de sistemas.  \n"
+            "- **2026**: início da transição; alíquotas-teste; coexistência de sistemas.  \n"
             "- **2026–2032**: fases escalonadas.  \n"
             "- **2033**: modelo CBS/IBS pleno."
         )
@@ -162,7 +159,7 @@ else:
         st.subheader("Simulador – Carga Atual vs. Pós-Reforma (didático)")
         st.markdown(
             "**Como usar**  \n"
-            "- Ajuste alíquotas **CBS/IBS**.  \n"
+            "- Ajuste **CBS/IBS**.  \n"
             "- Informe **créditos recuperáveis**.  \n"
             "- Compare com a **carga atual** (11,33%).  \n\n"
             "> Este simulador é didático e não substitui análise oficial."
@@ -177,7 +174,7 @@ else:
             creditos = st.number_input("Créditos recuperáveis (%)", min_value=0.0, max_value=100.0, value=60.0, step=1.0)
 
         carga_atual = 0.65 + 3.00 + 4.80 + 2.88  # 11,33%
-        carga_nova = (cbs + ibs) * (1 - creditos/100.0) + 4.80 + 2.88  # fórmula didática
+        carga_nova = (cbs + ibs) * (1 - creditos/100.0) + 4.80 + 2.88  # didático
 
         colA, colB = st.columns(2)
         with colA:
@@ -208,5 +205,7 @@ else:
             "- Imobiliário e transição: https://www.controllercontabil.com.br/setor-imobiliario-e-construcao-civil-os-impactos-da-reforma-tributaria-de-2025-para-empresas-e-investidores/  \n"
             "- CIB/SINTER: https://jornalcontabil.ig.com.br/noticia/entenda-o-impacto-que-a-reforma-tributaria-tera-nas-atividades-imobiliarias/"
         )
-        st.info("Use essas referências como apoio. Acompanhe normas complementares, decretos e portarias para parâmetros finais de al
+        # Mantenha esta linha curta para não quebrar:
+        st.info("Use as fontes como apoio e acompanhe normas complementares.")
+``
 
