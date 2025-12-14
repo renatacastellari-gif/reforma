@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#FF6600"        # Cor principal (botões, links)
+backgroundColor = "#0E1117"     # Fundo escuro
+secondaryBackgroundColor = "#262730" # Fundo dos cards
+textColor = "#FFFFFF"           # Texto branco
+font = "sans serif"
