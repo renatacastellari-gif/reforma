@@ -42,7 +42,7 @@ else:
     # CONTEÚDO PROTEGIDO
     # =========================
 
-    # --- LOGO: tenta hines.svg, hines.png, hines.jpg ---
+    # --- LOGO: tenta hines.svg, hines.png, hines.jpg, hines.jpeg ---
     candidatos = [Path("hines.svg"), Path("hines.png"), Path("hines.jpg"), Path("hines.jpeg")]
     logo_path = next((p for p in candidatos if p.exists()), None)
 
@@ -53,7 +53,7 @@ else:
             st.warning(f"Não foi possível exibir a imagem '{logo_path.name}'. Detalhe: {e}")
             st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
     else:
-        st.info("Logo 'hines' não encontrado (aceitos: hines.svg, hines.png, hines.jpg). Coloque o arquivo na mesma pasta do app.")
+        st.info("Logo 'hines' não encontrado (aceitos: hines.svg, hines.png, hines.jpg, hines.jpeg). Coloque o arquivo na mesma pasta do app.")
         st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
 
     # Título principal estilizado
@@ -271,7 +271,7 @@ else:
 
         - **CIB/SINTER** e reforço de controle sobre transações imobiliárias:  
           https://jornalcontabil.ig.com.br/noticia/entenda-o-impacto-que-a-reforma-tributaria-tera-nas-atividades-imobiliarias/
-        """)
+               """)
 
-        st.info("Use essas referências como apoio. Acompanhe normas complementares, decretos e portarias para parâmetros finais de alíquotas e
+        # *** Linha única para evitar quebra de string ***
 
