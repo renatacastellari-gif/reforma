@@ -21,13 +21,13 @@ with col2:
             st.image(str(logo_path), width=300)
         except Exception as e:
             st.warning(f"Não foi possível exibir a imagem '{logo_path.name}'. Detalhe: {e}")
-            st.markdown("<h3>Hines</h3>", unsafe_allow_html=True)
+            st.markdown("<h3 style='text-align:center;'>Hines</h3>", unsafe_allow_html=True)
     else:
-        st.info("Logo 'hines' não encontrado (hines.svg/png/jpg).")
-        st.markdown("<h3>Hines</h3>", unsafe_allow_html=True)
+        st.info("Logo 'hines' não encontrado (hines.svg/png/jpg/jpeg).")
+        st.markdown("<h3 style='text-align:center;'>Hines</h3>", unsafe_allow_html=True)
 
 # ---------------------------
-# Título principal estilizado (vermelho serifado, igual ao Hines)
+# Título principal (vermelho serifado)
 # ---------------------------
 st.markdown(
     "<h2 style='color:#B22222; font-family:Times New Roman, Georgia, serif; font-weight:700; "
@@ -121,7 +121,4 @@ df_comp = pd.DataFrame({
 })
 st.bar_chart(df_comp.set_index("Cenário"))
 
-# Observação final curta
-st.info("No Lucro Real já existem créditos de PIS/COFINS; a CBS tende a uniformizar créditos para todos. A carga efetiva dependerá do mix de despesas elegíveis e da eficiência na tomada de créditos.")
-``
-
+# Observação# Observação final curta
