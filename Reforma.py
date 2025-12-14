@@ -100,10 +100,7 @@ else:
         )
 
         st.markdown("**Carga tributária atual (exemplo informado):**")
-        atual = pd.DataFrame({
-            "Tributo": ["PIS", "COFINS", "IRRF", "CSLL"],
-            "Alíquota_%": [0.65, 3.00, 4.80, 2.88]
-        })
+        atual = pd.DataFrame({"Tributo": ["PIS", "COFINS", "IRRF", "CSLL"], "Alíquota_%": [0.65, 3.00, 4.80, 2.88]})
         st.bar_chart(atual.set_index("Tributo"))
 
     # =========================
@@ -120,21 +117,14 @@ else:
             "- Pequenas locações: permanece **IRPF** tradicional."
         )
         with st.expander("Notas operacionais"):
-            st.markdown(
-                "- Estrutura PJ em locações profissionais pode aproveitar créditos.  \n"
-                "- Temporada/serviços pode ter carga maior por classificação."
-            )
+            st.markdown("- Estrutura PJ em locações profissionais pode aproveitar créditos.  \n- Temporada/serviços pode ter carga maior por classificação.")
 
     # =========================
     # ⏱️ TRANSIÇÃO
     # =========================
     with tab_transicao:
         st.subheader("Linha do Tempo de Transição")
-        st.markdown(
-            "- **2026**: início da transição; alíquotas-teste; coexistência de sistemas.  \n"
-            "- **2026–2032**: fases escalonadas.  \n"
-            "- **2033**: modelo CBS/IBS pleno."
-        )
+        st.markdown("- **2026**: início da transição; alíquotas-teste; coexistência de sistemas.  \n- **2026–2032**: fases escalonadas.  \n- **2033**: modelo CBS/IBS pleno.")
         st.warning("Prepare processos para convivência dos dois modelos e auditoria interna de créditos.")
 
     # =========================
@@ -142,14 +132,7 @@ else:
     # =========================
     with tab_simulador:
         st.subheader("Simulador – Carga Atual vs. Pós-Reforma (didático)")
-        st.markdown(
-            "**Como usar**  \n"
-            "- Ajuste **CBS/IBS**.  \n"
-            "- Informe **créditos recuperáveis**.  \n"
-            "- Compare com a **carga atual** (11,33%).  \n\n"
-            "> Este simulador é didático e não substitui análise oficial."
-        )
-
+        st.markdown("**Como usar**  \n- Ajuste **CBS/IBS**.  \n- Informe **créditos recuperáveis**.  \n- Compare com a **carga atual** (11,33%).  \n\n> Este simulador é didático e não substitui análise oficial.")
         col1, col2, col3 = st.columns(3)
         with col1:
             cbs = st.number_input("CBS estimada (%)", min_value=0.0, max_value=50.0, value=8.0, step=0.1)
@@ -157,25 +140,17 @@ else:
             ibs = st.number_input("IBS estimada (%)", min_value=0.0, max_value=50.0, value=5.0, step=0.1)
         with col3:
             creditos = st.number_input("Créditos recuperáveis (%)", min_value=0.0, max_value=100.0, value=60.0, step=1.0)
-
         carga_atual = 0.65 + 3.00 + 4.80 + 2.88  # 11,33%
         carga_nova = (cbs + ibs) * (1 - creditos/100.0) + 4.80 + 2.88
-
         colA, colB = st.columns(2)
         with colA:
             st.metric("Carga Atual (%)", f"{carga_atual:.2f}")
         with colB:
             st.metric("Pós-Reforma (simulado) (%)", f"{carga_nova:.2f}")
-
         df_comp = pd.DataFrame({"Cenário": ["Atual", "Pós-Reforma (simulado)"], "Carga_%": [carga_atual, carga_nova]})
         st.bar_chart(df_comp.set_index("Cenário"))
-
         with st.expander("Parâmetros e suposições"):
-            st.markdown(
-                "- **CBS/IBS** são parâmetros ajustáveis.  \n"
-                "- **Créditos** refletem insumos/serviços.  \n"
-                "- **IRRF/CSLL** mantidos para comparação."
-            )
+            st.markdown("- **CBS/IBS** são parâmetros ajustáveis.  \n- **Créditos** refletem insumos/serviços.  \n- **IRRF/CSLL** mantidos para comparação.")
 
     # =========================
     # 📎 FONTES
@@ -187,7 +162,7 @@ else:
             "- Nota à imprensa – Setor Imobiliário: https://www.gov.br/fazenda/pt-br/canais_atendimento/imprensa/notas-a-imprensa/2025/abril/reforma-tributaria-sera-positiva-para-o-setor-imobiliario  \n"
             "- Lucro Presumido vs. Lucro Real (créditos): https://netcpa.com.br/colunas/principais-impactos-da-reforma-tributaria-para-empresas-do-lucro-real-lucro-presumido-e-simples-nacional/24146  \n"
             "- Planejamento pós-reforma: https://blog.camargoevieira.adv.br/planejamento-tributario-na-reforma-tributaria/  \n"
-            "- Imobiliário e transição: https://www.controllercontabil.com.br/setor-imobiliario-e-construcao-civil-os-impactos-da-reforma-tributaria-de-2025-para-empresas-e-investidores/  \n"
-            "- CIB/SINTER: https://jornalcontabil.ig.com            "- CIB/SINTER: https://jornalcontabil.ig.com.br/noticia/entenda-o-impacto-que-a-reforma-tributaria-tera-nas-atividades-imobiliarias/"
+                       "- Imobiliário e transição: https://www.controllercontabil.com.br/setor-imobiliario-e-construcao-civil-os-impactos-da-reforma-tributaria-de-2025-para-empresas-e-investidores/  \n"
+            "- CIB/SINTER: https://jornalcontabil.ig.com.br/noticia/entenda-o-impacto-que-a-reforma-tributaria-tera-nas-atividades-imobiliarias/"
         )
 
