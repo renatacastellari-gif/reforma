@@ -220,8 +220,9 @@ else:
         unsafe_allow_html=True
     )
 
+   
     # ==========================================================
-    # TABELA FINAL (IDÊNTICA AO PRINT) — COM MESCLAGEM VIA components.html
+    # TABELA FINAL (IDÊNTICA AO PRINT) — CBS com 3 QUADRADOS
     # ==========================================================
     st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
 
@@ -258,6 +259,9 @@ else:
 
         .row-high { height: 52px; }
         .row-tall { height: 72px; }
+
+        /* (Opcional) destacar bordas dos 3 quadrados da coluna CBS */
+        .box1, .box2, .box3 { border: 2px solid #d6d6d6; }
     </style>
 
     <table class="print-table">
@@ -306,53 +310,56 @@ else:
                 <td class="center">2027</td>
                 <td rowspan="7"></td> <!-- MESCLAGEM 2027–2033 em PIS/PASEP -->
                 <td></td>
-                <td class="muted center" rowspan="2">Alíquota estabelecida (-) 0,1%</td> <!-- MESCLAGEM 2027–2028 em CBS -->
+                <!-- QUADRADO 1: CBS 2027–2028 -->
+                <td class="muted center box1" rowspan="2">Alíquota estabelecida (-) 0,1%</td>
             </tr>
 
-            <!-- 2028 -->
+            <!-- 2028 (continua mesclagem no PIS/PASEP e QUADRADO 1 no CBS) -->
             <tr class="row-high">
                 <td class="center">2028</td>
                 <td></td>
-                <!-- CBS já está mesclado acima -->
+                <!-- CBS já está mesclado acima (box1) -->
             </tr>
 
             <!-- 2029 -->
             <tr class="row-high">
                 <td class="center">2029</td>
                 <td></td>
-                <td></td>
+                <!-- QUADRADO 2: CBS 2029–2030 (vazio) -->
+                <td class="box2" rowspan="2"></td>
             </tr>
 
             <!-- 2030 -->
             <tr class="row-high">
                 <td class="center">2030</td>
                 <td class="muted center">Extinção</td>
-                <td></td>
+                <!-- CBS já está mesclado acima (box2) -->
             </tr>
 
-            <!-- 2031 inicia mesclagem 2031–2033 em CBS -->
+            <!-- 2031 -->
             <tr class="row-high">
                 <td class="center">2031</td>
                 <td></td>
-                <td class="muted center" rowspan="3">Alíquota estabelecida</td> <!-- MESCLAGEM 2031–2033 em CBS -->
+                <!-- QUADRADO 3: CBS 2031–2033 -->
+                <td class="muted center box3" rowspan="3">Alíquota estabelecida</td>
             </tr>
 
             <!-- 2032 -->
             <tr class="row-high">
                 <td class="center">2032</td>
                 <td></td>
-                <!-- CBS já está mesclado acima -->
+                <!-- CBS já está mesclado acima (box3) -->
             </tr>
 
             <!-- 2033 -->
             <tr class="row-high">
                 <td class="center">2033</td>
                 <td></td>
-                <!-- CBS já está mesclado acima -->
+                <!-- CBS já está mesclado acima (box3) -->
             </tr>
         </tbody>
     </table>
     """
 
-    # Renderiza HTML puro (sem markdown) — garante rowspan/colspan e CSS
-    components.html(html_tabela_print, height=720, scrolling=True)
+    # Renderiza HTML puro — garante rowspan/colspan e CSS
+    components.html(html_tabela_print, height=760, scrolling=True)
