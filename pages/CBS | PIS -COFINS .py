@@ -42,30 +42,55 @@ if not st.session_state.logged_in:
 # CONTEÚDO PROTEGIDO
 # =========================
 else:
-    # Botão de logout (opcional)
-    col1, col2 = st.columns([1, 1])
-    with col2:
-        if st.button("Sair", help="Encerrar sessão"):
-            st.session_state.logged_in = False
-            st.rerun()
+    # Toggle de estilo de fonte (opcional)
+    col_a, col_b = st.columns([3, 1])
+    with col_b:
+        fonte_modo = st.radio(
+            "Estilo de fonte",
+            options=["Clean (Inter)", "Mono (Consolas)"],
+            index=0,
+            help="Altere a tipografia para leitura mais limpa ou visual técnico."
+        )
 
     # =========================
-    # CSS GLOBAL (FUNDO PRETO + CARDS)
+    # CSS GLOBAL (FUNDO PRETO + CARDS + TIPOGRAFIA)
     # =========================
+    # Carrega Google Fonts para a opção Clean
+    # (Se estiver offline, cai nos fallbacks sem quebrar)
+    if fonte_modo == "Clean (Inter)":
+        st.markdown(
+            "<link rel='preconnect' href='https://fonts.googleapis.com'>"
+            "<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>"
+            "<link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap' rel='stylesheet'>",
+            unsafe_allow_html=True
+        )
+
+    # Define famílias de fontes conforme o modo
+    body_font = "Inter, Segoe UI, Roboto, Helvetica Neue, Arial, system-ui, -apple-system, sans-serif" \
+        if fonte_modo == "Clean (Inter)" else \
+        "Consolas, Menlo, Monaco, 'Courier New', monospace"
+
+    heading_font = "Consolas, Menlo, Monaco, 'Courier New', monospace" \
+        if fonte_modo == "Clean (Inter)" else \
+        "Consolas, Menlo, Monaco, 'Courier New', monospace"
+
     st.markdown(
         "<style>"
         "html, body, [class*='css']{background-color:#000000;}"
+        f"body {{ font-family:{body_font}; }}"
         ".content-wrapper{max-width:1100px;margin:0 auto;}"
-        ".titulo-principal{font-size:34px;font-weight:800;color:#B91E27;margin-bottom:10px;text-align:left;border-bottom:2px solid #B91E27;padding-bottom:8px;}"
-        ".subtitulo{font-size:22px;font-weight:bold;color:#D96569;margin-top:30px;}"
-        ".texto{font-size:16px;color:#dddddd;line-height:1.6;}"
+        f".titulo-principal{{font-family:{heading_font};font-size:34px;font-weight:800;color:#B91E27;margin-bottom:10px;text-align:left;border-bottom:2px solid #B91E27;padding-bottom:8px;}}"
+        ".subtitulo{font-size:22px;font-weight:700;color:#D96569;margin-top:30px;}"
+        ".texto{font-size:16px;color:#dddddd;line-height:1.65;}"
         ".card{background-color:#1e1e1e;color:#f0f0f0;padding:26px 28px;border-radius:14px;margin:22px 0;border-left:6px solid #B91E27;box-shadow:0 2px 0 #111111;}"
-        ".card h3{font-size:30px;font-weight:800;margin:0 0 10px 0;color:#ffffff;}"
-        ".card ul{margin:12px 0 0 18px;padding:0;list-style-type:disc;}"
-        ".card li{font-size:17px;line-height:1.65;margin-bottom:6px;}"
+        f".card h3{{font-family:{heading_font};font-size:28px;font-weight:800;margin:0 0 12px 0;color:#ffffff;letter-spacing:0.2px;}}"
+        ".card ul{margin:10px 0 0 18px;padding:0;list-style-type:disc;}"
+        ".card li{font-size:17px;line-height:1.7;margin-bottom:6px;color:#e6e6e6;}"
         ".card li b{color:#ffffff;font-weight:700;}"
         ".img-container{display:flex;justify-content:center;align-items:center;margin-top:12px;}"
-        ".callout{background:#101010;border:1px dashed #B91E27;border-radius:10px;padding:14px 16px;margin-top:10px;color:#dddddd;font-size:16px;}"
+        ".callout{background:#101010;border:1px dashed #B91E27;border-radius:10px;padding:14px 16px;margin-top:12px;color:#dddddd;font-size:16px;}"
+        /* pequenos ajustes de legibilidade */
+        ".card p{margin:0;color:#dcdcdc;font-size:16px;line-height:1.65;}"
         "</style>",
         unsafe_allow_html=True
     )
