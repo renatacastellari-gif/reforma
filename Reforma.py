@@ -1,4 +1,3 @@
-
 import streamlit as st
 from pathlib import Path
 # import pandas as pd  # remova se não usar
@@ -6,7 +5,68 @@ from pathlib import Path
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
 # =========================
-st.set_page_config(page_title="Reforma Tributária", page_icon="🟪")
+st.set_page_config(
+    page_title="Reforma Tributária",
+    page_icon="🟪",
+    layout="centered"
+)
+
+# =========================
+# CSS - TEMA ESCURO + PALETA
+# =========================
+st.markdown("""
+<style>
+/* Fundo geral */
+.stApp {
+    background-color: #1b1b1b;
+    color: #F9EEEF;
+}
+
+/* Esconder menu e rodapé */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+
+/* Títulos */
+h1, h2, h3, h4 {
+    color: #B91E27;
+}
+
+/* Caixa de texto e inputs */
+input, textarea {
+    background-color: #2a2a2a !important;
+    color: #F9EEEF !important;
+    border: 1px solid #EBBFC1 !important;
+}
+
+/* Botões */
+.stButton > button {
+    background-color: #B91E27;
+    color: #F9EEEF;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+}
+.stButton > button:hover {
+    background-color: #8f1620;
+    color: #F9EEEF;
+}
+
+/* Cards */
+.card {
+    background-color: #2a2a2a;
+    padding: 18px;
+    border-radius: 12px;
+    border-left: 6px solid #B91E27;
+    margin-bottom: 16px;
+}
+
+/* Destaque */
+.highlight {
+    color: #F2D5D7;
+    font-weight: 600;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # =========================
 # SENHA FIXA / LOGIN
@@ -15,7 +75,7 @@ PASSWORD = "minhasenha123"
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
-# 🔒 Esconde a barra lateral com CSS se não estiver logado
+# 🔒 Esconde a barra lateral se não estiver logado
 if not st.session_state.logged_in:
     st.markdown("<style>[data-testid='stSidebar']{display:none;}</style>", unsafe_allow_html=True)
 
@@ -28,34 +88,87 @@ if not st.session_state.logged_in:
     if st.button("Entrar", use_container_width=True):
         if senha == PASSWORD:
             st.session_state.logged_in = True
-            st.success("Acesso liberado! Agora você pode navegar pelas páginas.")
+            st.success("Acesso liberado!")
             st.rerun()
         else:
             st.error("Senha incorreta.")
+
 else:
     # =========================
     # CONTEÚDO PROTEGIDO
     # =========================
 
-    # ---- LOGO HINES (hines.svg/png/jpg/jpeg) ----
-    candidatos = [Path("hines.svg"), Path("hines.png"), Path("hines.jpg"), Path("hines.jpeg")]
+    # ---- LOGO HINES ----
+    candidatos = [
+        Path("hines.svg"),
+        Path("hines.png"),
+        Path("hines.jpg"),
+        Path("hines.jpeg")
+    ]
     logo_path = next((p for p in candidatos if p.exists()), None)
 
     if logo_path:
-        try:
-            st.image(str(logo_path), width=220)
-        except Exception as e:
-            st.warning(f"Não foi possível exibir a imagem '{logo_path.name}'. Detalhe: {e}")
-            st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
+        st.image(str(logo_path), width=220)
     else:
-        st.info("Logo 'hines' não encontrado. Coloque hines.svg/png/jpg/jpeg na mesma pasta do app.")
-        st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
+        st.markdown(
+            "<h3 style='color:#B91E27;'>🟪 Hines – Painel Tributário</h3>",
+            unsafe_allow_html=True
+        )
 
     # ---- Título ----
-    st.markdown(
-        "<h2 style='color:#B22222;font-family:Times New Roman,sans-serif;font-weight:700;text-align:center;border-bottom:2px solid #B22222;padding-bottom:8px;margin-bottom:20px;'>Reforma Tributária</h2>",
-        unsafe_allow_html=True
-    )
+    st.markdown("""
+        <h2 style="
+            text-align:center;
+            border-bottom:2px solid #B91E27;
+            padding-bottom:10px;
+            margin-bottom:30px;
+        ">
+            Reforma Tributária – Resumo Simples
+        </h2>
+    """, unsafe_allow_html=True)
 
-    st.image("Apresentação1.png")
-    st.image("Apr.svg")
+    # =========================
+    # CONTEÚDO – CBS
+    # =========================
+    st.markdown("""
+    <div class="card">
+        <h3>CBS – Contribuição sobre Bens e Serviços</h3>
+        <ul>
+            <li>Substitui <span class="highlight">PIS e COFINS</span></li>
+            <li>Imposto <span class="highlight">federal</span></li>
+            <li>Modelo de <span class="highlight">IVA</span></li>
+            <li>Permite <span class="highlight">crédito do imposto</span></li>
+            <li>Objetivo: <span class="highlight">simplificar</span> a tributação</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # =========================
+    # CONTEÚDO – ISS
+    # =========================
+    st.markdown("""
+    <div class="card">
+        <h3>ISS – Imposto Sobre Serviços</h3>
+        <ul>
+            <li>Imposto <span class="highlight">municipal</span></li>
+            <li>Incide sobre <span class="highlight">prestação de serviços</span></li>
+            <li>Será <span class="highlight">extinto</span> com a reforma</li>
+            <li>Substituído pelo <span class="highlight">IBS</span></li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # =========================
+    # RESUMO FINAL
+    # =========================
+    st.markdown("""
+    <div class="card">
+        <h3>Resumo Geral</h3>
+        <ul>
+            <li>PIS + COFINS → <span class="highlight">CBS</span></li>
+            <li>ISS + ICMS → <span class="highlight">IBS</span></li>
+            <li>Menos impostos e <span class="highlight">regras unificadas</span></li>
+            <li>Mais <span class="highlight">transparência</span> e simplicidade</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
