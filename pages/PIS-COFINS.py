@@ -326,4 +326,4 @@ else:
         </tbody>
     </table>
     """, unsafe_allow_html=True)
-``
+
