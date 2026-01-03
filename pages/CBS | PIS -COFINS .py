@@ -56,17 +56,18 @@ else:
             html, body, [class*="css"]  {
                 background-color: #000000;
             }
-            /* Título principal cor #B91E27 */
+            /* Título principal na cor #B91E27 */
             .titulo-principal {
                 font-size: 34px;
                 font-weight: bold;
                 color: #B91E27;
                 margin-bottom: 10px;
             }
+            /* Subtítulos na cor #D96569 */
             .subtitulo {
                 font-size: 22px;
                 font-weight: bold;
-                color: #D96569;  /* cor solicitada */
+                color: #D96569;
                 margin-top: 30px;
             }
             .texto {
@@ -82,7 +83,7 @@ else:
                 border: 1px solid #2a2a2a;
             }
 
-            /* Tabela geral (preta) */
+            /* Tabela comparativa (tema escuro) */
             .tabela {
                 width: 100%;
                 border-collapse: collapse;
@@ -107,7 +108,7 @@ else:
     )
 
     # =========================
-    # TÍTULO (COR #B91E27)
+    # TÍTULO PRINCIPAL
     # =========================
     st.markdown("<div class='titulo-principal'>PIS e COFINS → CBS</div>", unsafe_allow_html=True)
 
@@ -220,158 +221,143 @@ else:
         unsafe_allow_html=True
     )
 
-   
-    
-import streamlit as st
-import streamlit.components.v1 as components
+    # ==========================================================
+    # TABELA FINAL — IDÊNTICA AO PRINT (3 BLOCOS NA CBS + PIS MESCLADO 2027–2033)
+    # ==========================================================
+    st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
 
-# --- Título principal em #B91E27 ---
-st.markdown("""
-<style>
-.titulo-principal{font-size:34px;font-weight:bold;color:#B91E27;margin-bottom:10px;}
-.subtitulo{font-size:22px;font-weight:bold;color:#D96569;margin-top:30px;}
-</style>
-<div class='titulo-principal'>PIS e COFINS → CBS</div>
-""", unsafe_allow_html=True)
+    html_tabela_print = """
+    <style>
+        .print-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            margin-top: 6px;
+        }
+        .print-table th, .print-table td {
+            border: 1px solid #d6d6d6;
+            color: #222;
+            padding: 12px 10px;
+            text-align: left;
+            vertical-align: middle;
+            background: #fff;
+        }
+        .print-table thead th {
+            background: #cfe0f1; /* cabeçalho azul claro conforme print */
+            color: #1f2a37;
+            font-weight: 700;
+            text-align: center;
+        }
+        .center { text-align: center; }
+        .muted  { color: #3b3b3b; }
 
-# --- Tabela FINAL (HTML puro) com 3 QUADRADOS exatamente como no print ---
-st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
+        /* Larguras aproximadas para o visual do print */
+        .col-ano   { width: 10%; }
+        .col-pis   { width: 22%; }
+        .col-cofins{ width: 22%; }
+        .col-cbs   { width: 46%; }
 
-html_tabela = """
-<style>
-  .print-table{
-    width:100%;
-    border-collapse:collapse;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#ffffff;
-  }
-  .print-table th,.print-table td{
-    border:1px solid #d6d6d6;
-    color:#222;
-    padding:12px 10px;
-    text-align:left;
-    vertical-align:middle;
-    background:#fff;
-  }
-  .print-table thead th{
-    background:#cfe0f1;           /* cabeçalho azul claro */
-    color:#1f2a37;
-    font-weight:700;
-    text-align:center;
-  }
-  .center{ text-align:center; }
-  .muted{  color:#3b3b3b; }
+        /* Altura das linhas para proporção semelhante ao print */
+        .row { height: 56px; }
+    </style>
 
-  /* Larguras para bater com o visual */
-  .col-ano{    width:10%; }
-  .col-pis{    width:22%; }
-  .col-cofins{ width:22%; }
-  .col-cbs{    width:46%; }
+    <table class="print-table">
+        <thead>
+            <tr>
+                <th class="col-ano">Ano</th>
+                <th colspan="2">Tributos Atuais</th>
+                <th>Novos Tributos</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="col-pis center">PIS/PASEP</th>
+                <th class="col-cofins center">COFINS</th>
+                <th class="col-cbs center">CBS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 2024 -->
+            <tr class="row">
+                <td class="center">2024</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
 
-  /* Altura das linhas (aprox) p/ formar os quadrados */
-  .row{ height:56px; }
-</style>
+            <!-- 2025 -->
+            <tr class="row">
+                <td class="center">2025</td>
+                <td></td>
+                <td class="center muted">Sem mudanças</td>
+                <td class="center">-</td>
+            </tr>
 
-<table class="print-table">
-  <thead>
-    <tr>
-      <th class="col-ano">Ano</th>
-      <th colspan="2">Tributos Atuais</th>
-      <th>Novos Tributos</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th class="col-pis center">PIS/PASEP</th>
-      <th class="col-cofins center">COFINS</th>
-      <th class="col-cbs center">CBS</th>
-    </tr>
-  </thead>
+            <!-- 2026 -->
+            <tr class="row">
+                <td class="center">2026</td>
+                <td></td>
+                <td class="muted">
+                    Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).
+                </td>
+                <td class="muted center">Alíquota teste: 0,9%</td>
+            </tr>
 
-  <tbody>
-    <!-- 2024 -->
-    <tr class="row">
-      <td class="center">2024</td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+            <!-- 2027 (início dos blocos) -->
+            <tr class="row">
+                <td class="center">2027</td>
 
-    <!-- 2025 -->
-    <tr class="row">
-      <td class="center">2025</td>
-      <td></td>
-      <td class="center muted">Sem mudanças</td>
-      <td class="center">-</td>
-    </tr>
+                <!-- BLOCO PIS/PASEP: grande, 2027–2033 -->
+                <td rowspan="7"></td>
 
-    <!-- 2026 -->
-    <tr class="row">
-      <td class="center">2026</td>
-      <td></td>
-      <td class="muted">
-        Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).
-      </td>
-      <td class="muted center">Alíquota teste: 0,9%</td>
-    </tr>
+                <!-- COFINS -->
+                <td></td>
 
-    <!-- 2027 inicia os 3 QUADRADOS -->
-    <tr class="row">
-      <td class="center">2027</td>
+                <!-- BLOCO CBS #1: 2027–2028 com texto -->
+                <td class="muted center" rowspan="2">Alíquota estabelecida (-) 0,1%</td>
+            </tr>
 
-      <!-- QUADRADO 1 (GRANDE) na coluna PIS/PASEP: 2027–2033 -->
-      <td rowspan="7"></td>
+            <!-- 2028 (continua bloco CBS #1) -->
+            <tr class="row">
+                <td class="center">2028</td>
+                <td></td>
+            </tr>
 
-      <!-- COFINS normal (sem mesclagem) -->
-      <td></td>
+            <!-- 2029 (abre bloco CBS #2: 2029–2030 vazio) -->
+            <tr class="row">
+                <td class="center">2029</td>
+                <td></td>
+                <td rowspan="2"></td>
+            </tr>
 
-      <!-- QUADRADO 2 (CBS 2027–2028) com texto -->
-      <td class="muted center" rowspan="2">Alíquota estabelecida (-) 0,1%</td>
-    </tr>
+            <!-- 2030 (COFINS com Extinção; continua CBS #2 vazio) -->
+            <tr class="row">
+                <td class="center">2030</td>
+                <td class="center muted">Extinção</td>
+                <!-- CBS mesclado acima (vazio) -->
+            </tr>
 
-    <!-- 2028 continua no QUADRADO 2 -->
-    <tr class="row">
-      <td class="center">2028</td>
-      <td></td>
-      <!-- CBS mesclado acima -->
-    </tr>
+            <!-- 2031 (abre bloco CBS #3: 2031–2033 com texto) -->
+            <tr class="row">
+                <td class="center">2031</td>
+                <td></td>
+                <td class="muted center" rowspan="3">Alíquota estabelecida</td>
+            </tr>
 
-    <!-- 2029 abre QUADRADO 3 (CBS 2029–2030 vazio) -->
-    <tr class="row">
-      <td class="center">2029</td>
-      <td></td>
-      <td rowspan="2"></td>
-    </tr>
+            <!-- 2032 (continua CBS #3) -->
+            <tr class="row">
+                <td class="center">2032</td>
+                <td></td>
+            </tr>
 
-    <!-- 2030 (COFINS Extinção) continua QUADRADO 3 vazio -->
-    <tr class="row">
-      <td class="center">2030</td>
-      <td class="center muted">Extinção</td>
-      <!-- CBS mesclado acima -->
-    </tr>
+            <!-- 2033 (continua CBS #3) -->
+            <tr class="row">
+                <td class="center">2033</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    """
 
-    <!-- 2031 abre QUADRADO 4 (CBS 2031–2033 com texto) -->
-    <tr class="row">
-      <td class="center">2031</td>
-      <td></td>
-      <td class="muted center" rowspan="3">Alíquota estabelecida</td>
-    </tr>
-
-    <!-- 2032 continua QUADRADO 4 -->
-    <tr class="row">
-      <td class="center">2032</td>
-      <td></td>
-      <!-- CBS mesclado acima -->
-    </tr>
-
-    <!-- 2033 continua QUADRADO 4 -->
-    <tr class="row">
-      <td class="center">2033</td>
-      <td></td>
-      <!-- CBS mesclado acima -->
-    </tr>
-  </tbody>
-</table>
-"""
-
-# Renderiza HTML puro (garante rowspan/colspan)
-components.html(html_tabela, height=780, scrolling=True)
+    # Renderiza HTML puro — garante rowspan/colspan e CSS sem interferência do Markdown
+    components.html(html_tabela_print, height=780, scrolling=True)
