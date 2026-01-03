@@ -1,57 +1,191 @@
-import streamlit as st
-from pathlib import Path
-# import pandas as pd  # remova se não usar
+# =========================
+# CSS – MESMO LAYOUT DA PRIMEIRA PÁGINA
+# =========================
+st.markdown(
+    """
+    <style>
+        html, body, [class*="css"] {
+            background-color: #000000;
+        }
+
+        .content-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .titulo-principal {
+            font-size: 32px;
+            font-weight: bold;
+            color: #B91E27;
+            margin-bottom: 8px;
+        }
+
+        .subtitulo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #EBBFC1;
+            margin-top: 35px;
+        }
+
+        .texto {
+            font-size: 16px;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .card {
+            background-color: #111111;
+            padding: 22px;
+            border-radius: 14px;
+            margin-top: 16px;
+            border-left: 5px solid #B91E27;
+            box-shadow: 0 0 12px rgba(185,30,39,0.15);
+        }
+
+        .highlight {
+            color: #F2D5D7;
+            font-weight: bold;
+        }
+
+        .tabela {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 18px;
+        }
+
+        .tabela th {
+            background-color: #6b1f3a;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .tabela td {
+            background-color: #0f0f0f;
+            color: #eaeaea;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
 
 # =========================
-# CONFIGURAÇÃO DA PÁGINA
+# TÍTULO
 # =========================
-st.set_page_config(page_title="Reforma Tributária", page_icon="🟪")
+st.markdown("<div class='titulo-principal'>PIS e COFINS → CBS</div>", unsafe_allow_html=True)
+
+st.markdown(
+    """
+    <div class='texto'>
+    Resumo prático da Reforma Tributária aplicado a
+    <b>empresas prestadoras de serviços de consultoria e assessoria patrimonial imobiliária</b>.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # =========================
-# SENHA FIXA / LOGIN
+# 2026 – PERÍODO DE TESTE
 # =========================
-PASSWORD = "minhasenha123"
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
-
-# 🔒 Esconde a barra lateral com CSS se não estiver logado
-if not st.session_state.logged_in:
-    st.markdown("<style>[data-testid='stSidebar']{display:none;}</style>", unsafe_allow_html=True)
+st.markdown("<div class='subtitulo'>📅 Ano de 2026 — Período de Teste</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='card texto'>
+    ✔ Entrada da <b>CBS em fase piloto</b><br>
+    ✔ Alíquota teste: <span class='highlight'>0,9%</span><br>
+    ✔ Valor recolhido é <b>compensado com PIS e COFINS</b><br>
+    ✔ Possível <b>dispensa de recolhimento</b> se cumprir obrigações acessórias<br><br>
+    ❗ <b>Não há aumento real de carga tributária em 2026</b>.  
+    O objetivo é adaptação dos sistemas e validação do modelo.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # =========================
-# TELA DE LOGIN
+# 2027 EM DIANTE
 # =========================
-if not st.session_state.logged_in:
-    st.title("Acesso Restrito")
-    senha = st.text_input("Digite a senha:", type="password")
-    if st.button("Entrar", use_container_width=True):
-        if senha == PASSWORD:
-            st.session_state.logged_in = True
-            st.success("Acesso liberado! Agora você pode navegar pelas páginas.")
-            st.rerun()
-        else:
-            st.error("Senha incorreta.")
-else:
-    # =========================
-    # CONTEÚDO PROTEGIDO
-    # =========================
+st.markdown("<div class='subtitulo'>🚨 A partir de 2027</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='card texto'>
+    ❌ <b>PIS e COFINS são extintos</b><br>
+    ✔ Entra a <b>CBS definitiva</b><br><br>
 
-    # ---- LOGO HINES (hines.svg/png/jpg/jpeg) ----
-    candidatos = [Path("hines.svg"), Path("hines.png"), Path("hines.jpg"), Path("hines.jpeg")]
-    logo_path = next((p for p in candidatos if p.exists()), None)
+    <b>Características da CBS:</b><br>
+    • Não cumulativa (modelo IVA)<br>
+    • Crédito financeiro amplo<br>
+    • Alíquota estimada: <span class='highlight'>~8,8%</span><br><br>
 
-    if logo_path:
-        try:
-            st.image(str(logo_path), width=220)
-        except Exception as e:
-            st.warning(f"Não foi possível exibir a imagem '{logo_path.name}'. Detalhe: {e}")
-            st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
-    else:
-        st.info("Logo 'hines' não encontrado. Coloque hines.svg/png/jpg/jpeg na mesma pasta do app.")
-        st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
+    ⚠️ Empresas de serviços com poucos insumos
+    tendem a sentir <b>aumento real da carga tributária</b>.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
-    # ---- Título ----
-    st.markdown(
-        "<h2 style='color:#B22222;font-family:Times New Roman,sans-serif;font-weight:700;text-align:center;border-bottom:2px solid #B22222;padding-bottom:8px;margin-bottom:20px;'>Reforma Tributária</h2>",
-        unsafe_allow_html=True
-    )
+# =========================
+# TABELA COMPARATIVA (HTML – NÃO IMAGEM)
+# =========================
+st.markdown("<div class='subtitulo'>📊 Comparativo Geral</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <table class="tabela">
+        <thead>
+            <tr>
+                <th>Período</th>
+                <th>Tributo</th>
+                <th>Alíquota</th>
+                <th>Crédito</th>
+                <th>Impacto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Até 2025</td>
+                <td>PIS + COFINS</td>
+                <td>3,65%</td>
+                <td>Não</td>
+                <td>Baixo</td>
+            </tr>
+            <tr>
+                <td>2026</td>
+                <td>CBS (teste)</td>
+                <td>0,9%</td>
+                <td>Sim (compensado)</td>
+                <td>Neutro</td>
+            </tr>
+            <tr>
+                <td>2027+</td>
+                <td>CBS definitiva</td>
+                <td>~8,8%</td>
+                <td>Sim (pleno)</td>
+                <td>Elevado</td>
+            </tr>
+        </tbody>
+    </table>
+    """,
+    unsafe_allow_html=True
+)
+
+# =========================
+# CONCLUSÃO
+# =========================
+st.markdown("<div class='subtitulo'>🧾 Conclusão Prática</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='card texto'>
+    ✔ 2026 é um ano de adaptação<br>
+    ✔ A mudança financeira começa em 2027<br>
+    ✔ Revisão de preços e contratos será essencial para empresas de serviços
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown("</div>", unsafe_allow_html=True)
