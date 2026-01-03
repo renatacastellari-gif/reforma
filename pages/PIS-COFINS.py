@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
@@ -11,23 +10,16 @@ st.set_page_config(
 )
 
 # =========================
-# SENHA FIXA / LOGIN
+# LOGIN
 # =========================
 PASSWORD = "minhasenha123"
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
-# Esconde sidebar se não estiver logado
 if not st.session_state.logged_in:
-    st.markdown(
-        "<style>[data-testid='stSidebar']{display:none;}</style>",
-        unsafe_allow_html=True
-    )
+    st.markdown("<style>[data-testid='stSidebar']{display:none;}</style>", unsafe_allow_html=True)
 
-# =========================
-# TELA DE LOGIN
-# =========================
 if not st.session_state.logged_in:
     st.title("🔒 Acesso Restrito")
     senha = st.text_input("Digite a senha:", type="password")
@@ -35,65 +27,94 @@ if not st.session_state.logged_in:
     if st.button("Entrar", use_container_width=True):
         if senha == PASSWORD:
             st.session_state.logged_in = True
-            st.success("Acesso liberado!")
             st.rerun()
         else:
             st.error("Senha incorreta.")
 
 # =========================
-# CONTEÚDO PROTEGIDO
+# CONTEÚDO
 # =========================
 else:
 
     # =========================
-    # CSS GLOBAL (FUNDO PRETO)
+    # CSS GLOBAL
     # =========================
     st.markdown("""
     <style>
-        html, body, [class*="css"]  {
+        html, body, [class*="css"] {
             background-color: #000000;
         }
+
         .titulo {
-            font-size: 34px;
+            font-size: 36px;
             font-weight: bold;
-            color: #ffffff;
+            color: #B11226;
             margin-bottom: 10px;
         }
+
         .subtitulo {
             font-size: 22px;
             font-weight: bold;
-            color: #c08497;
-            margin-top: 30px;
+            color: #B11226;
+            margin-top: 35px;
         }
+
         .texto {
             font-size: 16px;
-            color: #dddddd;
+            color: #E0E0E0;
             line-height: 1.6;
         }
+
         .box {
-            background-color: #111111;
+            background-color: #0F0F0F;
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 14px;
             margin-top: 15px;
-            border: 1px solid #2a2a2a;
+            border: 1px solid #2A2A2A;
         }
-        .tabela {
+
+        /* TABELA FINAL */
+        .tabela-final {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 25px;
+            font-size: 15px;
         }
-        .tabela thead th {
-            background-color: #6b1f3a; /* vinho */
-            color: #ffffff;
+
+        .tabela-final th {
+            border: 1px solid #555555;
             padding: 10px;
             text-align: center;
+            font-weight: bold;
         }
-        .tabela tbody td {
-            background-color: #0f0f0f;
-            color: #eaeaea;
+
+        .tabela-final td {
+            border: 1px solid #555555;
             padding: 10px;
             text-align: center;
-            border-bottom: 1px solid #333333;
+            color: #EAEAEA;
+            background-color: #0B0B0B;
+        }
+
+        .th-ano {
+            background-color: #C9DEF1;
+            color: #000000;
+        }
+
+        .th-atual {
+            background-color: #C9DEF1;
+            color: #000000;
+        }
+
+        .th-novo {
+            background-color: #C9DEF1;
+            color: #000000;
+        }
+
+        .th-sub {
+            background-color: #FFFFFF;
+            color: #000000;
+            font-weight: bold;
         }
     </style>
     """, unsafe_allow_html=True)
@@ -105,98 +126,113 @@ else:
 
     st.markdown("""
     <div class='texto'>
-    Resumo prático da Reforma Tributária aplicado a
-    <b>empresas prestadoras de serviços de consultoria e assessoria patrimonial imobiliária</b>.
+    Visão resumida da transição dos tributos federais conforme a Reforma Tributária,
+    aplicada a empresas prestadoras de serviços.
     </div>
     """, unsafe_allow_html=True)
 
     # =========================
-    # 2026 – PERÍODO DE TESTE
+    # 2026
     # =========================
     st.markdown("<div class='subtitulo'>📅 Ano de 2026 — Período de Teste</div>", unsafe_allow_html=True)
 
     st.markdown("""
     <div class='box texto'>
-    ✔ Entrada da <b>CBS em fase piloto</b><br>
-    ✔ Alíquota teste: <b>0,9%</b><br>
-    ✔ Valor recolhido é <b>compensado com PIS e COFINS</b><br>
-    ✔ Possível <b>dispensa de recolhimento</b> se cumprir obrigações acessórias<br><br>
-    ❗ <b>Não há aumento real de carga tributária em 2026</b>.  
-    O objetivo é apenas informativo e de adaptação dos sistemas.
+    ✔ Entrada da CBS em fase piloto<br>
+    ✔ Alíquota teste: 0,9%<br>
+    ✔ Valor recolhido pode ser compensado com PIS e COFINS<br>
+    ✔ Possível dispensa de recolhimento mediante cumprimento das obrigações acessórias<br><br>
+    ❗ Não há aumento real de carga tributária em 2026.
     </div>
     """, unsafe_allow_html=True)
 
     # =========================
-    # 2027 EM DIANTE
+    # 2027
     # =========================
     st.markdown("<div class='subtitulo'>🚨 A partir de 2027</div>", unsafe_allow_html=True)
 
     st.markdown("""
     <div class='box texto'>
-    ❌ <b>PIS e COFINS são extintos</b><br>
-    ✔ Entra a <b>CBS</b> de forma definitiva<br><br>
-
-    <b>Características da CBS:</b><br>
-    • Não cumulativa (modelo IVA)<br>
-    • Crédito financeiro amplo<br>
-    • Alíquota estimada: <b>~8,8%</b><br><br>
-
-    ⚠️ Empresas de serviços com poucos insumos
-    tendem a sentir <b>aumento real da carga tributária</b>.
+    ❌ Extinção do PIS e da COFINS<br>
+    ✔ Entrada definitiva da CBS<br>
+    • Modelo não cumulativo (IVA)<br>
+    • Alíquota a ser definida por lei específica
     </div>
     """, unsafe_allow_html=True)
 
     # =========================
-    # TABELA COMPARATIVA
+    # TABELA FINAL (REPLICA)
     # =========================
-    st.markdown("<div class='subtitulo'>📊 Comparativo Geral</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subtitulo'>📊 Linha do Tempo dos Tributos</div>", unsafe_allow_html=True)
 
     st.markdown("""
-    <table class="tabela">
-        <thead>
-            <tr>
-                <th>Período</th>
-                <th>Tributo</th>
-                <th>Alíquota</th>
-                <th>Crédito</th>
-                <th>Impacto Financeiro</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Até 2025</td>
-                <td>PIS + COFINS</td>
-                <td>3,65%</td>
-                <td>Não</td>
-                <td>Baixo</td>
-            </tr>
-            <tr>
-                <td>2026</td>
-                <td>CBS (teste)</td>
-                <td>0,9%</td>
-                <td>Sim (compensado)</td>
-                <td>Neutro</td>
-            </tr>
-            <tr>
-                <td>2027+</td>
-                <td>CBS definitiva</td>
-                <td>~8,8%</td>
-                <td>Sim (pleno)</td>
-                <td>Mais elevado</td>
-            </tr>
-        </tbody>
+    <table class="tabela-final">
+        <tr>
+            <th rowspan="2" class="th-ano">Ano</th>
+            <th colspan="2" class="th-atual">Tributos Atuais</th>
+            <th colspan="1" class="th-novo">Novos Tributos</th>
+        </tr>
+        <tr>
+            <th class="th-sub">PIS/PASEP</th>
+            <th class="th-sub">COFINS</th>
+            <th class="th-sub">CBS</th>
+        </tr>
+
+        <tr>
+            <td>2024</td>
+            <td colspan="2">Sem mudanças</td>
+            <td>-</td>
+        </tr>
+
+        <tr>
+            <td>2025</td>
+            <td colspan="2">Sem mudanças</td>
+            <td>-</td>
+        </tr>
+
+        <tr>
+            <td>2026</td>
+            <td colspan="2">
+                Alíquotas mantidas; com a possibilidade de compensação
+                de 1% dos novos tributos (CBS 0,9% e IBS 0,1%)
+            </td>
+            <td>Alíquota teste: 0,9%</td>
+        </tr>
+
+        <tr>
+            <td>2027</td>
+            <td rowspan="5" colspan="2">Extinção</td>
+            <td>Alíquota estabelecida (-)</td>
+        </tr>
+
+        <tr>
+            <td>2028</td>
+            <td>0,1%</td>
+        </tr>
+
+        <tr>
+            <td>2029</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>2030</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>2031</td>
+            <td>Alíquota estabelecida</td>
+        </tr>
+
+        <tr>
+            <td>2032</td>
+            <td colspan="3"></td>
+        </tr>
+
+        <tr>
+            <td>2033</td>
+            <td colspan="3"></td>
+        </tr>
     </table>
-    """, unsafe_allow_html=True)
-
-    # =========================
-    # CONCLUSÃO
-    # =========================
-    st.markdown("<div class='subtitulo'>🧾 Conclusão Prática</div>", unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class='box texto'>
-    ✔ 2026 é um ano de adaptação<br>
-    ✔ A mudança financeira começa em 2027<br>
-    ✔ Revisão de preços e contratos será essencial para serviços
-    </div>
     """, unsafe_allow_html=True)
