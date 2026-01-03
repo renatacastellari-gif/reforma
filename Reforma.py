@@ -1,4 +1,3 @@
-
 import pandas as pd
 from pathlib import Path
 
@@ -151,16 +150,4 @@ else:
         with st.expander("Parâmetros e suposições"):
             st.markdown("- **CBS/IBS** são parâmetros ajustáveis.  \n- **Créditos** refletem insumos/serviços.  \n- **IRRF/CSLL** mantidos para comparação.")
 
-    # =========================
-    # 📎 FONTES
-    # =========================
-    with tab_fontes:
-        st.subheader("Avisos & Fontes (consultar antes de decisões)")
-        st.markdown(
-            "- Ministério da Fazenda – Impactos da Reforma: https://www.gov.br/fazenda/pt-br/acesso-a-informacao/acoes-e-programas/futuro-seguro/reforma-tributaria/impactos-da-reforma  \n"
-            "- Nota à imprensa – Setor Imobiliário: https://www.gov.br/fazenda/pt-br/canais_atendimento/imprensa/notas-a-imprensa/2025/abril/reforma-tributaria-sera-positiva-para-o-setor-imobiliario  \n"
-            "- Lucro Presumido vs. Lucro Real (créditos): https://netcpa.com.br/colunas/principais-impactos-da-reforma-tributaria-para-empresas-do-lucro-real-lucro-presumido-e-simples-nacional/24146  \n"
-            "- Planejamento pós-reforma: https://blog.camargoevieira.adv.br/planejamento-tributario-na-reforma-tributaria/  \n"
-                       "- Imobiliário e transição: https://www.controllercontabil.com.br/setor-imobiliario-e-construcao-civil-os-impactos-da-reforma-tributaria-de-2025-para-empresas-e-investidores/  \n"
-            "- CIB/SINTER: https://jornalcontabil.ig.com.br/noticia/entenda-o-impacto-que-a-reforma-tributaria-tera-nas-atividades-imobiliarias/"
-        )
+   
