@@ -1,6 +1,7 @@
 
 import streamlit as st
 import pandas as pd
+import streamlit.components.v1 as components
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
@@ -55,7 +56,7 @@ else:
             html, body, [class*="css"]  {
                 background-color: #000000;
             }
-            /* Título principal com cor específica (#B91E27) */
+            /* Título principal cor #B91E27 */
             .titulo-principal {
                 font-size: 34px;
                 font-weight: bold;
@@ -65,7 +66,7 @@ else:
             .subtitulo {
                 font-size: 22px;
                 font-weight: bold;
-                color: #D96569;  /* COR SOLICITADA */
+                color: #D96569;  /* cor solicitada */
                 margin-top: 30px;
             }
             .texto {
@@ -100,48 +101,13 @@ else:
                 text-align: center;
                 border-bottom: 1px solid #333333;
             }
-
-            /* Tabela do print (branca) com mesclagem */
-            .print-table {
-                width: 100%;
-                border-collapse: collapse;
-                font-family: Arial, Helvetica, sans-serif;
-                background: #ffffff;
-                margin-top: 14px;
-            }
-            .print-table th, .print-table td {
-                border: 1px solid #d6d6d6;
-                color: #222;
-                padding: 12px 10px;
-                text-align: left;
-                vertical-align: middle;
-                background: #fff;
-            }
-            .print-table thead th {
-                background: #cfe0f1; /* cabeçalho azul claro conforme print */
-                color: #1f2a37;
-                font-weight: 700;
-                text-align: center;
-            }
-            .print-table .center { text-align: center; }
-            .print-table .muted  { color: #3b3b3b; }
-
-            /* Larguras aproximadas para replicar visual */
-            .col-ano   { width: 10%; }
-            .col-pis   { width: 22%; }
-            .col-cofins{ width: 22%; }
-            .col-cbs   { width: 46%; }
-
-            /* Altura das linhas para espaçamento semelhante ao print */
-            .row-high { height: 52px; }
-            .row-tall { height: 72px; }
         </style>
         """,
         unsafe_allow_html=True
     )
 
     # =========================
-    # TÍTULO (COR ALTERADA PARA #B91E27)
+    # TÍTULO (COR #B91E27)
     # =========================
     st.markdown("<div class='titulo-principal'>PIS e COFINS → CBS</div>", unsafe_allow_html=True)
 
@@ -255,103 +221,138 @@ else:
     )
 
     # ==========================================================
-    # TABELA FINAL (IDÊNTICA AO PRINT) — COM MESCLAGEM NAS LINHAS
+    # TABELA FINAL (IDÊNTICA AO PRINT) — COM MESCLAGEM VIA components.html
     # ==========================================================
     st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <table class="print-table">
-            <thead>
-                <tr>
-                    <th class="col-ano">Ano</th>
-                    <th colspan="2">Tributos Atuais</th>
-                    <th>Novos Tributos</th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th class="col-pis center">PIS/PASEP</th>
-                    <th class="col-cofins center">COFINS</th>
-                    <th class="col-cbs center">CBS</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 2024 -->
-                <tr class="row-high">
-                    <td class="center">2024</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
 
-                <!-- 2025 -->
-                <tr class="row-high">
-                    <td class="center">2025</td>
-                    <td class="center"></td>
-                    <td class="center muted">Sem mudanças</td>
-                    <td class="center">-</td>
-                </tr>
+    html_tabela_print = """
+    <style>
+        .print-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            margin-top: 6px;
+        }
+        .print-table th, .print-table td {
+            border: 1px solid #d6d6d6;
+            color: #222;
+            padding: 12px 10px;
+            text-align: left;
+            vertical-align: middle;
+            background: #fff;
+        }
+        .print-table thead th {
+            background: #cfe0f1; /* cabeçalho azul claro conforme print */
+            color: #1f2a37;
+            font-weight: 700;
+            text-align: center;
+        }
+        .center { text-align: center; }
+        .muted  { color: #3b3b3b; }
 
-                <!-- 2026 -->
-                <tr class="row-tall">
-                    <td class="center">2026</td>
-                    <td class="center"></td>
-                    <td class="muted">
-                        Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).
-                    </td>
-                    <td class="muted center">Alíquota teste: 0,9%</td>
-                </tr>
+        .col-ano   { width: 10%; }
+        .col-pis   { width: 22%; }
+        .col-cofins{ width: 22%; }
+        .col-cbs   { width: 46%; }
 
-                <!-- 2027 inicia bloco com mesclagem em PIS/PASEP (2027–2033) -->
-                <tr class="row-high">
-                    <td class="center">2027</td>
-                    <td rowspan="7"></td> <!-- MESCLAGEM 2027–2033 em PIS/PASEP -->
-                    <td></td>
-                    <td class="muted center" rowspan="2">Alíquota estabelecida (-) 0,1%</td> <!-- MESCLAGEM 2027–2028 em CBS -->
-                </tr>
+        .row-high { height: 52px; }
+        .row-tall { height: 72px; }
+    </style>
 
-                <!-- 2028 (continua mesclagem no PIS/PASEP e no CBS) -->
-                <tr class="row-high">
-                    <td class="center">2028</td>
-                    <td></td>
-                    <!-- CBS já está mesclado acima -->
-                </tr>
+    <table class="print-table">
+        <thead>
+            <tr>
+                <th class="col-ano">Ano</th>
+                <th colspan="2">Tributos Atuais</th>
+                <th>Novos Tributos</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="col-pis center">PIS/PASEP</th>
+                <th class="col-cofins center">COFINS</th>
+                <th class="col-cbs center">CBS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 2024 -->
+            <tr class="row-high">
+                <td class="center">2024</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
 
-                <!-- 2029 (PIS/PASEP segue mesclado; CBS em branco) -->
-                <tr class="row-high">
-                    <td class="center">2029</td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            <!-- 2025 -->
+            <tr class="row-high">
+                <td class="center">2025</td>
+                <td class="center"></td>
+                <td class="center muted">Sem mudanças</td>
+                <td class="center">-</td>
+            </tr>
 
-                <!-- 2030 (COFINS com Extinção; CBS em branco) -->
-                <tr class="row-high">
-                    <td class="center">2030</td>
-                    <td class="muted center">Extinção</td>
-                    <td></td>
-                </tr>
+            <!-- 2026 -->
+            <tr class="row-tall">
+                <td class="center">2026</td>
+                <td class="center"></td>
+                <td class="muted">
+                    Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).
+                </td>
+                <td class="muted center">Alíquota teste: 0,9%</td>
+            </tr>
 
-                <!-- 2031 inicia mesclagem 2031–2033 em CBS -->
-                <tr class="row-high">
-                    <td class="center">2031</td>
-                    <td></td>
-                    <td class="muted center" rowspan="3">Alíquota estabelecida</td> <!-- MESCLAGEM 2031–2033 em CBS -->
-                </tr>
+            <!-- 2027 inicia bloco com mesclagem em PIS/PASEP (2027–2033) -->
+            <tr class="row-high">
+                <td class="center">2027</td>
+                <td rowspan="7"></td> <!-- MESCLAGEM 2027–2033 em PIS/PASEP -->
+                <td></td>
+                <td class="muted center" rowspan="2">Alíquota estabelecida (-) 0,1%</td> <!-- MESCLAGEM 2027–2028 em CBS -->
+            </tr>
 
-                <!-- 2032 -->
-                <tr class="row-high">
-                    <td class="center">2032</td>
-                    <td></td>
-                    <!-- CBS já está mesclado acima -->
-                </tr>
+            <!-- 2028 -->
+            <tr class="row-high">
+                <td class="center">2028</td>
+                <td></td>
+                <!-- CBS já está mesclado acima -->
+            </tr>
 
-                <!-- 2033 -->
-                <tr class="row-high">
-                    <td class="center">2033</td>
-                    <td></td>
-                    <!-- CBS já está mesclado acima -->
-                </tr>
-            </tbody>
-        </table>
-        """,
-        unsafe_allow_html=True
-    )
+            <!-- 2029 -->
+            <tr class="row-high">
+                <td class="center">2029</td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <!-- 2030 -->
+            <tr class="row-high">
+                <td class="center">2030</td>
+                <td class="muted center">Extinção</td>
+                <td></td>
+            </tr>
+
+            <!-- 2031 inicia mesclagem 2031–2033 em CBS -->
+            <tr class="row-high">
+                <td class="center">2031</td>
+                <td></td>
+                <td class="muted center" rowspan="3">Alíquota estabelecida</td> <!-- MESCLAGEM 2031–2033 em CBS -->
+            </tr>
+
+            <!-- 2032 -->
+            <tr class="row-high">
+                <td class="center">2032</td>
+                <td></td>
+                <!-- CBS já está mesclado acima -->
+            </tr>
+
+            <!-- 2033 -->
+            <tr class="row-high">
+                <td class="center">2033</td>
+                <td></td>
+                <!-- CBS já está mesclado acima -->
+            </tr>
+        </tbody>
+    </table>
+    """
+
+    # Renderiza HTML puro (sem markdown) — garante rowspan/colspan e CSS
+    components.html(html_tabela_print, height=720, scrolling=True)
