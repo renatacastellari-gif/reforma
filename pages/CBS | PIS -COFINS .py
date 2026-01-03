@@ -243,25 +243,20 @@ else:
     )
 
     # ==========================================================
-    # TABELA FINAL — SUBSTITUÍDA POR IMAGEM 'tabela.png'
+    # TABELA FINAL — SUBSTITUÍDA POR IMAGEM 'tabela.png' (650 px de largura)
     # ==========================================================
     st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
 
     img_path = Path("tabela.png")  # coloque o arquivo na mesma pasta do .py
 
     if img_path.exists():
-        # Controle de tamanho: defina a largura (em px)
-        col1, col2 = st.columns([1, 3])
-        with col1:
-            width_px = st.slider("Largura da imagem (px)", min_value=350, max_value=1200, value=650, step=25)
-        with col2:
-            st.markdown("<div class='img-container'>", unsafe_allow_html=True)
-            st.image(
-                str(img_path),
-                caption="Linha do Tempo — PIS/COFINS → CBS",
-                width=width_px  # controla o tamanho sem perder nitidez
-            )
-            st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown("<div class='img-container'>", unsafe_allow_html=True)
+        st.image(
+            str(img_path),
+            caption="Linha do Tempo — PIS/COFINS → CBS",
+            width=650  # largura fixa solicitada
+        )
+        st.markdown("</div>", unsafe_allow_html=True)
     else:
         st.error("⚠️ Arquivo 'tabela.png' não encontrado. Coloque-o na mesma pasta do app ou ajuste o caminho.")
 
