@@ -236,13 +236,20 @@ else:
     # ==========================================================
     # TABELA FINAL — SUBSTITUÍDA POR IMAGEM 'tabela.png'
     # ==========================================================
-    st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
+   
+st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
 
-    img_path = Path("tabela.png")  # coloque o arquivo na mesma pasta do .py
-    if img_path.exists():
-        # Centraliza a imagem
-        st.markdown("<div class='img-container'>", unsafe_allow_html=True)
-        st.image(str(img_path), caption="Linha do Tempo — PIS/COFINS → CBS", use_container_width=True)
-        st.markdown("</div>", unsafe_allow_html=True)
-    else:
-        st.error("⚠️ Arquivo 'tabela.png' não encontrado. Coloque-o na mesma pasta do app ou ajuste o caminho.")
+img_path = Path("tabela.png")  # coloque o arquivo na mesma pasta do .py
+
+if img_path.exists():
+    # Centraliza a imagem
+    st.markdown("<div class='img-container'>", unsafe_allow_html=True)
+
+    # Ajuste o width aqui ↓ (ex.: 600 pixels)
+    st.image(str(img_path),
+             caption="Linha do Tempo — PIS/COFINS → CBS",
+             width=600)
+
+    st.markdown("</div>", unsafe_allow_html=True)
+else:
+    st.error("⚠️ Arquivo 'tabela.png' não encontrado. Coloque-o na mesma pasta do app ou ajuste o caminho.")
