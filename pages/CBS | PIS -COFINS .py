@@ -12,255 +12,159 @@ st.set_page_config(
 )
 
 # =========================
-# SENHA FIXA / LOGIN
+# LOGIN
 # =========================
 PASSWORD = "minhasenha123"
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
-# Esconde sidebar se não estiver logado
 if not st.session_state.logged_in:
-    st.markdown(
-        "<style>[data-testid='stSidebar']{display:none;}</style>",
-        unsafe_allow_html=True
-    )
+    st.markdown("<style>[data-testid='stSidebar']{display:none;}</style>", unsafe_allow_html=True)
 
-# =========================
-# TELA DE LOGIN
-# =========================
 if not st.session_state.logged_in:
     st.title("🔒 Acesso Restrito")
     senha = st.text_input("Digite a senha:", type="password")
-
     if st.button("Entrar", use_container_width=True):
         if senha == PASSWORD:
             st.session_state.logged_in = True
-            st.success("Acesso liberado!")
             st.rerun()
         else:
             st.error("Senha incorreta.")
 
 # =========================
-# CONTEÚDO PROTEGIDO
+# CONTEÚDO
 # =========================
 else:
 
     # =========================
-    # CSS GLOBAL (FUNDO PRETO)
+    # CSS – CARDS
     # =========================
+    st.markdown("""
+    <style>
+        .stApp {
+            background-color: #1b1b1b;
+            color: #F9EEEF;
+        }
+
+        h1, h2, h3 {
+            color: #B91E27;
+        }
+
+        .card {
+            background-color: #2a2a2a;
+            padding: 22px;
+            border-radius: 14px;
+            border-left: 6px solid #B91E27;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #B91E27;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 16px;
+            color: #EAEAEA;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: #F2D5D7;
+            font-weight: 600;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # =========================
+    # TÍTULO
+    # =========================
+    st.markdown("<h2 style='text-align:center;'>PIS e COFINS → CBS</h2>", unsafe_allow_html=True)
     st.markdown(
-        """
-        <style>
-            html, body, [class*="css"]  {
-                background-color: #000000;
-            }
-
-            .titulo-principal {
-                font-size: 34px;
-                font-weight: bold;
-                color: #B91E27;
-                margin-bottom: 10px;
-            }
-
-            .subtitulo {
-                font-size: 22px;
-                font-weight: bold;
-                color: #D96569;
-                margin-top: 30px;
-            }
-
-            .texto {
-                font-size: 16px;
-                color: #dddddd;
-                line-height: 1.6;
-            }
-
-            .box {
-                background-color: #111111;
-                padding: 20px;
-                border-radius: 12px;
-                margin-top: 15px;
-                border: 1px solid #2a2a2a;
-            }
-
-            .tabela {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 20px;
-            }
-            .tabela thead th {
-                background-color: #6b1f3a;
-                color: #ffffff;
-                padding: 10px;
-                text-align: center;
-            }
-            .tabela tbody td {
-                background-color: #0f0f0f;
-                color: #eaeaea;
-                padding: 10px;
-                text-align: center;
-                border-bottom: 1px solid #333333;
-            }
-
-            .img-container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-top: 12px;
-            }
-
-            .content-wrapper {
-                max-width: 1100px;
-                margin: 0 auto;
-            }
-        </style>
-        """,
+        "<p style='text-align:center;color:#cccccc;'>Resumo prático da Reforma Tributária para empresas de serviços</p>",
         unsafe_allow_html=True
     )
 
-    # Wrapper
-    st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
-
     # =========================
-    # TÍTULO PRINCIPAL
+    # CARD – 2026
     # =========================
-    st.markdown("<div class='titulo-principal'>PIS e COFINS → CBS</div>", unsafe_allow_html=True)
-
-    st.markdown(
-        """
-        <div class='texto'>
-        Resumo prático da Reforma Tributária aplicado a
-        <b>empresas prestadoras de serviços de consultoria e assessoria patrimonial imobiliária</b>.
+    st.markdown("""
+    <div class="card">
+        <div class="card-title">📅 2026 — Período de Teste</div>
+        <div class="card-text">
+            ✔ Entrada da <span class="highlight">CBS em fase piloto</span><br>
+            ✔ Alíquota teste: <span class="highlight">0,9%</span><br>
+            ✔ Valor <span class="highlight">compensado com PIS e COFINS</span><br>
+            ✔ Possível dispensa de recolhimento se cumprir obrigações acessórias<br><br>
+            ❗ <b>Não há aumento real de carga tributária em 2026</b>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+    </div>
+    """, unsafe_allow_html=True)
 
     # =========================
-    # 2026 – PERÍODO DE TESTE
+    # CARD – 2027
     # =========================
-    st.markdown("<div class='subtitulo'>📅 Ano de 2026 — Período de Teste</div>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <div class='box texto'>
-        ✔ Entrada da <b>CBS em fase piloto</b><br>
-        ✔ Alíquota teste: <b>0,9%</b><br>
-        ✔ Valor recolhido é <b>compensado com PIS e COFINS</b><br>
-        ✔ Possível <b>dispensa de recolhimento</b> se cumprir obrigações acessórias<br><br>
-        ❗ <b>Não há aumento real de carga tributária em 2026</b>.  
-        O objetivo é apenas informativo e de adaptação dos sistemas.
+    st.markdown("""
+    <div class="card">
+        <div class="card-title">🚨 A partir de 2027</div>
+        <div class="card-text">
+            ❌ <b>PIS e COFINS são extintos</b><br>
+            ✔ Entra a <span class="highlight">CBS definitiva</span><br><br>
+
+            <b>Características da CBS:</b><br>
+            • Não cumulativa (modelo IVA)<br>
+            • Crédito financeiro amplo<br>
+            • Alíquota estimada: <span class="highlight">~8,8%</span><br><br>
+
+            ⚠️ Empresas de serviços com poucos insumos
+            tendem a sentir <b>aumento real da carga tributária</b>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+    </div>
+    """, unsafe_allow_html=True)
 
     # =========================
-    # 2027 EM DIANTE
+    # CARD – COMPARATIVO
     # =========================
-    st.markdown("<div class='subtitulo'>🚨 A partir de 2027</div>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <div class='box texto'>
-        ❌ <b>PIS e COFINS são extintos</b><br>
-        ✔ Entra a <b>CBS</b> de forma definitiva<br><br>
-
-        <b>Características da CBS:</b><br>
-        • Não cumulativa (modelo IVA)<br>
-        • Crédito financeiro amplo<br>
-        • Alíquota estimada: <b>~8,8%</b><br><br>
-
-        ⚠️ Empresas de serviços com poucos insumos
-        tendem a sentir <b>aumento real da carga tributária</b>.
+    st.markdown("""
+    <div class="card">
+        <div class="card-title">📊 Comparativo Geral</div>
+        <div class="card-text">
+            • Até 2025 → PIS + COFINS (3,65%) — sem crédito<br>
+            • 2026 → CBS teste (0,9%) — impacto neutro<br>
+            • 2027+ → CBS definitiva (~8,8%) — impacto maior
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+    </div>
+    """, unsafe_allow_html=True)
 
     # =========================
-    # TABELA COMPARATIVA
+    # CARD – CONCLUSÃO
     # =========================
-    st.markdown("<div class='subtitulo'>📊 Comparativo Geral</div>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <table class="tabela">
-            <thead>
-                <tr>
-                    <th>Período</th>
-                    <th>Tributo</th>
-                    <th>Alíquota</th>
-                    <th>Crédito</th>
-                    <th>Impacto Financeiro</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Até 2025</td>
-                    <td>PIS + COFINS</td>
-                    <td>3,65%</td>
-                    <td>Não</td>
-                    <td>Baixo</td>
-                </tr>
-                <tr>
-                    <td>2026</td>
-                    <td>CBS (teste)</td>
-                    <td>0,9%</td>
-                    <td>Sim (compensado)</td>
-                    <td>Neutro</td>
-                </tr>
-                <tr>
-                    <td>2027+</td>
-                    <td>CBS definitiva</td>
-                    <td>~8,8%</td>
-                    <td>Sim (pleno)</td>
-                    <td>Mais elevado</td>
-                </tr>
-            </tbody>
-        </table>
-        """,
-        unsafe_allow_html=True
-    )
-
-    # =========================
-    # CONCLUSÃO
-    # =========================
-    st.markdown("<div class='subtitulo'>🧾 Conclusão Prática</div>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <div class='box texto'>
-        ✔ 2026 é um ano de adaptação<br>
-        ✔ A mudança financeira começa em 2027<br>
-        ✔ Revisão de preços e contratos será essencial para serviços
+    st.markdown("""
+    <div class="card">
+        <div class="card-title">🧾 Conclusão Prática</div>
+        <div class="card-text">
+            ✔ 2026 é um ano de adaptação<br>
+            ✔ A mudança financeira começa em 2027<br>
+            ✔ Revisão de preços e contratos será essencial
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+    </div>
+    """, unsafe_allow_html=True)
 
     # =========================
-    # IMAGEM DA LINHA DO TEMPO
+    # CARD – EXCEL
     # =========================
-    st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
-
-    img_path = Path("tabela.png")
-    if img_path.exists():
-        st.markdown("<div class='img-container'>", unsafe_allow_html=True)
-        st.image(str(img_path), caption="Linha do Tempo — PIS/COFINS → CBS", width=650)
-        st.markdown("</div>", unsafe_allow_html=True)
-    else:
-        st.error("⚠️ Arquivo 'tabela.png' não encontrado.")
-
-    # =========================
-    # 👉 BLOCO NOVO – EXCEL
-    # =========================
-    st.markdown("<div class='subtitulo'>📈 Dados detalhados (Excel)</div>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="card">
+        <div class="card-title">📈 Dados Detalhados (Excel)</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     excel_path = Path("tabela.xlsx")
-
     if excel_path.exists():
         df = pd.read_excel(excel_path)
-        st.dataframe(df, use_container_width=True, height=450)
+        st.dataframe(df, use_container_width=True, height=420)
     else:
-        st.warning("Arquivo 'tabela.xlsx' não encontrado. Coloque-o na mesma pasta do app.")
-
-    # Fecha wrapper
-    st.markdown("</div>", unsafe_allow_html=True)
+        st.warning("Arquivo 'tabela.xlsx' não encontrado.")
