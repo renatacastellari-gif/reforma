@@ -1,16 +1,17 @@
 import streamlit as st
+import pandas as pd
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
 # =========================
 st.set_page_config(
-    page_title="Painel Reforma Tributária – PIS/COFINS",
-    page_icon="🟪",
+    page_title="Reforma Tributária | PIS e COFINS → CBS",
+    page_icon="🟥",
     layout="centered"
 )
 
 # =========================
-# LOGIN
+# SENHA / LOGIN
 # =========================
 PASSWORD = "minhasenha123"
 
@@ -23,17 +24,13 @@ if not st.session_state.logged_in:
 if not st.session_state.logged_in:
     st.title("🔒 Acesso Restrito")
     senha = st.text_input("Digite a senha:", type="password")
-
     if st.button("Entrar", use_container_width=True):
         if senha == PASSWORD:
             st.session_state.logged_in = True
+            st.success("Acesso liberado!")
             st.rerun()
         else:
             st.error("Senha incorreta.")
-
-# =========================
-# CONTEÚDO
-# =========================
 else:
 
     # =========================
@@ -46,81 +43,62 @@ else:
         }
 
         .titulo {
-            font-size: 36px;
-            font-weight: bold;
-            color: #B11226;
-            margin-bottom: 10px;
+            font-size: 38px;
+            font-weight: 800;
+            color: #8B0000;
+            margin-bottom: 12px;
         }
 
         .subtitulo {
             font-size: 22px;
-            font-weight: bold;
-            color: #B11226;
+            font-weight: 700;
+            color: #8B0000;
             margin-top: 35px;
         }
 
         .texto {
             font-size: 16px;
-            color: #E0E0E0;
-            line-height: 1.6;
+            color: #E6E6E6;
+            line-height: 1.7;
         }
 
         .box {
-            background-color: #0F0F0F;
-            padding: 20px;
-            border-radius: 14px;
+            background: linear-gradient(145deg, #0E0E0E, #050505);
+            padding: 22px;
+            border-radius: 16px;
             margin-top: 15px;
             border: 1px solid #2A2A2A;
+            box-shadow: 0 0 18px rgba(139,0,0,0.20);
         }
 
-        /* TABELA FINAL */
-        .tabela-final {
+        /* ===== TABELA ===== */
+
+        table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 25px;
+            margin-top: 30px;
             font-size: 15px;
         }
 
-        .tabela-final th {
-            border: 1px solid #555555;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
+        th {
+            background-color: #8B0000;
+            color: #FFFFFF;
+            padding: 12px;
+            border: 1px solid #3A3A3A;
         }
 
-        .tabela-final td {
-            border: 1px solid #555555;
-            padding: 10px;
-            text-align: center;
-            color: #EAEAEA;
+        td {
             background-color: #0B0B0B;
-        }
-
-        .th-ano {
-            background-color: #C9DEF1;
-            color: #000000;
-        }
-
-        .th-atual {
-            background-color: #C9DEF1;
-            color: #000000;
-        }
-
-        .th-novo {
-            background-color: #C9DEF1;
-            color: #000000;
-        }
-
-        .th-sub {
-            background-color: #FFFFFF;
-            color: #000000;
-            font-weight: bold;
+            color: #EAEAEA;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #2F2F2F;
         }
     </style>
     """, unsafe_allow_html=True)
 
     # =========================
-    # TÍTULO
+    # CONTEÚDO
     # =========================
     st.markdown("<div class='titulo'>PIS e COFINS → CBS</div>", unsafe_allow_html=True)
 
@@ -138,44 +116,57 @@ else:
 
     st.markdown("""
     <div class='box texto'>
-    ✔ Entrada da CBS em fase piloto<br>
-    ✔ Alíquota teste: 0,9%<br>
-    ✔ Valor recolhido pode ser compensado com PIS e COFINS<br>
-    ✔ Possível dispensa de recolhimento mediante cumprimento das obrigações acessórias<br><br>
-    ❗ Não há aumento real de carga tributária em 2026.
+        ✓ Entrada da CBS em fase piloto<br>
+        ✓ Alíquota teste: 0,9%<br>
+        ✓ Valor recolhido pode ser compensado com PIS e COFINS<br>
+        ✓ Possível dispensa de recolhimento mediante cumprimento das obrigações acessórias<br><br>
+        ❗ <b>Não há aumento real de carga tributária em 2026.</b>
     </div>
     """, unsafe_allow_html=True)
 
     # =========================
-    # 2027
+    # 2027+
     # =========================
     st.markdown("<div class='subtitulo'>🚨 A partir de 2027</div>", unsafe_allow_html=True)
 
     st.markdown("""
     <div class='box texto'>
-    ❌ Extinção do PIS e da COFINS<br>
-    ✔ Entrada definitiva da CBS<br>
-    • Modelo não cumulativo (IVA)<br>
-    • Alíquota a ser definida por lei específica
+        ✖ Extinção do PIS e da COFINS<br>
+        ✓ Entrada definitiva da CBS<br>
+        • Modelo não cumulativo (IVA)<br>
+        • Alíquota a ser definida por lei específica
     </div>
     """, unsafe_allow_html=True)
 
     # =========================
-    # TABELA FINAL (REPLICA)
+    # TABELA ANTERIOR (MANTIDA)
     # =========================
-    st.markdown("<div class='subtitulo'>📊 Linha do Tempo dos Tributos</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subtitulo'>📊 Comparativo Geral</div>", unsafe_allow_html=True)
+
+    df = pd.DataFrame({
+        "Tributo": ["PIS", "COFINS", "CBS"],
+        "Situação Atual": ["Vigente", "Vigente", "Em fase de teste"],
+        "Situação Futura": ["Extinto", "Extinto", "Definitivo"]
+    })
+
+    st.dataframe(df, use_container_width=True)
+
+    # =========================
+    # NOVA TABELA (NO FINAL)
+    # =========================
+    st.markdown("<div class='subtitulo'>📈 Linha do Tempo dos Tributos</div>", unsafe_allow_html=True)
 
     st.markdown("""
-    <table class="tabela-final">
+    <table>
         <tr>
-            <th rowspan="2" class="th-ano">Ano</th>
-            <th colspan="2" class="th-atual">Tributos Atuais</th>
-            <th colspan="1" class="th-novo">Novos Tributos</th>
+            <th rowspan="2">Ano</th>
+            <th colspan="2">Tributos Atuais</th>
+            <th>Novos Tributos</th>
         </tr>
         <tr>
-            <th class="th-sub">PIS/PASEP</th>
-            <th class="th-sub">COFINS</th>
-            <th class="th-sub">CBS</th>
+            <th>PIS/PASEP</th>
+            <th>COFINS</th>
+            <th>CBS</th>
         </tr>
 
         <tr>
@@ -193,7 +184,7 @@ else:
         <tr>
             <td>2026</td>
             <td colspan="2">
-                Alíquotas mantidas; com a possibilidade de compensação
+                Alíquotas mantidas; possibilidade de compensação
                 de 1% dos novos tributos (CBS 0,9% e IBS 0,1%)
             </td>
             <td>Alíquota teste: 0,9%</td>
@@ -201,7 +192,7 @@ else:
 
         <tr>
             <td>2027</td>
-            <td rowspan="5" colspan="2">Extinção</td>
+            <td colspan="2" rowspan="4">Extinção</td>
             <td>Alíquota estabelecida (-)</td>
         </tr>
 
@@ -222,6 +213,7 @@ else:
 
         <tr>
             <td>2031</td>
+            <td colspan="2"></td>
             <td>Alíquota estabelecida</td>
         </tr>
 
