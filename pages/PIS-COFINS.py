@@ -126,25 +126,4 @@ Isso **protege** quem acumulou crédito no regime antigo.
 """)
 
     # =========================
-    # TABELA (exatamente como enviada)
-    # =========================
-    st.markdown("\n---\n\n**Tabela – Transição PIS/COFINS → CBS (SERVIÇOS)**")
-
-    data = [
-        ["2024", "", "", ""],
-        ["2025", "Sem mudanças", "", "-"],
-        ["2026", "Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).", "", "Alíquota teste: 0,9%"],
-        ["2027", "", "", "Alíquota estabelecida (-) 0,1%"],
-        ["2028", "", "", ""],
-        ["2029", "", "", ""],
-        ["2030", "Extinção", "", "Alíquota estabelecida"],
-        ["2031", "", "", ""],
-        ["2032", "", "", ""],
-        ["2033", "", "", ""],
-    ]
-
-    df = pd.DataFrame(data, columns=["Ano", "PIS/PASEP", "COFINS", "CBS"])
-
-    # Cabeçalho visual
-    st.table(df)
-
+   
