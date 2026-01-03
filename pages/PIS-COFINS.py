@@ -1,12 +1,11 @@
 
 import streamlit as st
-from pathlib import Path
 import pandas as pd
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
 # =========================
-st.set_page_config(page_title="Reforma Tributária", page_icon="🟪" )
+st.set_page_config(page_title="Reforma Tributária", page_icon="🟪")
 
 # =========================
 # SENHA FIXA / LOGIN
@@ -38,7 +37,7 @@ else:
     # CONTEÚDO PROTEGIDO
     # =========================
 
-    # ---- Título enxuto ----
+    # Título
     st.markdown(
         "<h2 style='color:#B22222;font-family:Times New Roman,sans-serif;font-weight:700;"
         "text-align:center;border-bottom:2px solid #B22222;padding-bottom:8px;margin-bottom:20px;'>"
@@ -47,7 +46,7 @@ else:
     )
 
     # =========================
-    # TEXTO PRINCIPAL (sem a palavra 'didático')
+    # TEXTO PRINCIPAL
     # =========================
     st.markdown("""
 📘 **RESUMO – REFORMA TRIBUTÁRIA (IBS/CBS) PARA EMPRESA PATRIMONIAL / SERVIÇOS**
@@ -126,67 +125,67 @@ Isso **protege** quem acumulou crédito no regime antigo.
 """)
 
     # =========================
-    # TABELA (exatamente como enviada)
+    # TABELA – fundo branco; cabeçalho vinho; coluna "Ano" sem quebra
     # =========================
-    
-# =========================
-# TABELA (formatação vinho no cabeçalho, texto branco)
-# =========================
-st.markdown("\n---\n\n**Tabela – Transição PIS/COFINS → CBS (SERVIÇOS)**")
+    st.markdown("\n---\n\n**Tabela – Transição PIS/COFINS → CBS (SERVIÇOS)**")
 
-data = [
-    ["2024", "", "", ""],
-    ["2025", "Sem mudanças", "", "-"],
-    ["2026", "Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).", "", "Alíquota teste: 0,9%"],
-    ["2027", "", "", "Alíquota estabelecida (-) 0,1%"],
-    ["2028", "", "", ""],
-    ["2029", "", "", ""],
-    ["2030", "Extinção", "", "Alíquota estabelecida"],
-    ["2031", "", "", ""],
-    ["2032", "", "", ""],
-    ["2033", "", "", ""],
-]
+    data = [
+        ["2024", "", "", ""],
+        ["2025", "Sem mudanças", "", "-"],
+        ["2026", "Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).", "", "Alíquota teste: 0,9%"],
+        ["2027", "", "", "Alíquota estabelecida (-) 0,1%"],
+        ["2028", "", "", ""],
+        ["2029", "", "", ""],
+        ["2030", "Extinção", "", "Alíquota estabelecida"],
+        ["2031", "", "", ""],
+        ["2032", "", "", ""],
+        ["2033", "", "", ""],
+    ]
 
-df = pd.DataFrame(data, columns=["Ano", "PIS/PASEP", "COFINS", "CBS"])
+    df = pd.DataFrame(data, columns=["Ano", "PIS/PASEP", "COFINS", "CBS"])
 
-# Estilo (cabeçalho vinho e texto branco; fonte com peso; bordas suaves)
-wine = "#7A0C16"  # vinho (pode usar #B22222 se preferir mais claro)
-white = "#FFFFFF"
-border_color = "#D0D0D0"
+    wine   = "#B22222"  # vinho mais claro, igual ao título
+    white  = "#FFFFFF"
+    border = "#D0D0D0"
 
-styled = (
-    df.style
-    .set_table_styles([
-        # cabeçalho completo
-        {"selector": "th", "props": [
-            ("background-color", wine),
-            ("color", white),
-            ("font-weight", "700"),
-            ("text-align", "center"),
-            ("border", f"1px solid {border_color}")
-        ]},
-        # linhas/células
-        {"selector": "td", "props": [
-            ("border", f"1px solid {border_color}"),
-            ("padding", "10px"),
-            ("vertical-align", "middle"),
-        ]},
-        # tabela (bordas arredondadas)
-        {"selector": "table", "props": [
-            ("border-collapse", "separate"),
-            ("border-spacing", "0"),
-            ("border", f"1px solid {border_color}"),
-            ("border-radius", "8px"),
-            ("overflow", "hidden"),
-        ]},
-    ])
-    # centraliza cabeçalhos e a coluna CBS
-    .set_properties(subset=["Ano", "PIS/PASEP", "COFINS", "CBS"], **{
-        "text-align": "center"
-    })
-)
+    styled = (
+        df.style
+        .set_table_styles([
+            {"selector": "th", "props": [
+                ("background-color", wine),
+                ("color", white),
+                ("font-weight", "700"),
+                ("text-align", "center"),
+                ("border", f"1px solid {border}"),
+                ("padding", "10px")
+            ]},
+            {"selector": "td", "props": [
+                ("background-color", white),
+                ("color", "#222"),
+                ("border", f"1px solid {border}"),
+                ("padding", "12px"),
+                ("vertical-align", "middle")
+            ]},
+            {"selector": "table", "props": [
+                ("border-collapse", "separate"),
+                ("border-spacing", "0"),
+                ("border", f"1px solid {border}"),
+                ("border-radius", "10px"),
+                ("overflow", "hidden")
+            ]},
+        ])
+        .set_properties(subset=["Ano", "PIS/PASEP", "COFINS", "CBS"], **{
+            "text-align": "center"
+        })
+        .set_properties(subset=["Ano"], **{
+            "white-space": "nowrap",
+            "width": "100px",
+            "min-width": "100px",
+            "max-width": "100px"
+        })
+        .set_properties(subset=["PIS/PASEP"], **{"width": "360px"})
+        .set_properties(subset=["COFINS"], **{"width": "160px"})
+        .set_properties(subset=["CBS"], **{"width": "220px"})
+    )
 
-# Renderiza com estilos
-st.table(styled)
-
-
+    st.table(styled)
