@@ -114,10 +114,19 @@ else:
                 align-items: center;
                 margin-top: 12px;
             }
+
+            /* Limita a largura máxima da área de conteúdo */
+            .content-wrapper {
+                max-width: 1100px;
+                margin: 0 auto;
+            }
         </style>
         """,
         unsafe_allow_html=True
     )
+
+    # Wrapper para manter tudo centralizado
+    st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
 
     # =========================
     # TÍTULO PRINCIPAL
@@ -236,20 +245,25 @@ else:
     # ==========================================================
     # TABELA FINAL — SUBSTITUÍDA POR IMAGEM 'tabela.png'
     # ==========================================================
-   
-st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
 
-img_path = Path("tabela.png")  # coloque o arquivo na mesma pasta do .py
+    img_path = Path("tabela.png")  # coloque o arquivo na mesma pasta do .py
 
-if img_path.exists():
-    # Centraliza a imagem
-    st.markdown("<div class='img-container'>", unsafe_allow_html=True)
+    if img_path.exists():
+        # Controle de tamanho: defina a largura (em px)
+        col1, col2 = st.columns([1, 3])
+        with col1:
+            width_px = st.slider("Largura da imagem (px)", min_value=350, max_value=1200, value=650, step=25)
+        with col2:
+            st.markdown("<div class='img-container'>", unsafe_allow_html=True)
+            st.image(
+                str(img_path),
+                caption="Linha do Tempo — PIS/COFINS → CBS",
+                width=width_px  # controla o tamanho sem perder nitidez
+            )
+            st.markdown("</div>", unsafe_allow_html=True)
+    else:
+        st.error("⚠️ Arquivo 'tabela.png' não encontrado. Coloque-o na mesma pasta do app ou ajuste o caminho.")
 
-    # Ajuste o width aqui ↓ (ex.: 600 pixels)
-    st.image(str(img_path),
-             caption="Linha do Tempo — PIS/COFINS → CBS",
-             width=600)
-
+    # Fecha wrapper
     st.markdown("</div>", unsafe_allow_html=True)
-else:
-    st.error("⚠️ Arquivo 'tabela.png' não encontrado. Coloque-o na mesma pasta do app ou ajuste o caminho.")
