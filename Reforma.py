@@ -123,7 +123,7 @@ else:
             padding-bottom:10px;
             margin-bottom:30px;
         ">
-            Reforma Tributária – Resumo Simples
+            Reforma Tributária
         </h2>
     """, unsafe_allow_html=True)
 
