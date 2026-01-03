@@ -6,7 +6,7 @@ from io import BytesIO
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
 # =========================
-st.set_page_config(page_title="Reforma Tributária", page_icon="🟪", layout="wide")
+st.set_page_config(page_title="Reforma Tributária", page_icon="🟪" )
 
 # =========================
 # SENHA FIXA / LOGIN
