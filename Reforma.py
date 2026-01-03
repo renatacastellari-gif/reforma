@@ -1,5 +1,7 @@
-import pandas as pd
+
+import streamlit as st
 from pathlib import Path
+# import pandas as pd  # remova se não usar
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
@@ -54,4 +56,5 @@ else:
         "<h2 style='color:#B22222;font-family:Times New Roman,sans-serif;font-weight:700;text-align:center;border-bottom:2px solid #B22222;padding-bottom:8px;margin-bottom:20px;'>Reforma Tributária</h2>",
         unsafe_allow_html=True
     )
-    st.markdown("**`REFORMA TRIBUTÁRIA`**")
+
+    # Aqui você continua com o conteúdo do painel...
