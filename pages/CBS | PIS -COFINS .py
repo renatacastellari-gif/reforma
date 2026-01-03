@@ -1,6 +1,5 @@
 
 import streamlit as st
-# import pandas as pd  # remova se não usar pandas
 from pathlib import Path
 
 # =========================
@@ -120,12 +119,21 @@ else:
                 font-weight: 700;
             }
 
-            /* Imagem centralizada */
             .img-container {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 margin-top: 12px;
+            }
+
+            .callout {
+                background: #101010;
+                border: 1px dashed #B91E27;
+                border-radius: 10px;
+                padding: 14px 16px;
+                margin-top: 10px;
+                color: #dddddd;
+                font-size: 16px;
             }
         </style>
         """,
@@ -141,10 +149,8 @@ else:
     st.markdown("<div class='titulo-principal'>Reforma Tributária</div>", unsafe_allow_html=True)
 
     # =========================
-    # CARDS (layout da imagem)
+    # CARD: CBS (mantido)
     # =========================
-
-    # Card: CBS
     st.markdown(
         """
         <div class="card">
@@ -152,8 +158,8 @@ else:
             <ul>
                 <li>Substitui <b>PIS e COFINS</b></li>
                 <li>Imposto <b>federal</b></li>
-                <li>Modelo de <b>IVA</b></li>
-                <li>Permite <b>crédito do imposto</b></li>
+                <li>Modelo de <b>IVA</b> (não cumulativo)</li>
+                <li>Permite <b>crédito financeiro</b> amplo</li>
                 <li>Objetivo: <b>simplificar</b> a tributação</li>
             </ul>
         </div>
@@ -161,24 +167,85 @@ else:
         unsafe_allow_html=True
     )
 
-    # Card: ISS
+    # =========================
+    # NOVO CARD: O que importa para sua empresa (prestação de serviços)
+    # =========================
     st.markdown(
         """
         <div class="card">
-            <h3>ISS – Imposto Sobre Serviços</h3>
+            <h3>O que importa para sua empresa (prestação de serviços)</h3>
+
             <ul>
-                <li>Imposto <b>municipal</b></li>
-                <li>Incide sobre <b>prestação de serviços</b></li>
-                <li>Será <b>extinto</b> com a reforma</li>
-                <li>Substituído pelo <b>IBS</b></li>
+                <li><b>Obrigatoriedade de emitir documento fiscal eletrônico:</b><br>
+                    Para qualquer operação com serviços em 2026, a empresa deve emitir <b>NFS-e</b>
+                    (Nota Fiscal de Serviços Eletrônica) — exatamente o que vocês já fazem.
+                    A NFS-e está listada como documento <b>recepcionado</b> pelo <b>IBS</b> e <b>CBS</b>.
+                </li>
+
+                <li><b>Campos do IBS e da CBS na NFS-e:</b><br>
+                    No início, <b>não haverá penalidade</b> se vocês ainda não preencherem os novos
+                    campos de IBS/CBS na NFS-e. Isso vale <b>até o primeiro dia do 4º mês</b> após a
+                    publicação dos regulamentos do IBS/CBS (ainda não publicados).
+                </li>
+
+                <li><b>2026 será um ano de apuração “informativa”:</b>
+                    <ul>
+                        <li>A apuração de <b>IBS</b> e <b>CBS</b> <b>não terá efeitos tributários</b> em 2026.</li>
+                        <li>Mas será <b>obrigatório</b> enviar as informações conforme a legislação.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="callout">
+                Ou seja:<br>
+                ➡️ <b>não paga IBS/CBS em 2026</b>,<br>
+                ➡️ <b>mas precisa transmitir</b> as informações corretamente quando exigido.<br><br>
+                • Em 2026, precisarão atender <b>obrigações acessórias</b> do IBS/CBS, mas sem recolhimento.<br>
+                • Os <b>novos campos de IBS/CBS</b> na NFS-e <b>não gerarão multa</b> inicialmente.<br>
+                • A apuração será <b>somente informativa</b> durante 2026.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # =========================
+    # NOVO CARD: NFS-e — layouts em 2026
+    # =========================
+    st.markdown(
+        """
+        <div class="card">
+            <h3>NFS-e — layouts que poderão ser usados em 2026</h3>
+            <p class="texto" style="margin-bottom: 10px;">
+                Segundo comunicado de <b>15/12/2025</b>, o município permitirá duas modalidades de emissão da NFS-e:
+                <span style="opacity:0.7;">[reformatri...utaria.com]</span>
+            </p>
+
+            <ul>
+                <li><b>Layout 1 (atual)</b>
+                    <ul>
+                        <li>Só contém <b>ISS</b></li>
+                        <li>Não inclui ainda os campos de <b>IBS/CBS</b></li>
+                        <li>Ainda será aceito em 2026 (online, webservice, TXT)</li>
+                    </ul>
+                </li>
+
+                <li><b>Layout 2 (novo)</b>
+                    <ul>
+                        <li>Inclui <b>ISS + IBS + CBS</b></li>
+                        <li><b>Válido a partir de 01/01/2026</b></li>
+                        <li>Se a empresa optar por usar, os campos de IBS/CBS passam a constar na emissão</li>
+                    </ul>
+                </li>
             </ul>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    # Você pode seguir adicionando outros cards na mesma pegada:
-    # IBS, IVA Dual, Períodos (2026 e 2027+), regimes especiais etc.
+    # =========================
+    # CARDS DE PERÍODO (mantidos)
+    # =========================
     st.markdown(
         """
         <div class="card">
