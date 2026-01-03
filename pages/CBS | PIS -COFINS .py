@@ -60,10 +60,17 @@ else:
             color: #ffffff;
             margin-bottom: 10px;
         }
+        /* Título principal com cor específica (#B91E27) */
+        .titulo-principal {
+            font-size: 34px;
+            font-weight: bold;
+            color: #B91E27;
+            margin-bottom: 10px;
+        }
         .subtitulo {
             font-size: 22px;
             font-weight: bold;
-            color: #D96569;  /* ALTERADO para D96569 */
+            color: #D96569;  /* COR SOLICITADA */
             margin-top: 30px;
         }
         .texto {
@@ -100,9 +107,9 @@ else:
     """, unsafe_allow_html=True)
 
     # =========================
-    # TÍTULO
+    # TÍTULO (COR ALTERADA PARA #B91E27)
     # =========================
-    st.markdown("<div class='titulo'>PIS e COFINS → CBS</div>", unsafe_allow_html=True)
+    st.markdown("<div class='titulo-principal'>PIS e COFINS → CBS</div>", unsafe_allow_html=True)
 
     st.markdown("""
     <div class='texto'>
@@ -148,7 +155,7 @@ else:
     """, unsafe_allow_html=True)
 
     # =========================
-    # TABELA COMPARATIVA
+    # TABELA COMPARATIVA (GERAL)
     # =========================
     st.markdown("<div class='subtitulo'>📊 Comparativo Geral</div>", unsafe_allow_html=True)
 
@@ -203,11 +210,11 @@ else:
     """, unsafe_allow_html=True)
 
     # ==========================================================
-    # TABELA FINAL (IDÊNTICA AO PRINT ENVIADO) — SEM MUDAR NADA
+    # TABELA FINAL (IDÊNTICA AO PRINT) — COM MESCLAGEM NAS LINHAS
     # ==========================================================
     st.markdown("""
     <style>
-        /* Estilo específico para a tabela do print */
+        /* Estilo específico para a tabela do print com mesclagem */
         .print-table {
             width: 100%;
             border-collapse: collapse;
@@ -228,17 +235,15 @@ else:
             font-weight: 700;
             text-align: center;
         }
-        .print-table .center {
-            text-align: center;
-        }
-        .print-table .muted {
-            color: #3b3b3b;
-        }
+        .print-table .center { text-align: center; }
+        .print-table .muted  { color: #3b3b3b; }
+
         /* Larguras aproximadas para replicar visual */
-        .col-ano { width: 10%; }
-        .col-pis { width: 22%; }
-        .col-cofins { width: 22%; }
-        .col-cbs { width: 46%; }
+        .col-ano   { width: 10%; }
+        .col-pis   { width: 22%; }
+        .col-cofins{ width: 22%; }
+        .col-cbs   { width: 46%; }
+
         /* Altura das linhas para espaçamento semelhante ao print */
         .row-high { height: 52px; }
         .row-tall { height: 72px; }
@@ -261,18 +266,23 @@ else:
             </tr>
         </thead>
         <tbody>
+            <!-- 2024 -->
             <tr class="row-high">
                 <td class="center">2024</td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
+
+            <!-- 2025 -->
             <tr class="row-high">
                 <td class="center">2025</td>
                 <td class="center"></td>
                 <td class="center muted">Sem mudanças</td>
                 <td class="center">-</td>
             </tr>
+
+            <!-- 2026 -->
             <tr class="row-tall">
                 <td class="center">2026</td>
                 <td class="center"></td>
@@ -281,49 +291,56 @@ else:
                 </td>
                 <td class="muted center">Alíquota teste: 0,9%</td>
             </tr>
+
+            <!-- 2027 inicia bloco com mesclagem em PIS/PASEP (2027–2033) -->
             <tr class="row-high">
                 <td class="center">2027</td>
+                <td rowspan="7"></td> <!-- MESCLAGEM 2027–2033 em PIS/PASEP -->
                 <td></td>
-                <td></td>
-                <td class="muted center">Alíquota estabelecida (-) 0,1%</td>
+                <td class="muted center" rowspan="2">Alíquota estabelecida (-) 0,1%</td> <!-- MESCLAGEM 2027–2028 em CBS -->
             </tr>
+
+            <!-- 2028 (continua mesclagem no PIS/PASEP e no CBS) -->
             <tr class="row-high">
                 <td class="center">2028</td>
                 <td></td>
-                <td></td>
-                <td></td>
+                <!-- CBS já está mesclado acima -->
             </tr>
+
+            <!-- 2029 (PIS/PASEP segue mesclado; CBS em branco) -->
             <tr class="row-high">
                 <td class="center">2029</td>
                 <td></td>
                 <td></td>
-                <td></td>
             </tr>
+
+            <!-- 2030 (COFINS com Extinção; CBS em branco) -->
             <tr class="row-high">
                 <td class="center">2030</td>
-                <td></td>
                 <td class="muted center">Extinção</td>
                 <td></td>
             </tr>
+
+            <!-- 2031 inicia mesclagem 2031–2033 em CBS -->
             <tr class="row-high">
                 <td class="center">2031</td>
                 <td></td>
-                <td></td>
-                <td class="muted center">Alíquota estabelecida</td>
+                <td class="muted center" rowspan="3">Alíquota estabelecida</td> <!-- MESCLAGEM 2031–2033 em CBS -->
             </tr>
+
+            <!-- 2032 -->
             <tr class="row-high">
                 <td class="center">2032</td>
                 <td></td>
-                <td></td>
-                <td></td>
+                <!-- CBS já está mesclado acima -->
             </tr>
+
+            <!-- 2033 -->
             <tr class="row-high">
                 <td class="center">2033</td>
                 <td></td>
-                <td></td>
-                <td></td>
+                <!-- CBS já está mesclado acima -->
             </tr>
         </tbody>
     </table>
     """, unsafe_allow_html=True)
-
