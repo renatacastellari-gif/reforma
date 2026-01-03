@@ -42,12 +42,7 @@ if not st.session_state.logged_in:
 # CONTEÚDO PROTEGIDO
 # =========================
 else:
-    # Botão de logout (opcional)
-    col1, col2 = st.columns([1, 1])
-    with col2:
-        if st.button("Sair", help="Encerrar sessão"):
-            st.session_state.logged_in = False
-            st.rerun()
+ 
 
     # =========================
     # TIPOGRAFIA (ajuste aqui se quiser trocar)
