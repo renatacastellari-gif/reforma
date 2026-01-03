@@ -1,11 +1,12 @@
 
 import streamlit as st
 import pandas as pd
+from pathlib import Path
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
 # =========================
-st.set_page_config(page_title="Reforma Tributária", page_icon="🟪")
+st.set_page_config(page_title="Painel IBS/CBS – Serviços", page_icon="🟪", layout="centered")
 
 # =========================
 # SENHA FIXA / LOGIN
@@ -37,98 +38,127 @@ else:
     # CONTEÚDO PROTEGIDO
     # =========================
 
-    # Título
+    # ---- Estilo global (fundo escuro, tipografia clean, vinho da marca) ----
     st.markdown(
-        "<h2 style='color:#B22222;font-family:Times New Roman,sans-serif;font-weight:700;"
-        "text-align:center;border-bottom:2px solid #B22222;padding-bottom:8px;margin-bottom:20px;'>"
-        "Reforma Tributária – IBS/CBS (Serviços/Empresa Patrimonial)</h2>",
+        """
+        <style>
+        :root {
+            --wine: #B22222; /* vinho principal */
+            --wine-dark: #7A0C16; /* vinho escuro para detalhes */
+            --bg-card: #121212; /* cards sobre fundo preto */
+            --text: #EDEDED; /* texto em claro */
+            --muted: #B0B0B0; /* texto secundário */
+        }
+        html, body, [class*="css"]  {
+            font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        }
+        .wine-title {
+            color: var(--wine);
+            font-weight: 800;
+            letter-spacing: .5px;
+            text-align:center;
+            border-bottom: 2px solid var(--wine);
+            padding-bottom: 8px; margin: 8px 0 18px 0;
+        }
+        .badge {
+            display:inline-block; background: var(--wine-dark); color:#fff; padding:6px 10px; border-radius:999px; font-weight:600; font-size:13px;
+        }
+        .card {background: var(--bg-card); border:1px solid #222; border-radius:14px; padding:16px;}
+        .card h3 {color:#fff; margin-top:0}
+        .card p, .card li {color: var(--text);}
+        .muted {color: var(--muted);}
+        /* Tabela */
+        .rt-thead .rt-th {background: var(--wine); color:#fff; font-weight:700}
+        table {border-collapse: separate; border-spacing: 0; border-radius: 10px; overflow: hidden;}
+        </style>
+        """,
         unsafe_allow_html=True
     )
 
-    # =========================
-    # TEXTO PRINCIPAL
-    # =========================
+    # ---- Cabeçalho com logo (opcional) ----
+    logo_candidates = [Path("logo.png"), Path("logo.jpg"), Path("logo.jpeg"), Path("logo_vinho.png")]
+    logo_path = next((p for p in logo_candidates if p.exists()), None)
+    if logo_path:
+        st.image(str(logo_path), width=160)
+
+    st.markdown("<h2 class='wine-title'>Reforma Tributária – IBS/CBS (Serviços / Empresa Patrimonial)</h2>", unsafe_allow_html=True)
+
+    # ---- Corpo do texto em cards minimalistas ----
+    st.markdown("<span class='badge'>RESUMO</span>", unsafe_allow_html=True)
     st.markdown("""
-📘 **RESUMO – REFORMA TRIBUTÁRIA (IBS/CBS) PARA EMPRESA PATRIMONIAL / SERVIÇOS**
+    <div class='card'>
+    <h3>1. O que muda para quem presta serviços (consultoria, assessoria)</h3>
+    <ul>
+      <li>Continuar emitindo <b>NFS‑e</b> (padrão nacional).</li>
+      <li>Visualizar <b>campos de IBS e CBS</b> na nota.</li>
+      <li><b>Sem multa</b> nos primeiros meses se não preencher esses campos.</li>
+      <li><b>Sem pagamento</b> de IBS/CBS em 2026.</li>
+    </ul>
+    <p><b>Resumo:</b> você continua com a NFS‑e; 2026 é fase de teste sem aumento de custo; o governo quer apenas as informações.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-### ✅ 1. O que muda para quem presta serviços (consultoria, assessoria)
-**A partir de 2026**, toda empresa que presta serviços deve:
-- Continuar emitindo **NFS‑e** (padrão nacional).
-- Começar a visualizar **campos de IBS e CBS** na nota.
-- **Sem multa** se você não preencher esses campos nos primeiros meses.
-- **Sem pagamento de IBS/CBS em 2026.**
+    st.markdown("""
+    <div class='card'>
+    <h3>2. Por que existe a fase de teste em 2026?</h3>
+    <ul>
+      <li>Testar comunicação das notas</li>
+      <li>Testar cálculo automático</li>
+      <li>Validar leiaute</li>
+    </ul>
+    <p><b>CBS = 0,9%</b> · <b>IBS = 0,1%</b>. Esse 1% é <b>compensado</b> com PIS/COFINS; e, conforme a LC 214/2025 (art. 348, §1º), pode haver <b>dispensa do recolhimento</b> em 2026 para quem cumprir obrigações acessórias.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-**Resumo simples:**
-- Você continua emitindo a mesma **NFS‑e**.
-- **2026 é só teste**, sem aumento de custo tributário.
-- O governo quer apenas **receber as informações**.
+    st.markdown("""
+    <div class='card'>
+    <h3>3. O que muda de verdade a partir de 2027</h3>
+    <ul>
+      <li>PIS + COFINS deixam de existir</li>
+      <li>Entra a <b>CBS</b> (alíquota estimada ~8,8%)</li>
+      <li>IBS continua (mais relevante para municípios/estados)</li>
+    </ul>
+    <p><b>Serviços puros</b> tendem a ter impacto maior (poucos créditos para descontar).</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-### ✅ 2. Por que existe a fase “de teste” em 2026?
-Para que os sistemas nacionais (Receita Federal + Comitê do IBS) possam:
-- Testar comunicação das notas;
-- Testar cálculo automático;
-- Conferir se o leiaute funciona.
+    st.markdown("""
+    <div class='card'>
+    <h3>4. Por que a alíquota sobe (3,65% → ~8,8%)?</h3>
+    <ul>
+      <li>PIS/COFINS (3,65%) é <b>cumulativo</b> → tributa receita bruta.</li>
+      <li>CBS (~8,8%) é <b>não cumulativo</b> → tributa valor agregado.</li>
+      <li>Serviços têm pouco insumo → <b>crédito baixo</b>.</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
-Por isso:
-- **CBS = 0,9%**
-- **IBS = 0,1%**
+    st.markdown("""
+    <div class='card'>
+    <h3>5. O essencial para empresa patrimonial</h3>
+    <p><b>2026:</b> NFS‑e normal · IBS/CBS sem pagamento real · sem multa inicial · obrigação informativa.</p>
+    <p><b>2027:</b> fim de PIS/COFINS · entra CBS · serviços pagam mais por baixo crédito · IBS conforme atividade.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-**Esse 1% é compensado** com **PIS/COFINS**; e conforme art. 348, §1º da LC 214/2025, **pode haver dispensa de recolhimento** em 2026 para quem **cumprir obrigações acessórias**.
-**Na prática:** você **não paga nada a mais** em 2026.
+    st.markdown("""
+    <div class='card'>
+    <h3>6. Créditos de PIS/COFINS</h3>
+    <ul>
+      <li>Não desaparecem</li>
+      <li>Abatem CBS</li>
+      <li>Podem ser ressarcidos ou compensados</li>
+      <li>Depreciação vira crédito presumido de CBS</li>
+    </ul>
+    <p class='muted'>Protege quem acumulou crédito no regime antigo.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-### ✅ 3. O que muda de verdade só começa em 2027
-A partir de **1º de janeiro de 2027**:
-- **PIS + COFINS** deixam de existir;
-- Entra a **CBS**, com alíquota estimada em **~8,8%**;
-- Continua o **IBS** (mais relevante para municípios/estados).
-
-Para quem presta **serviços puros** (consultoria, assessoria, administração, holdings patrimoniais):
-- O **impacto tende a ser maior**, porque esse setor tem **poucos créditos** para descontar.
-- A **alíquota aumenta** porque o modelo novo é **não cumulativo** e serviços têm **pouco crédito** a abater.
-
-### ✅ 4. Por que a alíquota "sobe" (ex.: de **3,65%** → **~8,8%**)?
-- O **PIS/COFINS** atual (**3,65%**) é **cumulativo** → tributa a **receita bruta** inteira.
-- A **CBS** (**~8,8%**) é **não cumulativa** → tributa **valor agregado**.
-- Setor de **serviços** tem pouco **insumo** → **crédito** quase **zero**.
-
-**Conclusão:** a alíquota sobe porque o **crédito** do modelo novo é **baixo** para empresas de serviço.
-
-### ✅ 5. O que uma empresa patrimonial realmente precisa saber
-**2026**
-- Continua emitindo **NFS‑e**;
-- **IBS/CBS** não geram pagamento real;
-- Sem **multa** pelo não preenchimento imediato;
-- Obrigação é **somente informativa**.
-
-**2027**
-- **Acaba PIS/COFINS**;
-- Entra a **CBS**;
-- Serviços tendem a **pagar mais imposto**, porque não geram crédito;
-- **IBS** também entra no cálculo (depende do tipo de serviço/atividade).
-
-### ✅ 6. Créditos de PIS/COFINS
-Se a empresa tiver **créditos acumulados**:
-- Eles **não desaparecem**;
-- Podem ser usados para **abater a CBS**;
-- Podem ser **ressarcidos ou compensados**;
-- Créditos por **depreciação** continuam como **crédito presumido de CBS**.
-
-Isso **protege** quem acumulou crédito no regime antigo.
-
-### 🔎 Resumo final em 30 segundos
-- **2026:** muda nada no bolso → tudo **informativo**;
-- **2027:** acaba **PIS/COFINS**; começa **CBS**;
-- Em **serviços puros**, a carga **federal tende a subir**;
-- Emissão continua sendo **NFS‑e**;
-- Campos de **IBS/CBS** ficam **obrigatórios**;
-- **Créditos antigos** continuam **válidos**.
-""")
+    st.markdown("<span class='badge'>TABELA</span>", unsafe_allow_html=True)
 
     # =========================
-    # TABELA – fundo branco; cabeçalho vinho; coluna "Ano" sem quebra
+    # TABELA – sem índice; fundo branco; cabeçalho vinho; coluna "Ano" sem quebra
     # =========================
-    st.markdown("\n---\n\n**Tabela – Transição PIS/COFINS → CBS (SERVIÇOS)**")
-
     data = [
         ["2024", "", "", ""],
         ["2025", "Sem mudanças", "", "-"],
@@ -144,12 +174,13 @@ Isso **protege** quem acumulou crédito no regime antigo.
 
     df = pd.DataFrame(data, columns=["Ano", "PIS/PASEP", "COFINS", "CBS"])
 
-    wine   = "#B22222"  # vinho mais claro, igual ao título
+    wine   = "#B22222"  # vinho igual ao título
     white  = "#FFFFFF"
     border = "#D0D0D0"
 
     styled = (
         df.style
+        .hide(axis="index")
         .set_table_styles([
             {"selector": "th", "props": [
                 ("background-color", wine),
@@ -170,7 +201,7 @@ Isso **protege** quem acumulou crédito no regime antigo.
                 ("border-collapse", "separate"),
                 ("border-spacing", "0"),
                 ("border", f"1px solid {border}"),
-                ("border-radius", "10px"),
+                ("border-radius", "12px"),
                 ("overflow", "hidden")
             ]},
         ])
@@ -179,11 +210,11 @@ Isso **protege** quem acumulou crédito no regime antigo.
         })
         .set_properties(subset=["Ano"], **{
             "white-space": "nowrap",
-            "width": "100px",
-            "min-width": "100px",
-            "max-width": "100px"
+            "width": "110px",
+            "min-width": "110px",
+            "max-width": "110px"
         })
-        .set_properties(subset=["PIS/PASEP"], **{"width": "360px"})
+        .set_properties(subset=["PIS/PASEP"], **{"width": "380px"})
         .set_properties(subset=["COFINS"], **{"width": "160px"})
         .set_properties(subset=["CBS"], **{"width": "220px"})
     )
