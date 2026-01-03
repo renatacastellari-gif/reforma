@@ -58,3 +58,4 @@ else:
     )
 
     st.image("Apresentação1.png")
+    st.image("Apr.svg")
