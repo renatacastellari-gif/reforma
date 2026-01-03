@@ -2,6 +2,7 @@
 import streamlit as st
 from pathlib import Path
 from io import BytesIO
+import pandas as pd
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
@@ -40,7 +41,7 @@ else:
 
     # ---- LOGO HINES (opcional) ----
     try:
-        from PIL import Image, UnidentifiedImageError  # pode não existir no ambiente
+        from PIL import Image, UnidentifiedImageError
     except Exception:
         Image, UnidentifiedImageError = None, Exception
 
@@ -48,7 +49,6 @@ else:
     logo_path = next((p for p in candidatos if p.exists()), None)
     if logo_path:
         try:
-            # streamlit também aceita bytes/paths sem precisar do PIL
             st.image(str(logo_path), width=220)
         except Exception:
             st.markdown("&lt;h3&gt;🟪 Hines – Painel Tributário&lt;/h3&gt;", unsafe_allow_html=True)
@@ -65,216 +65,188 @@ else:
     st.markdown("**`REFORMA TRIBUTÁRIA`**")
 
     # =========================
-    # Leitura do Word (com e sem python-docx)
+    # ABAS PRINCIPAIS
     # =========================
-    DOCX_FILE = Path("fiscal reforma.docx")
-
-    # Tenta usar python-docx (se existir); senão, faz fallback via zip/xml
-    def ler_texto_e_imagens(docx_path: Path):
-        """
-        Retorna (texto_completo, lista_de_imagens_em_bytes).
-        - Se python-docx estiver disponível, usa para texto (parágrafos/tabelas).
-        - Imagens sempre por zipfile (word/media/*).
-        - Fallback sem python-docx: extrai texto dos nós w:t em word/document.xml.
-        """
-        texto = ""
-        imagens = []
-
-        # Imagens: sempre pelo zip (independe de python-docx)
-        import zipfile
-        try:
-            with zipfile.ZipFile(str(docx_path), 'r') as z:
-                for name in z.namelist():
-                    if name.startswith("word/media/"):
-                        with z.open(name) as f:
-                            imagens.append(f.read())
-        except Exception:
-            pass
-
-        # Texto: tenta python-docx
-        try:
-            from docx import Document  # pode não existir
-            doc = Document(str(docx_path))
-            partes = []
-            # Parágrafos
-            for p in doc.paragraphs:
-                t = (p.text or "").strip()
-                if t:
-                    partes.append(t)
-            # Tabelas
-            for tb in doc.tables:
-                for row in tb.rows:
-                    for cell in row.cells:
-                        t = (cell.text or "").strip()
-                        if t:
-                            partes.append(t)
-            texto = "\n\n".join(partes)
-            if texto.strip():
-                return texto, imagens
-        except Exception:
-            # Fallback: sem python-docx, extrai w:t de word/document.xml
-            pass
-
-        # Fallback via XML
-        try:
-            import xml.etree.ElementTree as ET
-            with zipfile.ZipFile(str(docx_path), 'r') as z:
-                # documento principal
-                xml_bytes = z.read("word/document.xml")
-                root = ET.fromstring(xml_bytes)
-                ns = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
-                textos = [el.text for el in root.findall(".//w:t", ns) if el.text]
-                texto = "\n".join(textos).strip()
-        except Exception:
-            texto = ""
-
-        return texto, imagens
-
-    texto_plano, imagens_bytes = ("", [])
-    if DOCX_FILE.exists():
-        texto_plano, imagens_bytes = ler_texto_e_imagens(DOCX_FILE)
-    else:
-        st.warning("Arquivo 'fiscal reforma.docx' não encontrado na mesma pasta do app.")
-
-    # ===== Utilitários =====
-    import re
-
-    def gerar_resumo_didatico(texto: str):
-        """
-        Resumo didático derivado do próprio texto do arquivo.
-        Não altera fatos; apenas organiza em linguagem simples.
-        """
-        if not texto:
-            return ["Arquivo não encontrado ou sem conteúdo."]
-
-        # Normaliza espaçamentos
-        base_txt = re.sub(r"\s+", " ", texto).strip()
-
-        def achou(pat):
-            return re.search(pat, base_txt, flags=re.IGNORECASE)
-
-        pontos = []
-        # Documento-base
-        if achou(r"Ato Conjunto.*RFB.*CGIBS.*001/2025"):
-            pontos.append("📄 **Documento-base**: Ato Conjunto RFB/CGIBS nº 001/2025 — define documentos fiscais para IBS e CBS e regras de transição em 2026.")
-        # NFSe recepcionada
-        if achou(r"NFSe|Nota Fiscal de Serviços Eletrônica"):
-            pontos.append("🧾 **NFSe**: permanece obrigatória na prestação de serviços e é recepcionada para IBS/CBS.")
-        # Sem penalidade inicial de campos IBS/CBS
-        if achou(r"não haverá penalidade.*IBS.*CBS"):
-            pontos.append("🧩 **Campos IBS/CBS na NFSe**: no início, não há penalidade se os novos campos não forem preenchidos até o prazo indicado.")
-        # 2026 informativo
-        if achou(r"2026.*apuração.*não.*efeitos tributários") or achou(r"apuração.*2026.*informativa"):
-            pontos.append("ℹ️ **2026 (apuração informativa)**: deve enviar informações de IBS/CBS, mas sem efeito tributário de apuração no ano.")
-        # Tributos atuais continuam
-        if achou(r"não elimina ISS") or achou(r"Tributos existentes continuam"):
-            pontos.append("⚖️ **Tributos atuais**: ISS (enquanto vigente), IRPJ, CSLL, PIS/COFINS etc. continuam conforme regras atuais.")
-        # Transição 0,9% / 0,1%
-        if achou(r"0,9%.*CBS"):
-            pontos.append("🔁 **Transição 2026**: CBS de 0,9% (teste) com compensação contra PIS/COFINS.")
-        if achou(r"0,1%.*IBS"):
-            pontos.append("🔁 **Transição 2026**: IBS de 0,1% (teste) com compensação.")
-        # Extinção PIS/COFINS 2027
-        if achou(r"2027.*PIS.*Cofins.*extintos"):
-            pontos.append("🗓️ **A partir de 2027**: PIS e COFINS são extintos; CBS passa a valer plenamente com alíquota a ser fixada.")
-        # Créditos transição
-        if achou(r"Saldo Credor.*PIS") or achou(r"créditos.*PIS.*Cofins.*continuarão válidos"):
-            pontos.append("💳 **Créditos de PIS/COFINS**: continuam válidos; podem compensar CBS, com regras e prazos específicos.")
-        # Estoque 01/01/2027
-        if achou(r"estoque.*01.?01.?2027"):
-            pontos.append("📦 **Estoque em 01/01/2027**: possibilidade de crédito presumido em condições definidas.")
-        # Locação por PJ
-        if achou(r"Locação.*pessoa jurídica") or achou(r"3,65%.*PIS.*COFINS"):
-            pontos.append("🏢 **Locação por PJ**: hoje paga 3,65% (PIS/COFINS cumulativo); após reforma, CBS não cumulativa (alíquota maior), o que pode elevar a carga quando há poucos créditos.")
-        # Exemplo do documento
-        if achou(r"EXEMPLO REAL") or achou(r"Comparação final"):
-            pontos.append("🧮 **Exemplo prático**: o documento traz um caso de locação comparando antes/depois (mesmo com créditos e redutor).")
-
-        pontos.append("✅ Para validação 1:1, veja a aba **Conteúdo Completo (texto + imagens)**.")
-        return pontos
-
-    def show_image_bytes(blob_bytes):
-        # Tenta abrir com PIL para melhor compatibilidade; se não tiver, usa bytes direto.
-        if Image is not None:
-            try:
-                img = Image.open(BytesIO(blob_bytes))
-                st.image(img, use_column_width=True)
-                return
-            except Exception:
-                pass
-        st.image(blob_bytes, use_column_width=True)
-
-    # =========================
-    # Abas
-    # =========================
-    tab_resumo, tab_completo, tab_transicao, tab_faq = st.tabs([
-        "📌 Resumo Didático", "📄 Conteúdo Completo (1:1)", "⏱️ Transição 2026–2027", "❓ Perguntas rápidas"
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+        "Resumo Didático", "NFS-e e Ato Conjunto", "Linha do Tempo", "Calculadora de Locação", "Créditos PIS/COFINS → CBS", "Imagens e Tabelas"
     ])
 
-    # =========================
-    # 📌 RESUMO
-    # =========================
-    with tab_resumo:
-        st.subheader("Visão geral em linguagem simples (sem alterar fatos)")
-        if not texto_plano:
-            st.warning("Não foi possível carregar o texto do documento (verifique se o arquivo está na mesma pasta).")
-        else:
-            for item in gerar_resumo_didatico(texto_plano):
-                st.markdown(f"- {item}")
-            st.info("O resumo reorganiza o conteúdo original para leigos, sem mudar números, prazos ou regras.")
+    # -------------------------
+    # 1) RESUMO DIDÁTICO
+    # -------------------------
+    with tab1:
+        st.subheader("📌 O que muda para prestadores de serviços (2026)")
+        st.markdown(
+            """
+            **Pontos-chave 2026 (fase informativa/teste):**
+            - Emissão **obrigatória** de documento fiscal eletrônico nas operações com bens e serviços. Para serviços, a **NFS-e** continua sendo o documento padrão.  
+            - Os **campos de IBS/CBS** nos documentos fiscais **não geram penalidade** inicialmente: a tolerância vai até o **1º dia do 4º mês** após a publicação da parte comum dos regulamentos do IBS/CBS.  
+            - **Não há efeitos tributários** de apuração de IBS/CBS em 2026 (caráter educativo), **desde que** cumpridas as obrigações acessórias.  
+            - A NFS-e **nacional** segue sob governança do **CGNFS-e** (padronização e leiaute).  
+            - Tributos atuais (ISS, IRPJ, CSLL, PIS/COFINS etc.) **permanecem vigentes** conforme a legislação de transição.  
+            """
+        )
+        st.info("Referências: Ato Conjunto RFB/CGIBS nº 1/2025 e LC 214/2025 (arts. 343, 346, 348).")
 
-    # =========================
-    # 📄 CONTEÚDO COMPLETO (1:1)
-    # =========================
-    with tab_completo:
-        st.subheader("Conteúdo integral do Word — texto e imagens")
-        if texto_plano:
-            st.markdown("#### Texto integral")
-            st.markdown(texto_plano)
-        else:
-            st.warning("Texto não carregado.")
-        if imagens_bytes:
-            st.markdown("#### Imagens do documento")
-            cols = st.columns(3)
-            for i, blob in enumerate(imagens_bytes):
-                with cols[i % 3]:
-                    show_image_bytes(blob)
-        else:
-            st.info("Nenhuma imagem encontrada ou extraída do documento.")
+    # -------------------------
+    # 2) NFS-e E ATO CONJUNTO
+    # -------------------------
+    with tab2:
+        st.subheader("📄 Documentos fiscais recepcionados pelo IBS e pela CBS")
+        docs = [
+            ["NF-e (modelo 55)", "Mercadorias"],
+            ["NFC-e (modelo 65)", "Varejo/consumo"],
+            ["NFS-e (padrão nacional)", "Serviços"],
+            ["CT-e (modelo 57)", "Transporte"],
+            ["CT-e OS (modelo 67)", "Outros serviços de transporte"],
+            ["BP-e (modelo 63)", "Bilhete de passagem"],
+            ["MDF-e (modelo 58)", "Manifesto de documentos"],
+            ["GTV-e (modelo 64)", "Transporte de valores"],
+            ["NF3e (modelo 66)", "Energia elétrica"],
+            ["NFCom (modelo 62)", "Serviços de comunicação"],
+            ["DC-e", "Declaração de conteúdo"],
+            ["NFS-e Via", "Exploração de via"],
+        ]
+        st.table(pd.DataFrame(docs, columns=["Documento", "Uso principal"]))
 
-    # =========================
-    # ⏱️ TRANSIÇÃO
-    # =========================
-    with tab_transicao:
-        st.subheader("Trechos do documento que falam da transição")
-        if texto_plano:
-            linhas = [l.strip() for l in texto_plano.splitlines() if l.strip()]
-            trechos_2026 = [l for l in linhas if "2026" in l]
-            trechos_2027 = [l for l in linhas if "2027" in l]
+        st.markdown("**Novos documentos a serem instituídos:**")
+        novos_docs = [
+            ["NFAg (modelo 75)", "Água e saneamento"],
+            ["DeRE", "Declaração de Regimes Específicos"],
+            ["NF-e ABI (modelo 77)", "Alienação de bens imóveis"],
+            ["NFGas (modelo 76)", "Gás"],
+        ]
+        st.table(pd.DataFrame(novos_docs, columns=["Documento", "Descrição"]))
 
-            st.markdown("**2026**")
-            if trechos_2026:
-                for l in trechos_2026:
-                    st.markdown(f"- {l}")
-            else:
-                st.write("—")
+        st.markdown("**NFS-e nacional e campos IBS/CBS:** Leiaute padronizado pelo CGNFS-e com grupos específicos para IBS/CBS (DPS e NFS-e). No início de 2026 há tolerância para não preenchimento dos novos campos, sem multa, dentro do período de adaptação.")
 
-            st.markdown("**2027**")
-            if trechos_2027:
-                for l in trechos_2027:
-                    st.markdown(f"- {l}")
-            else:
-                st.write("—")
-            st.caption("Conteúdo acima vem literalmente do arquivo (sem reescrita).")
-        else:
-            st.warning("Arquivo não carregado para montar a linha do tempo.")
+        st.caption("Fontes: Ato Conjunto RFB/CGIBS nº 1/2025; Notas Técnicas CGNFS-e (NT 004/2025) – grupos IBS/CBS.")
 
-    # =========================
-    # ❓ PERGUNTAS RÁPIDAS
-    # =========================
-    with tab_faq:
-        st.subheader("Explicações simples, baseadas no documento")
-        st.markdown("**O que são CBS e IBS?** — Substituem PIS/COFINS (CBS, federal) e ICMS/ISS (IBS), com sistema não cumulativo e crédito.")
-        st.markdown("**Em 2026 pago CBS/IBS cheio?** — Não. 2026 é fase de teste/informativa com alíquotas reduzidas e compensação.")
-        st.markdown("**Locação por PJ** — Hoje: PIS/COFINS 3,65% (cumulativo). Depois: CBS não cumulativa (alíquota mais alta); setores com poucos créditos tendem a perceber aumento.")
-        st.caption("Para qualquer decisão, confira o texto integral na aba ao lado.")
+        st.divider()
+        st.subheader("🧱 Leiautes municipais de NFS-e em 2026")
+        st.markdown("Alguns municípios anunciaram convivência de dois leiautes:")
+        leiautes = [
+            ["Layout 1 (atual)", "ISS apenas", "Aceito em 2026 (online/webservice/TXT)"],
+            ["Layout 2 (novo)", "ISS + IBS + CBS", "Válido a partir de 01/01/2026"],
+        ]
+        st.table(pd.DataFrame(leiautes, columns=["Modalidade", "Conteúdo", "Situação 2026"]))
+        st.caption("Observação: a adoção do layout com IBS/CBS é recomendada para testes e adaptação; o período inicial pode dispensar penalidades.")
+
+    # -------------------------
+    # 3) LINHA DO TEMPO
+    # -------------------------
+    with tab3:
+        st.subheader("📆 Transição (2024–2033): tributos atuais x novos tributos")
+        timeline = [
+            ["2024", "Sem mudanças", "-"] ,
+            ["2025", "Sem mudanças", "-"] ,
+            ["2026", "Mantidos ICMS/ISS/PIS/COFINS", "Alíquotas teste: IBS 0,1% e CBS 0,9% (compensáveis/dispensáveis se obrigações acessórias cumpridas)"],
+            ["2027", "Início da extinção de PIS/COFINS", "CBS passa a vigorar plenamente (alíquota a ser fixada) com redução de 0,1 p.p nos anos 2027-2028"],
+            ["2028", "Conviver com ICMS/ISS", "CBS com redução de 0,1 p.p em relação à referência"],
+            ["2029", "Redução progressiva ICMS/ISS (9/10)", "IBS em transição"],
+            ["2030", "Redução progressiva ICMS/ISS (8/10)", "IBS em transição"],
+            ["2031", "Redução progressiva ICMS/ISS (7/10)", "IBS em transição"],
+            ["2032", "Redução progressiva ICMS/ISS (6/10)", "IBS em transição"],
+            ["2033", "Extinção completa ICMS/ISS", "Sistema IBS/CBS pleno"],
+        ]
+        st.table(pd.DataFrame(timeline, columns=["Ano", "Tributos atuais", "Novos tributos (IBS/CBS)"]))
+        st.caption("Notas: 2026 é ano informativo com alíquotas de teste; a CBS entra plenamente em 2027; ICMS/ISS reduzem gradualmente até 2033.")
+
+    # -------------------------
+    # 4) CALCULADORA – LOCAÇÃO
+    # -------------------------
+    with tab4:
+        st.subheader("🧮 Simulador didático – locação empresarial (exemplo)")
+        st.markdown("Parâmetros padrão do exemplo realista (edite conforme seu cenário):")
+        colA, colB = st.columns(2)
+        with colA:
+            aluguel = st.number_input("Aluguel mensal (R$)", min_value=0.0, value=12000.0, step=100.0)
+            aliquota_referencial = st.slider("Alíquota referencial IBS+CBS (padrão)", min_value=20.0, max_value=30.0, value=27.0, step=0.1)
+            reducao_media = st.slider("Redução média setorial (%)", min_value=0.0, max_value=80.0, value=40.0, step=1.0)
+            redutor_social = st.number_input("Redutor Social mensal (R$)", min_value=0.0, value=400.0, step=50.0)
+        with colB:
+            energia = st.number_input("Energia elétrica (R$)", min_value=0.0, value=1200.0, step=50.0)
+            contabilidade = st.number_input("Contabilidade (R$)", min_value=0.0, value=1000.0, step=50.0)
+            telecom = st.number_input("Internet + telefone (R$)", min_value=0.0, value=300.0, step=10.0)
+            papelaria = st.number_input("Material de escritório (R$)", min_value=0.0, value=150.0, step=10.0)
+
+        # Cálculos
+        aliquota_efetiva = aliquota_referencial * (1 - reducao_media/100.0) / 100.0  # em fração
+        base_apos_redutor = max(aluguel - redutor_social, 0.0)
+        imposto_bruto = base_apos_redutor * aliquota_efetiva
+        despesas_total = energia + contabilidade + telecom + papelaria
+        creditos = despesas_total * aliquota_efetiva
+        imposto_final = max(imposto_bruto - creditos, 0.0)
+
+        # Exibição
+        st.markdown("**Passos do cálculo**")
+        passos = [
+            ["Alíquota efetiva (após redução)", f"{aliquota_referencial:.1f}% × (1 - {reducao_media:.0f}%) = {aliquota_efetiva*100:.2f}%"],
+            ["Base após Redutor Social", f"R$ {aluguel:,.2f} - R$ {redutor_social:,.2f} = R$ {base_apos_redutor:,.2f}"],
+            ["Imposto bruto", f"R$ {base_apos_redutor:,.2f} × {aliquota_efetiva*100:.2f}% = R$ {imposto_bruto:,.2f}"],
+            ["Créditos (despesas × alíquota efetiva)", f"R$ {despesas_total:,.2f} × {aliquota_efetiva*100:.2f}% = R$ {creditos:,.2f}"],
+            ["Imposto final (após créditos)", f"R$ {imposto_bruto:,.2f} - R$ {creditos:,.2f} = R$ {imposto_final:,.2f}"],
+        ]
+        st.table(pd.DataFrame(passos, columns=["Etapa", "Cálculo"]))
+
+        st.success(
+            f"Total de impostos estimado após a reforma (parâmetros atuais): **R$ {imposto_final:,.2f}**\n\n"
+            "Observação: em 2026, aplica-se a alíquota teste de **CBS 0,9%** e **IBS 0,1%**, com **compensação** junto ao PIS/COFINS do período, sem efeito tributário líquido se as obrigações acessórias forem cumpridas."
+        )
+
+        st.caption("Este simulador é ilustrativo e não substitui a análise do regime específico e dos redutores previstos na LC 214/2025.")
+
+    # -------------------------
+    # 5) CRÉDITOS PIS/COFINS → CBS
+    # -------------------------
+    with tab5:
+        st.subheader("🔁 Tratamento dos créditos de PIS/COFINS na transição para a CBS")
+        st.markdown(
+            """
+            **Regras principais (LC 214/2025 – Arts. 378 a 383):**
+            - **Créditos permanecem válidos** após a extinção de PIS/COFINS (01/01/2027).  
+            - Podem ser **usados para compensar a CBS**, e, quando permitido pela legislação anterior, **ressarcidos em dinheiro** ou **compensados** com outros tributos federais.  
+            - **Devoluções após 2027** de operações anteriores geram **crédito de CBS**, limitado ao abatimento da própria CBS.  
+            - Créditos vinculados a **depreciação/amortização** seguem como **créditos presumidos de CBS**, mantendo condições originais.  
+            - **Crédito presumido sobre estoques (01/01/2027)**: bens novos adquiridos no País (ou importados) – uso exclusivo para compensar CBS, em 12 parcelas mensais.  
+            - **Ordem de utilização:** preferência para **créditos antigos (PIS/COFINS)** antes dos **créditos da CBS**.  
+            """
+        )
+        regras = [
+            ["Validade dos créditos", "Creditos não apropriados/Utilizados continuam válidos"],
+            ["Formas de uso", "Compensar CBS; ressarcimento/compensação conforme regras anteriores"],
+            ["Devoluções pós-2027", "Geram crédito de CBS para abatimento da própria CBS"],
+            ["Imobilizado", "Apropriação continua como crédito presumido de CBS"],
+            ["Estoques 01/01/2027", "Crédito presumido (12 parcelas), uso exclusivo na CBS"],
+            ["Preferência", "Usar primeiro créditos de PIS/COFINS"],
+        ]
+        st.table(pd.DataFrame(regras, columns=["Tópico", "Resumo"]))
+        st.caption("Atenção à escrituração correta dos créditos na EFD-Contribuições antes da migração.")
+
+    # -------------------------
+    # 6) IMAGENS E TABELAS
+    # -------------------------
+    with tab6:
+        st.subheader("🖼️ Use suas imagens para compor o painel")
+        st.markdown(
+            "Faça upload das imagens com seus quadros/infográficos. Elas serão exibidas ao lado das tabelas reproduzidas no painel.")
+        imgs = st.file_uploader("Envie imagens (PNG/JPG)", type=["png", "jpg", "jpeg"], accept_multiple_files=True)
+        if imgs:
+            for i, img in enumerate(imgs, start=1):
+                st.image(img, caption=f"Imagem {i}", use_column_width=True)
+        st.info("As tabelas do painel foram construídas com base nas informações consolidadas do seu material e na legislação vigente.")
+
+    # -------------------------
+    # RODAPÉ / DOWNLOAD
+    # -------------------------
+    st.divider()
+    st.markdown("**Referências legais e técnicas resumidas no painel**")
+    refs = [
+        ["Ato Conjunto RFB/CGIBS nº 1/2025", "Documentos recepcionados; tolerância no preenchimento dos campos IBS/CBS; caráter informativo em 2026"],
+        ["LC 214/2025 (arts. 343, 346, 348)", "Alíquotas de teste em 2026; dispensa/compensação; exceções ao Simples"],
+        ["LC 214/2025 (art. 347)", "Redução de 0,1 p.p na CBS em 2027–2028"],
+        ["LC 214/2025 (arts. 378–383)", "Créditos PIS/COFINS – regras de transição e uso na CBS"],
+        ["CGNFS-e – NT 004/2025", "Novos grupos/Leiaute da NFS-e para IBS/CBS"],
+    ]
+    st.table(pd.DataFrame(refs, columns=["Norma", "Assunto"]))
+
