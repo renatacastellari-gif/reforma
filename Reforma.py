@@ -57,4 +57,4 @@ else:
         unsafe_allow_html=True
     )
 
-    # Aqui você continua com o conteúdo do painel...
+    st.image("Apresentação1.png")
