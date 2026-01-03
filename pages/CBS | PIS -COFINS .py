@@ -56,6 +56,7 @@ else:
             html, body, [class*="css"]  {
                 background-color: #000000;
             }
+
             /* Título principal na cor #B91E27 */
             .titulo-principal {
                 font-size: 34px;
@@ -63,6 +64,7 @@ else:
                 color: #B91E27;
                 margin-bottom: 10px;
             }
+
             /* Subtítulos na cor #D96569 */
             .subtitulo {
                 font-size: 22px;
@@ -70,11 +72,13 @@ else:
                 color: #D96569;
                 margin-top: 30px;
             }
+
             .texto {
                 font-size: 16px;
                 color: #dddddd;
                 line-height: 1.6;
             }
+
             .box {
                 background-color: #111111;
                 padding: 20px;
@@ -222,7 +226,8 @@ else:
     )
 
     # ==========================================================
-    # TABELA FINAL — IDÊNTICA AO PRINT (3 BLOCOS NA CBS + PIS MESCLADO 2027–2033)
+    # TABELA FINAL — 3 QUADRADOS NA CBS + PIS MESCLADO 2027–2033
+    # (sem linhas internas nos blocos)
     # ==========================================================
     st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
 
@@ -260,6 +265,14 @@ else:
 
         /* Altura das linhas para proporção semelhante ao print */
         .row { height: 56px; }
+
+        /* ---- Remoção das linhas internas dos blocos ----
+           Removemos a linha horizontal (border-top) das linhas:
+           2028 (dentro do bloco CBS 2027–2028 e PIS 2027–2033),
+           2030 (dentro do bloco CBS 2029–2030 e PIS 2027–2033),
+           2032 (dentro do bloco CBS 2031–2033 e PIS 2027–2033).
+        */
+        tr.r2028 td, tr.r2030 td, tr.r2032 td { border-top: none !important; }
     </style>
 
     <table class="print-table">
@@ -278,7 +291,7 @@ else:
         </thead>
         <tbody>
             <!-- 2024 -->
-            <tr class="row">
+            <tr class="row r2024">
                 <td class="center">2024</td>
                 <td></td>
                 <td></td>
@@ -286,7 +299,7 @@ else:
             </tr>
 
             <!-- 2025 -->
-            <tr class="row">
+            <tr class="row r2025">
                 <td class="center">2025</td>
                 <td></td>
                 <td class="center muted">Sem mudanças</td>
@@ -294,7 +307,7 @@ else:
             </tr>
 
             <!-- 2026 -->
-            <tr class="row">
+            <tr class="row r2026">
                 <td class="center">2026</td>
                 <td></td>
                 <td class="muted">
@@ -304,7 +317,7 @@ else:
             </tr>
 
             <!-- 2027 (início dos blocos) -->
-            <tr class="row">
+            <tr class="row r2027">
                 <td class="center">2027</td>
 
                 <!-- BLOCO PIS/PASEP: grande, 2027–2033 -->
@@ -317,41 +330,41 @@ else:
                 <td class="muted center" rowspan="2">Alíquota estabelecida (-) 0,1%</td>
             </tr>
 
-            <!-- 2028 (continua bloco CBS #1) -->
-            <tr class="row">
+            <!-- 2028 (continua bloco CBS #1). Sem linha interna -->
+            <tr class="row r2028">
                 <td class="center">2028</td>
                 <td></td>
             </tr>
 
-            <!-- 2029 (abre bloco CBS #2: 2029–2030 vazio) -->
-            <tr class="row">
+            <!-- 2029 (abre bloco CBS #2: 2029–2030 vazio). Mantém linha superior -->
+            <tr class="row r2029">
                 <td class="center">2029</td>
                 <td></td>
                 <td rowspan="2"></td>
             </tr>
 
-            <!-- 2030 (COFINS com Extinção; continua CBS #2 vazio) -->
-            <tr class="row">
+            <!-- 2030 (COFINS Extinção; continua CBS #2). Sem linha interna -->
+            <tr class="row r2030">
                 <td class="center">2030</td>
                 <td class="center muted">Extinção</td>
                 <!-- CBS mesclado acima (vazio) -->
             </tr>
 
-            <!-- 2031 (abre bloco CBS #3: 2031–2033 com texto) -->
-            <tr class="row">
+            <!-- 2031 (abre bloco CBS #3: 2031–2033 com texto). Mantém linha superior -->
+            <tr class="row r2031">
                 <td class="center">2031</td>
                 <td></td>
                 <td class="muted center" rowspan="3">Alíquota estabelecida</td>
             </tr>
 
-            <!-- 2032 (continua CBS #3) -->
-            <tr class="row">
+            <!-- 2032 (continua CBS #3). Sem linha interna -->
+            <tr class="row r2032">
                 <td class="center">2032</td>
                 <td></td>
             </tr>
 
-            <!-- 2033 (continua CBS #3) -->
-            <tr class="row">
+            <!-- 2033 (continua CBS #3). Mantém linha inferior do bloco -->
+            <tr class="row r2033">
                 <td class="center">2033</td>
                 <td></td>
             </tr>
