@@ -1,7 +1,7 @@
 
 import streamlit as st
 import pandas as pd
-import streamlit.components.v1 as components
+from pathlib import Path
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
@@ -53,7 +53,9 @@ else:
     st.markdown(
         """
         <style>
-            html, body, [class*="css"]  { background-color: #000000; }
+            html, body, [class*="css"]  {
+                background-color: #000000;
+            }
 
             /* Título principal na cor #B91E27 */
             .titulo-principal {
@@ -103,6 +105,14 @@ else:
                 padding: 10px;
                 text-align: center;
                 border-bottom: 1px solid #333333;
+            }
+
+            /* Centraliza imagens */
+            .img-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 12px;
             }
         </style>
         """,
@@ -224,174 +234,15 @@ else:
     )
 
     # ==========================================================
-    # TABELA FINAL — IDÊNTICA AO PRINT (SEM LINHAS INTERNAS)
-    # Implementada com CSS GRID para controlar bordas dos blocos
+    # TABELA FINAL — SUBSTITUÍDA POR IMAGEM 'tabela.png'
     # ==========================================================
     st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
 
-    html_grid = """
-    <style>
-      .grid-table {
-        display: grid;
-        /* 4 colunas com as mesmas larguras do seu print */
-        grid-template-columns: 10% 22% 22% 46%;
-        /* 2 linhas de cabeçalho + 10 linhas dos anos (2024–2033) */
-        grid-template-rows:
-          48px   /* header 1 */
-          48px   /* header 2 */
-          repeat(10, 56px); /* cada ano */
-        width: 100%;
-        background: #ffffff;
-        font-family: Arial, Helvetica, sans-serif;
-        border: 1px solid #d6d6d6; /* borda externa da tabela */
-        box-sizing: border-box;
-      }
-      .cell {
-        padding: 12px 10px;
-        color: #222;
-        background: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        border: 1px solid #d6d6d6;       /* borda padrão */
-        box-sizing: border-box;
-      }
-      .center { justify-content: center; text-align: center; }
-      .muted  { color: #3b3b3b; }
-
-      /* Cabeçalho (azul claro) */
-      .header { background: #cfe0f1; font-weight: 700; }
-
-      /* Remover bordas duplicadas da moldura externa */
-      .no-border { border: none; }
-
-      /* ====== BLOCO PIS/PASEP 2027–2033 (sem linhas internas) ====== */
-      .pis-block {
-        grid-column: 2 / 3;   /* segunda coluna (PIS/PASEP) */
-        grid-row: 3 + 4 / span 7; /* inicia na linha do ano 2027; span 7 anos (2027–2033) */
-        /* Como não temos cálculo aqui, vamos posicionar com números absolutos: */
-      }
-      /* OBS: Vamos posicionar explicitamente sem usar '3 + 4':
-         Cabeçalho ocupa rows 1 e 2; 2024 é row 3; então:
-         2024 -> row 3
-         2025 -> row 4
-         2026 -> row 5
-         2027 -> row 6
-         2028 -> row 7
-         2029 -> row 8
-         2030 -> row 9
-         2031 -> row 10
-         2032 -> row 11
-         2033 -> row 12
-      */
-
-      /* Reposicionamento manual */
-      .r1  { grid-row: 1; }
-      .r2  { grid-row: 2; }
-      .r3  { grid-row: 3; }  /* 2024 */
-      .r4  { grid-row: 4; }  /* 2025 */
-      .r5  { grid-row: 5; }  /* 2026 */
-      .r6  { grid-row: 6; }  /* 2027 */
-      .r7  { grid-row: 7; }  /* 2028 */
-      .r8  { grid-row: 8; }  /* 2029 */
-      .r9  { grid-row: 9; }  /* 2030 */
-      .r10 { grid-row: 10; } /* 2031 */
-      .r11 { grid-row: 11; } /* 2032 */
-      .r12 { grid-row: 12; } /* 2033 */
-
-      .c1 { grid-column: 1; } /* Ano */
-      .c2 { grid-column: 2; } /* PIS/PASEP */
-      .c3 { grid-column: 3; } /* COFINS */
-      .c4 { grid-column: 4; } /* CBS */
-
-      /* BLOCO PIS (grande) 2027–2033 */
-      .pis-merge {
-        grid-column: 2;
-        grid-row: 6 / span 7; /* 2027–2033 */
-        border: 1px solid #d6d6d6;
-      }
-
-      /* BLOCO CBS #1 (2027–2028) com texto */
-      .cbs-merge-1 {
-        grid-column: 4;
-        grid-row: 6 / span 2; /* 2027–2028 */
-        border: 1px solid #d6d6d6;
-      }
-
-      /* BLOCO CBS #2 (2029–2030) vazio */
-      .cbs-merge-2 {
-        grid-column: 4;
-        grid-row: 8 / span 2; /* 2029–2030 */
-        border: 1px solid #d6d6d6;
-      }
-
-      /* BLOCO CBS #3 (2031–2033) com texto */
-      .cbs-merge-3 {
-        grid-column: 4;
-        grid-row: 10 / span 3; /* 2031–2033 */
-        border: 1px solid #d6d6d6;
-      }
-
-      /* Células "normais" (sem mesclagem) — anos e COFINS, etc. */
-      .year { justify-content: center; }
-    </style>
-
-    <div class="grid-table">
-
-      <!-- Cabeçalho linha 1 -->
-      <div class="cell header r1 c1 center">Ano</div>
-      <div class="cell header r1" style="grid-column: 2 / span 2; justify-content:center;">Tributos Atuais</div>
-      <div class="cell header r1 c4 center">Novos Tributos</div>
-
-      <!-- Cabeçalho linha 2 -->
-      <div class="cell header r2 c1"></div>
-      <div class="cell header r2 c2 center">PIS/PASEP</div>
-      <div class="cell header r2 c3 center">COFINS</div>
-      <div class="cell header r2 c4 center">CBS</div>
-
-      <!-- Coluna Ano -->
-      <div class="cell year r3 c1">2024</div>
-      <div class="cell year r4 c1">2025</div>
-      <div class="cell year r5 c1">2026</div>
-      <div class="cell year r6 c1">2027</div>
-      <div class="cell year r7 c1">2028</div>
-      <div class="cell year r8 c1">2029</div>
-      <div class="cell year r9 c1">2030</div>
-      <div class="cell year r10 c1">2031</div>
-      <div class="cell year r11 c1">2032</div>
-      <div class="cell year r12 c1">2033</div>
-
-      <!-- PIS/PASEP: bloco mesclado 2027–2033 (vazio) -->
-      <div class="cell pis-merge"></div>
-
-      <!-- COFINS (células padrão) -->
-      <div class="cell r3 c3"></div>
-      <div class="cell r4 c3 muted center">Sem mudanças</div>
-      <div class="cell r5 c3 muted center">Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).</div>
-      <div class="cell r6 c3"></div>
-      <div class="cell r7 c3"></div>
-      <div class="cell r8 c3"></div>
-      <div class="cell r9 c3 muted center">Extinção</div>
-      <div class="cell r10 c3"></div>
-      <div class="cell r11 c3"></div>
-      <div class="cell r12 c3"></div>
-
-      <!-- CBS: 2024–2026 individuais -->
-      <div class="cell r3 c4"></div>
-      <div class="cell r4 c4 center">-</div>
-      <div class="cell r5 c4 muted center">Alíquota teste: 0,9%</div>
-
-      <!-- CBS: bloco #1 (2027–2028) -->
-      <div class="cell cbs-merge-1 muted center">Alíquota estabelecida (-) 0,1%</div>
-
-      <!-- CBS: bloco #2 (2029–2030) vazio -->
-      <div class="cell cbs-merge-2"></div>
-
-      <!-- CBS: bloco #3 (2031–2033) -->
-      <div class="cell cbs-merge-3 muted center">Alíquota estabelecida</div>
-
-    </div>
-    """
-
-    # Renderização via HTML puro (CSS Grid) — sem linhas internas nos blocos
-    components.html(html_grid, height=820, scrolling=True)
+    img_path = Path("tabela.png")  # coloque o arquivo na mesma pasta do .py
+    if img_path.exists():
+        # Centraliza a imagem
+        st.markdown("<div class='img-container'>", unsafe_allow_html=True)
+        st.image(str(img_path), caption="Linha do Tempo — PIS/COFINS → CBS", use_container_width=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+    else:
+        st.error("⚠️ Arquivo 'tabela.png' não encontrado. Coloque-o na mesma pasta do app ou ajuste o caminho.")
