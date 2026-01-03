@@ -1,122 +1,126 @@
-
-import streamlit as st
-import pandas as pd
-
-# =========================
-# CONFIGURAÇÃO DA PÁGINA
-# =========================
-st.set_page_config(page_title="Painel IBS/CBS – Serviços", page_icon="🟪", layout="centered")
-
-# =========================
-# SENHA FIXA / LOGIN
-# =========================
-PASSWORD = "minhasenha123"
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
-
-# 🔒 Esconde a barra lateral com CSS se não estiver logado
-if not st.session_state.logged_in:
-    st.markdown("<style>[data-testid='stSidebar']{display:none;}</style>", unsafe_allow_html=True)
-
-# =========================
-# TELA DE LOGIN
-# =========================
-if not st.session_state.logged_in:
-    st.title("Acesso Restrito")
-    senha = st.text_input("Digite a senha:", type="password")
-    if st.button("Entrar", use_container_width=True):
-        if senha == PASSWORD:
-            st.session_state.logged_in = True
-            st.success("Acesso liberado! Agora você pode navegar pelas páginas.")
-            st.rerun()
-        else:
-            st.error("Senha incorreta.")
-
-else:
     # =========================
-    # CONTEÚDO PROTEGIDO
+    # PÁGINA: PIS / COFINS → CBS
     # =========================
 
-    # Título
-    st.markdown(
-        "<h2 style='color:#1A3E5A;font-family:Segoe UI,Inter,Helvetica,Arial;font-weight:800;"
-        "letter-spacing:.3px;text-align:center;border-bottom:2px solid #1A3E5A;"
-        "padding-bottom:8px;margin:8px 0 20px 0;'>Reforma Tributária – IBS/CBS (Serviços / Empresa Patrimonial)</h2>",
-        unsafe_allow_html=True
-    )
+    st.markdown("""
+    <style>
+        .titulo {
+            font-size: 34px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #c08497;
+            margin-top: 30px;
+        }
+        .texto {
+            font-size: 17px;
+            color: #dddddd;
+            line-height: 1.6;
+        }
+        .box {
+            background-color: #111111;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border: 1px solid #2a2a2a;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        thead th {
+            background-color: #6b1f3a; /* vinho */
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 16px;
+        }
+        tbody td {
+            background-color: #0f0f0f;
+            color: #eaeaea;
+            padding: 10px;
+            border-bottom: 1px solid #333333;
+            text-align: center;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown("<div class='titulo'>PIS & COFINS → CBS</div>", unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class='texto'>
+    Esta página resume, de forma simples, como a <b>Reforma Tributária</b> afeta empresas
+    <b>prestadoras de serviços de consultoria e assessoria patrimonial imobiliária</b>.
+    </div>
+    """, unsafe_allow_html=True)
 
     # =========================
-    # TABELA – Cabeçalho agrupado (igual à imagem), sem índice
+    # RESUMO 2026
     # =========================
-    st.markdown("**Tabela – Transição PIS/COFINS → CBS (SERVIÇOS)**")
+    st.markdown("<div class='subtitulo'>📅 Ano de 2026 — Período de Teste</div>", unsafe_allow_html=True)
 
-    # Cabeçalho agrupado
-    cols = pd.MultiIndex.from_tuples([
-        ("Ano", ""),
-        ("Tributos Atuais", "PIS/PASEP"),
-        ("Tributos Atuais", "COFINS"),
-        ("Novos Tributos", "CBS"),
-    ])
+    st.markdown("""
+    <div class='box texto'>
+    ✔ A CBS entra em <b>fase piloto</b><br>
+    ✔ Alíquota de teste: <b>0,9%</b><br>
+    ✔ O valor pago é <b>compensado com PIS e COFINS</b><br>
+    ✔ Pode haver <b>dispensa de recolhimento</b> se as obrigações acessórias forem entregues<br><br>
+    ❗ Em 2026 <b>não há aumento real de carga tributária</b>.  
+    O foco é apenas informativo.
+    </div>
+    """, unsafe_allow_html=True)
 
-    # Linhas conforme sua imagem
-    data = [
-        ["2024", "", "", ""],
-        ["2025", "Sem mudanças", "", "-"],
-        ["2026", "Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).", "", "Alíquota teste: 0,9%"],
-        ["2027", "", "", "Alíquota estabelecida (-) 0,1%"],
-        ["2028", "", "", ""],
-        ["2029", "", "", ""],
-        ["2030", "Extinção", "", "Alíquota estabelecida"],
-        ["2031", "", "", ""],
-        ["2032", "", "", ""],
-        ["2033", "", "", ""],
-    ]
+    # =========================
+    # A PARTIR DE 2027
+    # =========================
+    st.markdown("<div class='subtitulo'>🚨 A partir de 2027 — Mudança Real</div>", unsafe_allow_html=True)
 
-    df = pd.DataFrame(data, columns=cols)
+    st.markdown("""
+    <div class='box texto'>
+    ❌ PIS e COFINS são <b>extintos</b><br>
+    ✔ Entra a <b>CBS</b>, substituindo ambos<br><br>
 
-    # Estilos iguais à imagem: cabeçalho azul claro, corpo branco, sem índice
-    header_bg   = "#cfe0ef"   # azul claro
-    header_text = "#000000"
-    body_bg     = "#FFFFFF"
-    body_text   = "#222222"
-    border      = "#D0D0D0"
+    <b>Características da CBS:</b><br>
+    • Não cumulativa (modelo IVA)<br>
+    • Crédito financeiro amplo<br>
+    • Alíquota estimada: <b>~8,8%</b><br><br>
 
-    styled = (
-        df.style
-        .hide(axis="index")  # sem índice
-        .set_table_styles([
-            {"selector": "th", "props": [
-                ("background-color", header_bg),
-                ("color", header_text),
-                ("font-weight", "700"),
-                ("text-align", "center"),
-                ("border", f"1px solid {border}"),
-                ("padding", "10px")
-            ]},
-            {"selector": "td", "props": [
-                ("background-color", body_bg),
-                ("color", body_text),
-                ("border", f"1px solid {border}"),
-                ("padding", "12px"),
-                ("vertical-align", "middle"),
-                ("text-align", "center")
-            ]},
-            {"selector": "table", "props": [
-                ("border-collapse", "separate"),
-                ("border-spacing", "0"),
-                ("border", f"1px solid {border}"),
-                ("border-radius", "12px"),
-                ("overflow", "hidden")
-            ]},
-        ])
-        # Evita quebra no "Ano" e define largura
-        .set_properties(subset=pd.IndexSlice[:, ("Ano", "")], **{
-            "white-space": "nowrap", "width": "100px", "min-width": "100px", "max-width": "100px"
-        })
-        # Larguras das outras colunas
-        .set_properties(subset=pd.IndexSlice[:, ("Tributos Atuais", "PIS/PASEP")], **{"width": "360px"})
-        .set_properties(subset=pd.IndexSlice[:, ("Tributos Atuais", "COFINS")], **{"width": "160px"})
-        .set_properties(subset=pd.IndexSlice[:, ("Novos Tributos", "CBS")], **{"width": "220px"})
-    )
+    ⚠️ Para serviços com poucos insumos (como consultoria),
+    o impacto tende a ser <b>aumento real de carga</b>.
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.table(styled)
+    # =========================
+    # TABELA COMPARATIVA
+    # =========================
+    st.markdown("<div class='subtitulo'>📊 Comparativo — Antes x Depois</div>", unsafe_allow_html=True)
+
+    dados = {
+        "Situação": ["Até 2025", "Ano de 2026", "A partir de 2027"],
+        "Tributo": ["PIS + COFINS", "CBS (teste)", "CBS definitiva"],
+        "Alíquota": ["3,65%", "0,9%", "~8,8%"],
+        "Crédito": ["Não", "Sim (compensado)", "Sim (pleno)"],
+        "Impacto Financeiro": ["Baixo", "Neutro", "Mais elevado"]
+    }
+
+    df = pd.DataFrame(dados)
+
+    st.markdown(df.to_html(index=False, escape=False), unsafe_allow_html=True)
+
+    # =========================
+    # CONCLUSÃO
+    # =========================
+    st.markdown("""
+    <div class='subtitulo'>🧾 Conclusão Prática</div>
+    <div class='box texto'>
+    ✔ Em 2026, sua empresa <b>não paga mais imposto</b><br>
+    ✔ A grande mudança começa em <b>2027</b><br>
+    ✔ Serviços com pouca despesa creditável sentem mais o impacto<br><br>
+    📌 Recomenda-se revisar <b>precificação e contratos</b> antes da virada definitiva.
+    </div>
+    """, unsafe_allow_html=True)
