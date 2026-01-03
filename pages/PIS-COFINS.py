@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 
@@ -62,7 +63,7 @@ else:
         .subtitulo {
             font-size: 22px;
             font-weight: bold;
-            color: #c08497;
+            color: #D96569;  /* ALTERADO para D96569 */
             margin-top: 30px;
         }
         .texto {
@@ -200,3 +201,129 @@ else:
     ✔ Revisão de preços e contratos será essencial para serviços
     </div>
     """, unsafe_allow_html=True)
+
+    # ==========================================================
+    # TABELA FINAL (IDÊNTICA AO PRINT ENVIADO) — SEM MUDAR NADA
+    # ==========================================================
+    st.markdown("""
+    <style>
+        /* Estilo específico para a tabela do print */
+        .print-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+        }
+        .print-table th, .print-table td {
+            border: 1px solid #d6d6d6;
+            color: #222;
+            padding: 12px 10px;
+            text-align: left;
+            vertical-align: middle;
+            background: #fff;
+        }
+        .print-table thead th {
+            background: #cfe0f1; /* cabeçalho azul claro conforme print */
+            color: #1f2a37;
+            font-weight: 700;
+            text-align: center;
+        }
+        .print-table .center {
+            text-align: center;
+        }
+        .print-table .muted {
+            color: #3b3b3b;
+        }
+        /* Larguras aproximadas para replicar visual */
+        .col-ano { width: 10%; }
+        .col-pis { width: 22%; }
+        .col-cofins { width: 22%; }
+        .col-cbs { width: 46%; }
+        /* Altura das linhas para espaçamento semelhante ao print */
+        .row-high { height: 52px; }
+        .row-tall { height: 72px; }
+    </style>
+
+    <div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>
+
+    <table class="print-table">
+        <thead>
+            <tr>
+                <th class="col-ano">Ano</th>
+                <th colspan="2">Tributos Atuais</th>
+                <th>Novos Tributos</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="col-pis center">PIS/PASEP</th>
+                <th class="col-cofins center">COFINS</th>
+                <th class="col-cbs center">CBS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="row-high">
+                <td class="center">2024</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row-high">
+                <td class="center">2025</td>
+                <td class="center"></td>
+                <td class="center muted">Sem mudanças</td>
+                <td class="center">-</td>
+            </tr>
+            <tr class="row-tall">
+                <td class="center">2026</td>
+                <td class="center"></td>
+                <td class="muted">
+                    Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).
+                </td>
+                <td class="muted center">Alíquota teste: 0,9%</td>
+            </tr>
+            <tr class="row-high">
+                <td class="center">2027</td>
+                <td></td>
+                <td></td>
+                <td class="muted center">Alíquota estabelecida (-) 0,1%</td>
+            </tr>
+            <tr class="row-high">
+                <td class="center">2028</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row-high">
+                <td class="center">2029</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row-high">
+                <td class="center">2030</td>
+                <td></td>
+                <td class="muted center">Extinção</td>
+                <td></td>
+            </tr>
+            <tr class="row-high">
+                <td class="center">2031</td>
+                <td></td>
+                <td></td>
+                <td class="muted center">Alíquota estabelecida</td>
+            </tr>
+            <tr class="row-high">
+                <td class="center">2032</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="row-high">
+                <td class="center">2033</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    """, unsafe_allow_html=True)
+``
