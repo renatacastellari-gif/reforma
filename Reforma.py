@@ -7,7 +7,7 @@ from pathlib import Path
 # =========================
 st.set_page_config(
     page_title="Reforma Tributária",
-    page_icon="🟪",
+    page_icon="🟥",
     layout="centered"
 )
 
