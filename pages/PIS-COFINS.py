@@ -126,4 +126,5 @@ Isso **protege** quem acumulou crédito no regime antigo.
 """)
 
     # =========================
+st.image("tabela.png")
    
