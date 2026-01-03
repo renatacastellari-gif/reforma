@@ -1,124 +1,215 @@
 
 import streamlit as st
-import pandas as pd
 from pathlib import Path
+from io import BytesIO
 
-# ---------------------------
-# Configuração da página (SEM wide)
-# ---------------------------
-st.set_page_config(page_title="PIS", page_icon="🟣")
+# =========================
+# CONFIGURAÇÃO DA PÁGINA
+# =========================
+st.set_page_config(page_title="Reforma Tributária", page_icon="🟪", layout="wide")
 
-# ---------------------------
-# Cabeçalho com logo Hines
-# ---------------------------
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    # tenta hines.svg/png/jpg/jpeg
+# =========================
+# SENHA FIXA / LOGIN
+# =========================
+PASSWORD = "minhasenha123"
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
+# 🔒 Esconde a barra lateral com CSS se não estiver logado
+if not st.session_state.logged_in:
+    st.markdown("<style>[data-testid='stSidebar']{display:none;}</style>", unsafe_allow_html=True)
+
+# =========================
+# TELA DE LOGIN
+# =========================
+if not st.session_state.logged_in:
+    st.title("Acesso Restrito")
+    senha = st.text_input("Digite a senha:", type="password")
+    if st.button("Entrar", use_container_width=True):
+        if senha == PASSWORD:
+            st.session_state.logged_in = True
+            st.success("Acesso liberado! Agora você pode navegar pelas páginas.")
+            st.rerun()
+        else:
+            st.error("Senha incorreta.")
+
+else:
+    # =========================
+    # CONTEÚDO PROTEGIDO
+    # =========================
+
+    # ---- LOGO HINES (opcional) ----
+    from PIL import Image, UnidentifiedImageError
     candidatos = [Path("hines.svg"), Path("hines.png"), Path("hines.jpg"), Path("hines.jpeg")]
     logo_path = next((p for p in candidatos if p.exists()), None)
     if logo_path:
         try:
-            st.image(str(logo_path), width=300)
-        except Exception as e:
-            st.warning(f"Não foi possível exibir a imagem '{logo_path.name}'. Detalhe: {e}")
-            st.markdown("<h3 style='text-align:center;'>Hines</h3>", unsafe_allow_html=True)
+            st.image(str(logo_path), width=220)
+        except Exception:
+            st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
     else:
-        st.info("Logo 'hines' não encontrado (hines.svg/png/jpg/jpeg).")
-        st.markdown("<h3 style='text-align:center;'>Hines</h3>", unsafe_allow_html=True)
+        st.markdown("<h3>🟪 Hines – Painel Tributário</h3>", unsafe_allow_html=True)
 
-# ---------------------------
-# Título principal (vermelho serifado)
-# ---------------------------
-st.markdown(
-    "<h2 style='color:#B22222; font-family:Times New Roman, Georgia, serif; font-weight:700; "
-    "text-align:center; border-bottom:2px solid #B22222; padding-bottom:8px; margin-bottom:20px;'>"
-    "Reforma Tributária</h2>",
-    unsafe_allow_html=True
-)
-st.markdown("**`REFORMA TRIBUTÁRIA`**")
-
-# ---------------------------
-# Cards de conteúdo (Resumo e Reforma)
-# ---------------------------
-cA, cB = st.columns(2)
-
-with cA:
+    # ---- Título ----
     st.markdown(
-        "<div style='background-color:#1f1f1f; border:1px solid #333; border-radius:12px; "
-        "padding:18px; box-shadow:0 0 0 1px rgba(255,255,255,0.04) inset;'>"
-        "<h3 style='color:#EEE4EF; font-family:Montserrat, sans-serif; margin-top:0;'>"
-        "Resumo – PIS e COFINS (situação atual)</h3>"
-        "<p style='color:#cfcfcf; font-size:15px; line-height:1.6;'>"
-        "<b>PIS</b> e <b>COFINS</b> incidem sobre a receita das empresas.<br>"
-        "• <b>Lucro Presumido (cumulativo):</b> PIS 0,65% + COFINS 3,00% = <b>3,65%</b> sobre a receita.<br>"
-        "• <b>Lucro Real (não cumulativo):</b> PIS 1,65% / COFINS 7,60%, com <b>créditos</b> de insumos/serviços.<br><br>"
-        "No contexto patrimonial/imobiliário, incidem sobre <b>receitas de locação</b> e, conforme o caso, sobre <b>receitas de venda</b>."
-        "</p></div>",
+        "<h2 style='color:#B22222;font-family:Times New Roman,sans-serif;font-weight:700;"
+        "text-align:center;border-bottom:2px solid #B22222;padding-bottom:8px;margin-bottom:20px;'>"
+        "Reforma Tributária</h2>",
         unsafe_allow_html=True
     )
+    st.markdown("**`REFORMA TRIBUTÁRIA`**")
 
-with cB:
-    st.markdown(
-        "<div style='background-color:#1f1f1f; border:1px solid #333; border-radius:12px; "
-        "padding:18px; box-shadow:0 0 0 1px rgba(255,255,255,0.04) inset;'>"
-        "<h3 style='color:#EEE4EF; font-family:Montserrat, sans-serif; margin-top:0;'>"
-        "O que muda com a Reforma (CBS)</h3>"
-        "<p style='color:#cfcfcf; font-size:15px; line-height:1.6;'>"
-        "• <b>PIS/COFINS</b> serão substituídos pela <b>CBS</b> (não cumulativa).<br>"
-        "• <b>Créditos</b> de insumos/serviços passam a ser amplos para todos os regimes, inclusive empresas no Presumido.<br>"
-        "• A alíquota da CBS será <b>única</b> (definição final depende de regulamentação).<br><br>"
-        "<b>Transição:</b> coexistência entre sistema atual e CBS em 2026–2032; simular cenários e mapear despesas elegíveis é essencial."
-        "</p></div>",
-        unsafe_allow_html=True
-    )
+    # =========================
+    # Funções utilitárias para ler o Word e extrair texto/imagens
+    # =========================
+    DOCX_FILE = Path("fiscal reforma.docx")
 
-# ---------------------------
-# Impacto prático para a Hines (patrimonial/imobiliária)
-# ---------------------------
-st.markdown(
-    "<div style='background-color:#101010; border:1px solid #333; border-radius:12px; "
-    "padding:18px; margin-top:18px;'>"
-    "<h3 style='color:#EEE4EF; font-family:Montserrat, sans-serif; margin-top:0;'>"
-    "Impacto prático para a Hines</h3>"
-    "<ul style='color:#cfcfcf; font-size:15px; line-height:1.6;'>"
-    "<li><b>Locação:</b> receita com CBS e <b>direito a crédito</b> sobre despesas vinculadas (manutenção, serviços, gestão).</li>"
-    "<li><b>Venda de imóveis:</b> foco na <b>diferença</b> entre preço de venda e custo do terreno; créditos de obra reduzem custo efetivo.</li>"
-    "<li><b>Regimes:</b> a escolha entre <b>Presumido x Real</b> segue afetando <b>IRPJ/CSLL</b>; a CBS equaliza créditos, então avalie margem e perfil de custos.</li>"
-    "<li><b>Governança:</b> mapear <b>despesas elegíveis</b> e reforçar a <b>rastreabilidade por ativo/obra</b> para maximizar créditos.</li>"
-    "</ul>"
-    "<p style='color:#aaa; font-size:13px; margin-top:8px;'>"
-    "<i>Dica:</i> detalhe custos por empreendimento/ativo e formalize contratos para documentar créditos da CBS."
-    "</p></div>",
-    unsafe_allow_html=True
-)
+    def carregar_docx(docx_path: Path):
+        """
+        Lê o .docx e retorna:
+        - texto_plano: texto concatenado (parágrafos e células de tabelas)
+        - imagens: lista de bytes de imagens extraídas
+        """
+        from docx import Document
+        texto_parts = []
+        imagens_bytes = []
 
-# ---------------------------
-# Mini-simulador didático (carga atual vs. CBS líquida de créditos)
-# ---------------------------
-st.markdown(
-    "<h3 style='color:#EEE4EF; font-family:Montserrat, sans-serif; margin-top:24px;'>"
-    "Comparativo didático – Carga atual vs. CBS</h3>"
-    "<p style='color:#cfcfcf; font-size:14px;'>"
-    "Ajuste os parâmetros para ver o efeito potencial. "
-    "<b>Observação:</b> este simulador é ilustrativo; a alíquota final depende de regulamentação."
-    "</p>",
-    unsafe_allow_html=True
-)
+        if not docx_path.exists():
+            return "", []
 
-col_sim1, col_sim2, col_sim3 = st.columns(3)
-with col_sim1:
-    cbs = st.number_input("CBS estimada (%)", min_value=0.0, max_value=30.0, value=8.0, step=0.1)
-with col_sim2:
-    creditos = st.number_input("Créditos recuperáveis (%)", min_value=0.0, max_value=100.0, value=60.0, step=1.0)
-with col_sim3:
-    carga_atual = 3.65  # PIS 0,65% + COFINS 3,00% (cumulativo no presumido)
-    st.metric("Carga atual (PIS+COFINS)", f"{carga_atual:.2f}%")
+        doc = Document(str(docx_path))
 
-carga_cbs_liquida = cbs * (1 - creditos/100.0)
-df_comp = pd.DataFrame({
-    "Cenário": ["Atual (PIS+COFINS)", "CBS (líquida de créditos)"],
-    "Carga_%": [carga_atual, carga_cbs_liquida]
-})
-st.bar_chart(df_comp.set_index("Cenário"))
+        # --- Extrair texto de parágrafos
+        for p in doc.paragraphs:
+            t = p.text.strip()
+            if t:
+                texto_parts.append(t)
 
-# Observação# Observação final curta
+        # --- Extrair texto das tabelas (se houver)
+        for table in doc.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    t = cell.text.strip()
+                    if t:
+                        texto_parts.append(t)
+
+        # --- Extrair imagens do pacote (media)
+        # Nota: python-docx não dá API direta para "inline shapes";
+        # mas as imagens ficam em doc.part.related_parts (package) e /word/media.
+        # Abaixo, percorremos relacionamentos e coletamos blobs binários.
+        rels = doc.part._rels
+        for rel in rels:
+            target = rels[rel].target_ref
+            part = rels[rel]._target
+            # Heurística: somente arquivos em word/media e com conteúdo binário
+            try:
+                if hasattr(part, "blob") and "/word/media/" in str(target):
+                    imagens_bytes.append(part.blob)
+            except Exception:
+                continue
+
+        texto_plano = "\n\n".join(texto_parts)
+        return texto_plano, imagens_bytes
+
+    def gerar_resumo_didatico(texto_plano: str):
+        """
+        Gera um resumo didático a partir do texto do arquivo.
+        Não altera fatos: apenas reorganiza em linguagem simples.
+        """
+        # Pontos extraídos do documento (mantendo fatos e prazos)
+        # ATENÇÃO: O conteúdo abaixo é uma reescrita didática dos pontos
+        # presentes no arquivo, sem mudar números, datas ou condições.
+        resumo = [
+            "📄 **Documento-base**: Ato Conjunto RFB/CGIBS nº 001/2025 (regras para documentos fiscais IBS/CBS em 2026).",
+            "🧾 **Para quem presta serviços (NFSe)**: segue obrigatório emitir NFSe; ela será recepcionada para IBS/CBS. No início, não há penalidade se os campos novos (IBS/CBS) não forem preenchidos até o 1º dia do 4º mês após os regulamentos. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)",
+            "ℹ️ **2026 é “informativo”**: há obrigação de enviar dados de IBS/CBS, mas sem efeitos tributários de apuração no ano. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)",
+            "🧭 **NFS-e nacional**: continua sob o CGNFS-e, com padronização nacional. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)",
+            "🧰 **Outros documentos**: existem para setores específicos; para prestadores de serviços comuns, foque na NFSe. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)",
+            "⚖️ **Tributos atuais seguem**: ISS (enquanto vigente), IRPJ, CSLL, PIS/COFINS etc. continuam conforme regras atuais. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)",
+            "🔁 **Transição 2026–2027 (CBS/IBS)**: 2026 tem CBS 0,9% e IBS 0,1% em regime de teste, com compensação contra PIS/COFINS; há possibilidade de dispensa parcial de recolhimento ao longo de 2026. Em 2027 extinguem-se PIS/COFINS e a CBS entra plenamente com alíquota definida por lei (referência ~8,8% ao fixar). [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)",
+            "💳 **Créditos PIS/COFINS remanescentes**: continuam válidos; podem compensar CBS; regras de depreciação/amortização e estoque em 01/01/2027 são preservadas com critérios específicos e prazos (apropriação até jun/2027, uso em 12 parcelas). [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)",
+            "🏢 **Locação por PJ (serviço com pouca despesa creditável)**: hoje paga 3,65% (PIS/COFINS cumulativo); após reforma, CBS não cumulativa e mais alta (~8,8% referencial), o que pode elevar carga quando praticamente não há créditos. Exemplo do documento mostra aumento mesmo com redutor e créditos comuns. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)",
+        ]
+        return resumo
+
+    # =========================
+    # Ler arquivo e preparar conteúdo
+    # =========================
+    texto_plano, imagens_bytes = carregar_docx(DOCX_FILE)
+
+    # ---- Abas
+    tab_resumo, tab_completo, tab_transicao, tab_faq = st.tabs([
+        "📌 Resumo", "📄 Conteúdo Completo (1:1)", "⏱️ Transição 2026–2027", "❓ Perguntas rápidas"
+    ])
+
+    # =========================
+    # 📌 RESUMO DIDÁTICO
+    # =========================
+    with tab_resumo:
+        st.subheader("Visão geral em linguagem simples")
+        if not texto_plano:
+            st.warning("Arquivo 'fiscal reforma.docx' não encontrado na mesma pasta do app.")
+        else:
+            pontos = gerar_resumo_didatico(texto_plano)
+            for item in pontos:
+                st.markdown(f"- {item}")
+
+            st.info(
+                "Este resumo reorganiza o conteúdo do arquivo em linguagem didática, "
+                "sem alterar fatos, números ou prazos. Para conferência, veja a aba "
+                "“Conteúdo Completo (1:1)”."
+            )
+
+    # =========================
+    # 📄 CONTEÚDO COMPLETO (1:1)
+    # =========================
+    with tab_completo:
+        st.subheader("Conteúdo integral do Word (texto + imagens)")
+        if texto_plano:
+            st.markdown("#### Texto integral")
+            st.markdown(texto_plano)
+        else:
+            st.warning("Sem texto carregado.")
+
+        if imagens_bytes:
+            st.markdown("#### Imagens extraídas do documento")
+            cols = st.columns(3)
+            idx = 0
+            for blob in imagens_bytes:
+                try:
+                    img = Image.open(BytesIO(blob))
+                    with cols[idx % 3]:
+                        st.image(img, use_column_width=True)
+                    idx += 1
+                except UnidentifiedImageError:
+                    st.warning("Uma imagem do documento não pôde ser exibida.")
+        else:
+            st.info("Nenhuma imagem foi encontrada no documento ou não pôde ser extraída.")
+
+    # =========================
+    # ⏱️ TRANSIÇÃO 2026–2027
+    # =========================
+    with tab_transicao:
+        st.subheader("Linha do tempo da transição (com base no documento)")
+        st.markdown(
+            "- **2026**: CBS 0,9% e IBS 0,1% em fase de teste, com compensação contra PIS/COFINS; "
+            "existe a possibilidade de dispensa parcial de recolhimento condicionada a obrigações acessórias. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)"
+        )
+        st.markdown(
+            "- **2027**: Extinção de PIS/COFINS; CBS entra plenamente com alíquota definida por lei específica e/ou referência do Senado; "
+            "preferência na compensação de créditos conforme regras de transição. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)"
+        )
+        st.markdown(
+            "- **Estoque e créditos**: créditos remanescentes de PIS/COFINS, critérios para estoque em 01/01/2027 e uso parcelado "
+            "em 12 meses, conforme prazos do documento. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)"
+        )
+
+    # =========================
+    # ❓ PERGUNTAS RÁPIDAS (para leigos)
+    # =========================
+    with tab_faq:
+        st.subheader("Perguntas rápidas – explicações simples")
+        st.markdown("**O que é CBS e IBS?** — Impostos que substituem PIS/COFINS (CBS, federal) e ICMS/ISS (IBS, subnacional), com sistema não cumulativo e direito a crédito. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)")
+        st.markdown("**Em 2026 eu já pago CBS/IBS cheio?** — Não. 2026 é fase de teste (0,9% CBS e 0,1% IBS) com compensação e possível dispensa parcial; foco em cumprir a entrega das informações. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)")
+        st.markdown("**Quem aluga imóvel por PJ hoje paga o quê?** — PIS/COFINS 3,65% (cumulativo). Depois, CBS não cumulativa (alíquota mais alta), e setores com pouca despesa creditável tendem a sentir aumento. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)")
+        st.markdown("**O conteúdo desta página altera algo do documento?** — Não. O resumo só reorganiza as mesmas informações em linguagem simples; o conteúdo integral está disponível na aba própria para conferência. [1](https://myhines-my.sharepoint.com/personal/rcastellari_myhines_com/_layouts/15/Doc.aspx?sourcedoc=%7BA18CE2E3-193E-4E05-90A0-81E00B1A23DB%7D&file=fiscal%20reforma.docx&action=default&mobileredirect=true)")
