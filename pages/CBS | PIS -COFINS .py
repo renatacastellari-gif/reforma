@@ -53,9 +53,7 @@ else:
     st.markdown(
         """
         <style>
-            html, body, [class*="css"]  {
-                background-color: #000000;
-            }
+            html, body, [class*="css"]  { background-color: #000000; }
 
             /* Título principal na cor #B91E27 */
             .titulo-principal {
@@ -226,151 +224,174 @@ else:
     )
 
     # ==========================================================
-    # TABELA FINAL — 3 QUADRADOS NA CBS + PIS MESCLADO 2027–2033
-    # (sem linhas internas nos blocos)
+    # TABELA FINAL — IDÊNTICA AO PRINT (SEM LINHAS INTERNAS)
+    # Implementada com CSS GRID para controlar bordas dos blocos
     # ==========================================================
     st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
 
-    html_tabela_print = """
+    html_grid = """
     <style>
-        .print-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #ffffff;
-            margin-top: 6px;
-        }
-        .print-table th, .print-table td {
-            border: 1px solid #d6d6d6;
-            color: #222;
-            padding: 12px 10px;
-            text-align: left;
-            vertical-align: middle;
-            background: #fff;
-        }
-        .print-table thead th {
-            background: #cfe0f1; /* cabeçalho azul claro conforme print */
-            color: #1f2a37;
-            font-weight: 700;
-            text-align: center;
-        }
-        .center { text-align: center; }
-        .muted  { color: #3b3b3b; }
+      .grid-table {
+        display: grid;
+        /* 4 colunas com as mesmas larguras do seu print */
+        grid-template-columns: 10% 22% 22% 46%;
+        /* 2 linhas de cabeçalho + 10 linhas dos anos (2024–2033) */
+        grid-template-rows:
+          48px   /* header 1 */
+          48px   /* header 2 */
+          repeat(10, 56px); /* cada ano */
+        width: 100%;
+        background: #ffffff;
+        font-family: Arial, Helvetica, sans-serif;
+        border: 1px solid #d6d6d6; /* borda externa da tabela */
+        box-sizing: border-box;
+      }
+      .cell {
+        padding: 12px 10px;
+        color: #222;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        border: 1px solid #d6d6d6;       /* borda padrão */
+        box-sizing: border-box;
+      }
+      .center { justify-content: center; text-align: center; }
+      .muted  { color: #3b3b3b; }
 
-        /* Larguras aproximadas para o visual do print */
-        .col-ano   { width: 10%; }
-        .col-pis   { width: 22%; }
-        .col-cofins{ width: 22%; }
-        .col-cbs   { width: 46%; }
+      /* Cabeçalho (azul claro) */
+      .header { background: #cfe0f1; font-weight: 700; }
 
-        /* Altura das linhas para proporção semelhante ao print */
-        .row { height: 56px; }
+      /* Remover bordas duplicadas da moldura externa */
+      .no-border { border: none; }
 
-        /* ---- Remoção das linhas internas dos blocos ----
-           Removemos a linha horizontal (border-top) das linhas:
-           2028 (dentro do bloco CBS 2027–2028 e PIS 2027–2033),
-           2030 (dentro do bloco CBS 2029–2030 e PIS 2027–2033),
-           2032 (dentro do bloco CBS 2031–2033 e PIS 2027–2033).
-        */
-        tr.r2028 td, tr.r2030 td, tr.r2032 td { border-top: none !important; }
+      /* ====== BLOCO PIS/PASEP 2027–2033 (sem linhas internas) ====== */
+      .pis-block {
+        grid-column: 2 / 3;   /* segunda coluna (PIS/PASEP) */
+        grid-row: 3 + 4 / span 7; /* inicia na linha do ano 2027; span 7 anos (2027–2033) */
+        /* Como não temos cálculo aqui, vamos posicionar com números absolutos: */
+      }
+      /* OBS: Vamos posicionar explicitamente sem usar '3 + 4':
+         Cabeçalho ocupa rows 1 e 2; 2024 é row 3; então:
+         2024 -> row 3
+         2025 -> row 4
+         2026 -> row 5
+         2027 -> row 6
+         2028 -> row 7
+         2029 -> row 8
+         2030 -> row 9
+         2031 -> row 10
+         2032 -> row 11
+         2033 -> row 12
+      */
+
+      /* Reposicionamento manual */
+      .r1  { grid-row: 1; }
+      .r2  { grid-row: 2; }
+      .r3  { grid-row: 3; }  /* 2024 */
+      .r4  { grid-row: 4; }  /* 2025 */
+      .r5  { grid-row: 5; }  /* 2026 */
+      .r6  { grid-row: 6; }  /* 2027 */
+      .r7  { grid-row: 7; }  /* 2028 */
+      .r8  { grid-row: 8; }  /* 2029 */
+      .r9  { grid-row: 9; }  /* 2030 */
+      .r10 { grid-row: 10; } /* 2031 */
+      .r11 { grid-row: 11; } /* 2032 */
+      .r12 { grid-row: 12; } /* 2033 */
+
+      .c1 { grid-column: 1; } /* Ano */
+      .c2 { grid-column: 2; } /* PIS/PASEP */
+      .c3 { grid-column: 3; } /* COFINS */
+      .c4 { grid-column: 4; } /* CBS */
+
+      /* BLOCO PIS (grande) 2027–2033 */
+      .pis-merge {
+        grid-column: 2;
+        grid-row: 6 / span 7; /* 2027–2033 */
+        border: 1px solid #d6d6d6;
+      }
+
+      /* BLOCO CBS #1 (2027–2028) com texto */
+      .cbs-merge-1 {
+        grid-column: 4;
+        grid-row: 6 / span 2; /* 2027–2028 */
+        border: 1px solid #d6d6d6;
+      }
+
+      /* BLOCO CBS #2 (2029–2030) vazio */
+      .cbs-merge-2 {
+        grid-column: 4;
+        grid-row: 8 / span 2; /* 2029–2030 */
+        border: 1px solid #d6d6d6;
+      }
+
+      /* BLOCO CBS #3 (2031–2033) com texto */
+      .cbs-merge-3 {
+        grid-column: 4;
+        grid-row: 10 / span 3; /* 2031–2033 */
+        border: 1px solid #d6d6d6;
+      }
+
+      /* Células "normais" (sem mesclagem) — anos e COFINS, etc. */
+      .year { justify-content: center; }
     </style>
 
-    <table class="print-table">
-        <thead>
-            <tr>
-                <th class="col-ano">Ano</th>
-                <th colspan="2">Tributos Atuais</th>
-                <th>Novos Tributos</th>
-            </tr>
-            <tr>
-                <th></th>
-                <th class="col-pis center">PIS/PASEP</th>
-                <th class="col-cofins center">COFINS</th>
-                <th class="col-cbs center">CBS</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- 2024 -->
-            <tr class="row r2024">
-                <td class="center">2024</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+    <div class="grid-table">
 
-            <!-- 2025 -->
-            <tr class="row r2025">
-                <td class="center">2025</td>
-                <td></td>
-                <td class="center muted">Sem mudanças</td>
-                <td class="center">-</td>
-            </tr>
+      <!-- Cabeçalho linha 1 -->
+      <div class="cell header r1 c1 center">Ano</div>
+      <div class="cell header r1" style="grid-column: 2 / span 2; justify-content:center;">Tributos Atuais</div>
+      <div class="cell header r1 c4 center">Novos Tributos</div>
 
-            <!-- 2026 -->
-            <tr class="row r2026">
-                <td class="center">2026</td>
-                <td></td>
-                <td class="muted">
-                    Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).
-                </td>
-                <td class="muted center">Alíquota teste: 0,9%</td>
-            </tr>
+      <!-- Cabeçalho linha 2 -->
+      <div class="cell header r2 c1"></div>
+      <div class="cell header r2 c2 center">PIS/PASEP</div>
+      <div class="cell header r2 c3 center">COFINS</div>
+      <div class="cell header r2 c4 center">CBS</div>
 
-            <!-- 2027 (início dos blocos) -->
-            <tr class="row r2027">
-                <td class="center">2027</td>
+      <!-- Coluna Ano -->
+      <div class="cell year r3 c1">2024</div>
+      <div class="cell year r4 c1">2025</div>
+      <div class="cell year r5 c1">2026</div>
+      <div class="cell year r6 c1">2027</div>
+      <div class="cell year r7 c1">2028</div>
+      <div class="cell year r8 c1">2029</div>
+      <div class="cell year r9 c1">2030</div>
+      <div class="cell year r10 c1">2031</div>
+      <div class="cell year r11 c1">2032</div>
+      <div class="cell year r12 c1">2033</div>
 
-                <!-- BLOCO PIS/PASEP: grande, 2027–2033 -->
-                <td rowspan="7"></td>
+      <!-- PIS/PASEP: bloco mesclado 2027–2033 (vazio) -->
+      <div class="cell pis-merge"></div>
 
-                <!-- COFINS -->
-                <td></td>
+      <!-- COFINS (células padrão) -->
+      <div class="cell r3 c3"></div>
+      <div class="cell r4 c3 muted center">Sem mudanças</div>
+      <div class="cell r5 c3 muted center">Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).</div>
+      <div class="cell r6 c3"></div>
+      <div class="cell r7 c3"></div>
+      <div class="cell r8 c3"></div>
+      <div class="cell r9 c3 muted center">Extinção</div>
+      <div class="cell r10 c3"></div>
+      <div class="cell r11 c3"></div>
+      <div class="cell r12 c3"></div>
 
-                <!-- BLOCO CBS #1: 2027–2028 com texto -->
-                <td class="muted center" rowspan="2">Alíquota estabelecida (-) 0,1%</td>
-            </tr>
+      <!-- CBS: 2024–2026 individuais -->
+      <div class="cell r3 c4"></div>
+      <div class="cell r4 c4 center">-</div>
+      <div class="cell r5 c4 muted center">Alíquota teste: 0,9%</div>
 
-            <!-- 2028 (continua bloco CBS #1). Sem linha interna -->
-            <tr class="row r2028">
-                <td class="center">2028</td>
-                <td></td>
-            </tr>
+      <!-- CBS: bloco #1 (2027–2028) -->
+      <div class="cell cbs-merge-1 muted center">Alíquota estabelecida (-) 0,1%</div>
 
-            <!-- 2029 (abre bloco CBS #2: 2029–2030 vazio). Mantém linha superior -->
-            <tr class="row r2029">
-                <td class="center">2029</td>
-                <td></td>
-                <td rowspan="2"></td>
-            </tr>
+      <!-- CBS: bloco #2 (2029–2030) vazio -->
+      <div class="cell cbs-merge-2"></div>
 
-            <!-- 2030 (COFINS Extinção; continua CBS #2). Sem linha interna -->
-            <tr class="row r2030">
-                <td class="center">2030</td>
-                <td class="center muted">Extinção</td>
-                <!-- CBS mesclado acima (vazio) -->
-            </tr>
+      <!-- CBS: bloco #3 (2031–2033) -->
+      <div class="cell cbs-merge-3 muted center">Alíquota estabelecida</div>
 
-            <!-- 2031 (abre bloco CBS #3: 2031–2033 com texto). Mantém linha superior -->
-            <tr class="row r2031">
-                <td class="center">2031</td>
-                <td></td>
-                <td class="muted center" rowspan="3">Alíquota estabelecida</td>
-            </tr>
-
-            <!-- 2032 (continua CBS #3). Sem linha interna -->
-            <tr class="row r2032">
-                <td class="center">2032</td>
-                <td></td>
-            </tr>
-
-            <!-- 2033 (continua CBS #3). Mantém linha inferior do bloco -->
-            <tr class="row r2033">
-                <td class="center">2033</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+    </div>
     """
 
-    # Renderiza HTML puro — garante rowspan/colspan e CSS sem interferência do Markdown
-    components.html(html_tabela_print, height=780, scrolling=True)
+    # Renderização via HTML puro (CSS Grid) — sem linhas internas nos blocos
+    components.html(html_grid, height=820, scrolling=True)
