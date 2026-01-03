@@ -157,66 +157,90 @@ else:
     st.markdown("<span class='badge'>TABELA</span>", unsafe_allow_html=True)
 
     # =========================
-    # TABELA – sem índice; fundo branco; cabeçalho vinho; coluna "Ano" sem quebra
-    # =========================
-    data = [
-        ["2024", "", "", ""],
-        ["2025", "Sem mudanças", "", "-"],
-        ["2026", "Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).", "", "Alíquota teste: 0,9%"],
-        ["2027", "", "", "Alíquota estabelecida (-) 0,1%"],
-        ["2028", "", "", ""],
-        ["2029", "", "", ""],
-        ["2030", "Extinção", "", "Alíquota estabelecida"],
-        ["2031", "", "", ""],
-        ["2032", "", "", ""],
-        ["2033", "", "", ""],
-    ]
+   
+# =========================
+# TABELA – Cabeçalho agrupado (igual à imagem), sem índice
+# =========================
+st.markdown("\n---\n\n**Tabela – Transição PIS/COFINS → CBS (SERVIÇOS)**")
 
-    df = pd.DataFrame(data, columns=["Ano", "PIS/PASEP", "COFINS", "CBS"])
+import pandas as pd
 
-    wine   = "#B22222"  # vinho igual ao título
-    white  = "#FFFFFF"
-    border = "#D0D0D0"
+# ----- Cabeçalho agrupado com MultiIndex -----
+# Nível 0: Ano | Tributos Atuais | Novos Tributos
+# Nível 1:     | PIS/PASEP | COFINS | CBS
+cols = pd.MultiIndex.from_tuples([
+    ("Ano",             ""),
+    ("Tributos Atuais", "PIS/PASEP"),
+    ("Tributos Atuais", "COFINS"),
+    ("Novos Tributos",  "CBS"),
+])
 
-    styled = (
-        df.style
-        .hide(axis="index")
-        .set_table_styles([
-            {"selector": "th", "props": [
-                ("background-color", wine),
-                ("color", white),
-                ("font-weight", "700"),
-                ("text-align", "center"),
-                ("border", f"1px solid {border}"),
-                ("padding", "10px")
-            ]},
-            {"selector": "td", "props": [
-                ("background-color", white),
-                ("color", "#222"),
-                ("border", f"1px solid {border}"),
-                ("padding", "12px"),
-                ("vertical-align", "middle")
-            ]},
-            {"selector": "table", "props": [
-                ("border-collapse", "separate"),
-                ("border-spacing", "0"),
-                ("border", f"1px solid {border}"),
-                ("border-radius", "12px"),
-                ("overflow", "hidden")
-            ]},
-        ])
-        .set_properties(subset=["Ano", "PIS/PASEP", "COFINS", "CBS"], **{
-            "text-align": "center"
-        })
-        .set_properties(subset=["Ano"], **{
-            "white-space": "nowrap",
-            "width": "110px",
-            "min-width": "110px",
-            "max-width": "110px"
-        })
-        .set_properties(subset=["PIS/PASEP"], **{"width": "380px"})
-        .set_properties(subset=["COFINS"], **{"width": "160px"})
-        .set_properties(subset=["CBS"], **{"width": "220px"})
-    )
+# ----- Linhas EXATAMENTE como sua referência -----
+data = [
+    ["2024", "", "", ""],
+    ["2025", "Sem mudanças", "", "-"],
+    ["2026", "Alíquotas mantidas; com a possibilidade de compensação de 1% dos novos tributos (CBS 0,9% e IBS 0,1%).", "", "Alíquota teste: 0,9%"],
+    ["2027", "", "", "Alíquota estabelecida (-) 0,1%"],
+    ["2028", "", "", ""],
+    ["2029", "", "", ""],
+    ["2030", "Extinção", "", "Alíquota estabelecida"],
+    ["2031", "", "", ""],
+    ["2032", "", "", ""],
+    ["2033", "", "", ""],
+]
 
-    st.table(styled)
+df = pd.DataFrame(data, columns=cols)
+
+# ----- Estilos (igual à imagem) -----
+header_bg   = "#cfe0ef"   # azul claro do cabeçalho (ajuste conforme seu tom)
+header_text = "#000000"   # texto preto no cabeçalho
+body_bg     = "#FFFFFF"   # fundo branco no corpo
+body_text   = "#222222"
+border      = "#D0D0D0"
+
+styled = (
+    df.style
+    .hide(axis="index")  # sem índice
+    .set_table_styles([
+        # Cabeçalho (todos th)
+        {"selector": "th", "props": [
+            ("background-color", header_bg),
+            ("color", header_text),
+            ("font-weight", "700"),
+            ("text-align", "center"),
+            ("border", f"1px solid {border}"),
+            ("padding", "10px")
+        ]},
+        # Corpo (td)
+        {"selector": "td", "props": [
+            ("background-color", body_bg),
+            ("color", body_text),
+            ("border", f"1px solid {border}"),
+            ("padding", "12px"),
+            ("vertical-align", "middle"),
+            ("text-align", "center"),
+        ]},
+        # Tabela
+        {"selector": "table", "props": [
+            ("border-collapse", "separate"),
+            ("border-spacing", "0"),
+            ("border", f"1px solid {border}"),
+            ("border-radius", "12px"),
+            ("overflow", "hidden"),
+        ]},
+    ])
+    # Ajuste de largura e nowrap para "Ano" (evita 20↵24)
+    .set_properties(subset=pd.IndexSlice[:, ("Ano", "")], **{
+        "white-space": "nowrap",
+        "width": "100px",
+        "min-width": "100px",
+        "max-width": "100px",
+        "text-align": "center",
+    })
+    # Larguras das demais colunas (evita “espremer”)
+    .set_properties(subset=pd.IndexSlice[:, ("Tributos Atuais", "PIS/PASEP")], **{"width": "360px"})
+    .set_properties(subset=pd.IndexSlice[:, ("Tributos Atuais", "COFINS")], **{"width": "160px"})
+    .set_properties(subset=pd.IndexSlice[:, ("Novos Tributos", "CBS")], **{"width": "220px"})
+)
+
+st.table(styled)
