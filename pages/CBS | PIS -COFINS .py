@@ -292,11 +292,10 @@ else:
             </li>
             <li>
                 Hoje: Lucro Real → PIS/COFINS não cumulativos (com crédito). 
-                Lucro Presumido → PIS/COFINS cumulativos (sem crédito). 
-                <b>Com a CBS, essa diferença deixa de existir.</b>
+                "<li><b> Hoje: Lucro Presumido → PIS/COFINS cumulativos (sem crédito)</b> Com a CBS, essa diferença deixa de existir </li>"
             </li>
             <li>
-                Possibilidade de crédito <b>compensável</b> sobre despesas como 
+                Possibilidade de crédito sobre <b>Bens e serviços utilizados na atividade</b> como 
                 aluguel, energia elétrica, internet, softwares, licenças e outros 
                 insumos vinculados à atividade.
             </li>
