@@ -154,7 +154,7 @@ else:
             <li>Incide sobre <span class="highlight">operações com bens materiais e imateriais, e com serviços. </span></li>
             <li>ISS será <span class="highlight">extinto</span> com a reforma</li>
             <li>Alíquotas: Cada estado e município fixará sua própria alíquota por lei específica, 
-            embora a legislação geral do imposto seja uniforme em todo o país.  <span class="highlight">IBS até 2033</span></li>
+            embora a legislação geral do imposto seja uniforme em todo o país. 
         </ul>
     </div>
     """, unsafe_allow_html=True)
@@ -168,8 +168,9 @@ else:
         <ul>
             <li>PIS + COFINS → <span class="highlight">CBS</span></li>
             <li>ISS + ICMS → <span class="highlight">IBS</span></li>
+            <li>Extinção: <span class="highlight">PIS - COFINS: 2027</span></li>
+            <li>Extinção: <span class="highlight">ISS: 2033.</span></li>
             <li>Menos impostos e <span class="highlight">regras unificadas</span></li>
-            <li>Extinção: PIS - COFINS: 2027. ISS: 2033.
         </ul>
     </div>
     """, unsafe_allow_html=True)
