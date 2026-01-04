@@ -1,3 +1,4 @@
+
 import streamlit as st
 from pathlib import Path
 # import pandas as pd  # remova se não usar
@@ -8,7 +9,7 @@ from pathlib import Path
 st.set_page_config(
     page_title="Reforma Tributária",
     page_icon="🟥",
-    layout="centered"
+    layout="centered"  # pode trocar para "wide" se preferir
 )
 
 # =========================
@@ -17,6 +18,9 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    /* Import de fonte monoespaçada para o título */
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&display=swap');
+
     /* Fundo geral */
     .stApp {
         background-color: #1b1b1b;
@@ -27,7 +31,7 @@ st.markdown(
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
 
-    /* Títulos */
+    /* Títulos padrão (se usados fora do bloco customizado) */
     h1, h2, h3, h4 {
         color: #B91E27;
     }
@@ -65,6 +69,36 @@ st.markdown(
     .highlight {
         color: #F2D5D7;
         font-weight: 600;
+    }
+
+    /* =========================
+       BLOCO DO TÍTULO (igual ao print)
+       ========================= */
+    .title-wrap {
+        /* limita a largura como no conteúdo streamlit centrado, mas alinhado à esquerda */
+        max-width: 1100px;        /* ajuste conforme seu layout */
+        margin: 0 auto;           /* segue o container centralizado */
+        padding: 0 1.2rem;        /* dá um respiro lateral */
+    }
+
+    .title-main {
+        font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        color: #B91E27;
+        font-weight: 800;         /* negrito forte */
+        font-size: 2rem;          /* ajuste o tamanho se quiser maior */
+        line-height: 1.25;
+        letter-spacing: 0.5px;    /* leve espaçamento de letras como no print */
+        margin: 0;                /* remove margem padrão do h2 */
+        text-align: left;         /* alinhado à esquerda */
+    }
+
+    .title-divider {
+        height: 2px;              /* espessura da linha */
+        background-color: #B91E27;
+        border: none;
+        margin-top: 14px;         /* espaço entre o título e a linha */
+        margin-bottom: 24px;      /* espaço abaixo da linha */
+        opacity: 1;               /* linha sólida */
     }
     </style>
     """,
@@ -107,21 +141,14 @@ if not st.session_state.logged_in:
 else:
 
     # =========================
-    # TÍTULO
+    # TÍTULO (customizado)
     # =========================
     st.markdown(
         """
-        <h2 style="
-            text-align:center;
-            border-bottom:2px solid #B91E27;
-            padding-bottom:10px;
-            margin-bottom:30px;
-            color:#B91E27;
-            font-weight:800;
-            letter-spacing:0.3px;
-        ">
-            Reforma Tributária
-        </h2>
+        <div class="title-wrap">
+            <h2 class="title-main">Reforma Tributária</h2>
+            <hr class="title-divider"/>
+        </div>
         """,
         unsafe_allow_html=True
     )
