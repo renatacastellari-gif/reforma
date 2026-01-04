@@ -106,36 +106,29 @@ if not st.session_state.logged_in:
 # =========================
 else:
 
-
     # =========================
-
     # TÍTULO
-
     # =========================
-    
     st.markdown(
-    """
-    <h2 style="
-        text-align:center;
-        border-bottom:2px solid #B91E27;
-        padding-bottom:10px;
-        margin-bottom:30px;
-        color:#B91E27;
-        font-weight:800;
-        letter-spacing:0.3px;
-    ">
-        Reforma Tributária
-    </h2>
-    """,
-    unsafe_allow_html=True
-)
-
-  
+        """
+        <h2 style="
+            text-align:center;
+            border-bottom:2px solid #B91E27;
+            padding-bottom:10px;
+            margin-bottom:30px;
+            color:#B91E27;
+            font-weight:800;
+            letter-spacing:0.3px;
+        ">
+            Reforma Tributária
+        </h2>
+        """,
+        unsafe_allow_html=True
+    )
 
     # =========================
     # CARDS – IBS
     # =========================
-
     st.markdown(
         """
         <div class='card'>
@@ -171,16 +164,9 @@ else:
         <div class='card'>
             <h3>💳 Créditos do IBS</h3>
             <ul>
-                <li>
-                    Gera crédito em praticamente todas as aquisições
-                    ligadas à atividade econômica
-                </li>
-                <li>
-                    Crédito <b>integral</b> e <b>não cumulativo</b>
-                </li>
-                <li>
-                    Reduz o efeito de <b>“imposto sobre imposto”</b>
-                </li>
+                <li>Gera crédito em praticamente todas as aquisições ligadas à atividade econômica</li>
+                <li>Crédito <b>integral</b> e <b>não cumulativo</b></li>
+                <li>Reduz o efeito de <b>“imposto sobre imposto”</b></li>
             </ul>
         </div>
         """,
@@ -210,10 +196,7 @@ else:
             <h3>⏳ Quando entra em vigor?</h3>
             <ul>
                 <li><b>2026 a 2032</b>: fase de transição</li>
-                <li>
-                    <b>2033</b>: IBS plenamente vigente,
-                    com extinção definitiva do ICMS e ISS
-                </li>
+                <li><b>2033</b>: IBS plenamente vigente, com extinção definitiva do ICMS e ISS</li>
             </ul>
         </div>
         """,
