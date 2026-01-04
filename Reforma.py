@@ -170,7 +170,10 @@ else:
             <li>ISS + ICMS → <span class="highlight">IBS</span></li>
             <li>Extinção: <span class="highlight">PIS - COFINS: 2027</span></li>
             <li>Extinção: <span class="highlight">ISS: 2033.</span></li>
-            <li>Menos impostos e <span class="highlight">regras unificadas</span></li>
+            <li>Não muda o envio de nenhum SPED por enquanto <span class="highlight">(só em 2027).</span></li>
+            <li> Por enquanto você destaca a CBS (e o IBS, se quiser) 
+            na Nota Fiscal de Serviço eletrônica (NFS-e) de São Paulo, apenas para fins de teste, 
+            sem pagamento. <span class="highlight">Acompanhe orientações da prefeitura e Receita, pois ainda deve divulgar mais detalhes técnicos.</span></li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
