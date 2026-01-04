@@ -177,7 +177,7 @@ else:
         "<li>Substitui <b>PIS e COFINS</b></li>"
         "<li>Imposto <b>federal</b></li>"
         "<li>Modelo de <b>IVA</b> (não cumulativo)</li>"
-        "<li>Permite <b>crédito financeiro</b> amplo</li>"
+        "<li>Lucro Real OU Lucro Presumido → ambos poderão tomar crédito de CBS."
         "<li>Objetivo: <b>simplificar</b> a tributação</li>"
         "</ul>"
         "</div>",
@@ -195,7 +195,7 @@ else:
         "Campos do IBS e da CBS na <b>NFS-e</b> "
         "</li>"
         "<li><b>Campos do IBS e da CBS na NFS-e:</b><br>"
-        "No início, <b>não haverá penalidade</b> se vocês ainda não preencherem os novos "
+        "No início, <b>não haverá penalidade</b> se não for preenchido os novos "
         "campos de IBS/CBS na NFS-e. Isso vale <b>até o primeiro dia do 4º mês</b> após a "
         "publicação dos regulamentos do IBS/CBS (ainda não publicados)."
         "</li>"
@@ -279,6 +279,41 @@ else:
         unsafe_allow_html=True
     )
 
+    # =========================
+    # CARDS DE credito
+    # =========================
+    st.markdown(
+        "<div class='card'>"
+        "<h3>CBS – Créditos para Prestador de Serviços</h3>"
+        "<ul>"
+        "<li>Lucro Real ou Lucro Presumido → ambos poderão tomar crédito de<b>CBS.</b></li>"
+        "<li>Hoje: Lucro Real → PIS/COFINS não cumulativos (com crédito). Lucro Presumido → PIS/COFINS cumulativos (sem crédito). 
+         <b> Com a CBS, essa diferença acaba.</b></li>"
+        "<li>Podendo tomar credito <b>compensado</b> de aluguel, energia elétrica, internet, softwares e licenças, entre outros </li>"
+        "</ul>"
+        "</div>",
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        "<div class='card'>"
+        "<h3>A partir de 2027</h3>"
+        "<ul>"
+        "<li><b>PIS e COFINS</b> são extintos</li>"
+        "<li>Entra a <b>CBS</b> de forma definitiva</li>"
+        "<li>Não cumulativa (modelo <b>IVA</b>)</li>"
+        "<li>Crédito financeiro amplo</li>"
+        "<li>Alíquota estimada: <b>~8,8%</b></li>"
+        "<li>Serviços tendem a <b>aumentar a carga tributária</b></li>"
+        "</ul>"
+        "</div>",
+        unsafe_allow_html=True
+    )
+#TESTE
+
+
+
+    
     # =========================
     # TABELA FINAL (IMAGEM)
     # =========================
