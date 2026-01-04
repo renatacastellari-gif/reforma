@@ -112,7 +112,7 @@ else:
     # TÍTULO
 
     # =========================
-    """
+    
     st.markdown(style_str, unsafe_allow_html=True)
 
     # Wrapper
