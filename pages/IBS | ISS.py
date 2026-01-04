@@ -112,9 +112,18 @@ else:
     # TÍTULO
 
     # =========================
+    """
+    st.markdown(style_str, unsafe_allow_html=True)
 
+    # Wrapper
+    st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
+
+    # =========================
+    # TÍTULO
+    # =========================
     st.markdown("<div class='titulo-principal'>Reforma Tributária</div>", unsafe_allow_html=True)
- 
+
+  
 
     # =========================
     # CARDS – IBS
