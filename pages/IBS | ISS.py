@@ -9,100 +9,7 @@ from pathlib import Path
 st.set_page_config(
     page_title="Reforma Tributária",
     page_icon="🟥",
-    layout="centered"  # pode trocar para "wide" se preferir
-)
-
-# =========================
-# CSS - TEMA ESCURO + PALETA
-# =========================
-st.markdown(
-    """
-    <style>
-    /* Import de fonte monoespaçada para o título */
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&display=swap');
-
-    /* Fundo geral */
-    .stApp {
-        background-color: #1b1b1b;
-        color: #F9EEEF;
-    }
-
-    /* Esconder menu e rodapé */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-
-    /* Títulos padrão (se usados fora do bloco customizado) */
-    h1, h2, h3, h4 {
-        color: #B91E27;
-    }
-
-    /* Caixa de texto e inputs */
-    input, textarea {
-        background-color: #2a2a2a !important;
-        color: #F9EEEF !important;
-        border: 1px solid #EBBFC1 !important;
-    }
-
-    /* Botões */
-    .stButton > button {
-        background-color: #B91E27;
-        color: #F9EEEF;
-        border-radius: 8px;
-        border: none;
-        font-weight: 600;
-    }
-    .stButton > button:hover {
-        background-color: #8f1620;
-        color: #F9EEEF;
-    }
-
-    /* Cards */
-    .card {
-        background-color: #2a2a2a;
-        padding: 18px;
-        border-radius: 12px;
-        border-left: 6px solid #B91E27;
-        margin-bottom: 16px;
-    }
-
-    /* Destaque */
-    .highlight {
-        color: #F2D5D7;
-        font-weight: 600;
-    }
-
-    /* =========================
-       BLOCO DO TÍTULO (igual ao print)
-       ========================= */
-    .title-wrap {
-        /* limita a largura como no conteúdo streamlit centrado, mas alinhado à esquerda */
-        max-width: 1100px;        /* ajuste conforme seu layout */
-        margin: 0 auto;           /* segue o container centralizado */
-        padding: 0 1.2rem;        /* dá um respiro lateral */
-    }
-
-    .title-main {
-        font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        color: #B91E27;
-        font-weight: 800;         /* negrito forte */
-        font-size: 2rem;          /* ajuste o tamanho se quiser maior */
-        line-height: 1.25;
-        letter-spacing: 0.5px;    /* leve espaçamento de letras como no print */
-        margin: 0;                /* remove margem padrão do h2 */
-        text-align: left;         /* alinhado à esquerda */
-    }
-
-    .title-divider {
-        height: 2px;              /* espessura da linha */
-        background-color: #B91E27;
-        border: none;
-        margin-top: 14px;         /* espaço entre o título e a linha */
-        margin-bottom: 24px;      /* espaço abaixo da linha */
-        opacity: 1;               /* linha sólida */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
+    layout="centered"
 )
 
 # =========================
@@ -141,17 +48,125 @@ if not st.session_state.logged_in:
 else:
 
     # =========================
-    # TÍTULO (customizado)
+    # TIPOGRAFIA
     # =========================
-    st.markdown(
-        """
-        <div class="title-wrap">
-            <h2 class="title-main">Reforma Tributária</h2>
-            <hr class="title-divider"/>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    BODY_FONT = "Consolas, Menlo, Monaco, 'Courier New', monospace"
+    HEADING_FONT = "Consolas, Menlo, Monaco, 'Courier New', monospace"
+
+    # =========================
+    # CSS GLOBAL (TEMA ESCURO + TÍTULO + CARDS)
+    # =========================
+    style_str = f"""
+    <style>
+        html, body, [class*="css"] {{
+            background-color: #1b1b1b; /* mantém seu fundo escuro do app original */
+        }}
+        body {{
+            font-family: {BODY_FONT};
+            color: #F9EEEF;
+        }}
+
+        #MainMenu {{visibility: hidden;}}
+        footer {{visibility: hidden;}}
+
+        .content-wrapper {{
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.2rem; /* respira nas laterais */
+        }}
+
+        /* Título exatamente como o seu exemplo */
+        .titulo-principal {{
+            font-family: {HEADING_FONT};
+            font-size: 34px;
+            font-weight: 800;
+            color: #B91E27;
+            margin-bottom: 10px;
+            text-align: left;
+            border-bottom: 2px solid #B91E27;
+            padding-bottom: 8px;
+            letter-spacing: 0.2px;
+        }}
+
+        /* Inputs e botões mantidos no tema escuro */
+        input, textarea {{
+            background-color: #2a2a2a !important;
+            color: #F9EEEF !important;
+            border: 1px solid #EBBFC1 !important;
+        }}
+
+        .stButton > button {{
+            background-color: #B91E27;
+            color: #F9EEEF;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+        }}
+        .stButton > button:hover {{
+            background-color: #8f1620;
+            color: #F9EEEF;
+        }}
+
+        /* Cards */
+        .card {{
+            background-color: #2a2a2a;
+            padding: 26px 28px;
+            border-radius: 14px;
+            margin: 22px 0;
+            border-left: 6px solid #B91E27;
+            box-shadow: 0 2px 0 #111111;
+            color: #f0f0f0;
+        }}
+
+        .card h3 {{
+            font-family: {HEADING_FONT};
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 12px 0;
+            color: #ffffff;
+            letter-spacing: 0.2px;
+        }}
+
+        .card ul {{
+            margin: 10px 0 0 18px;
+            padding: 0;
+            list-style-type: disc;
+        }}
+
+        .card li {{
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 6px;
+            color: #e6e6e6;
+        }}
+
+        .card li b {{
+            color: #ffffff;
+            font-weight: 700;
+        }}
+
+        .card p {{
+            margin: 0;
+            color: #dcdcdc;
+            font-size: 16px;
+            line-height: 1.65;
+        }}
+
+        .highlight {{
+            color: #F2D5D7;
+            font-weight: 600;
+        }}
+    </style>
+    """
+    st.markdown(style_str, unsafe_allow_html=True)
+
+    # Wrapper para alinhar e controlar largura
+    st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
+
+    # =========================
+    # TÍTULO (EXATO AO SEU ESTILO)
+    # =========================
+    st.markdown("<div class='titulo-principal'>Reforma Tributária</div>", unsafe_allow_html=True)
 
     # =========================
     # CARDS – IBS
@@ -243,3 +258,6 @@ else:
         """,
         unsafe_allow_html=True
     )
+
+    # Fecha o wrapper
+    st.markdown("</div>", unsafe_allow_html=True)
