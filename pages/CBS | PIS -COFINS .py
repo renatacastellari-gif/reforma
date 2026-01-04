@@ -280,20 +280,31 @@ else:
     )
 
     # =========================
-    # CARDS DE credito
+    # CARDS DE CREDITO
     # =========================
     st.markdown(
-        "<div class='card'>"
-        "<h3>CBS – Créditos para Prestador de Serviços</h3>"
-        "<ul>"
-        "<li>Lucro Real ou Lucro Presumido → ambos poderão tomar crédito de<b>CBS.</b></li>"
-        "<li>Hoje: Lucro Real → PIS/COFINS não cumulativos (com crédito). Lucro Presumido → PIS/COFINS cumulativos (sem crédito). 
-         <b> Com a CBS, essa diferença acaba.</b></li>"
-        "<li>Podendo tomar credito <b>compensado</b> de aluguel, energia elétrica, internet, softwares e licenças, entre outros </li>"
-        "</ul>"
-        "</div>",
-        unsafe_allow_html=True
-    )
+        """
+        <div class='card'>
+        <h3>CBS – Créditos para Prestador de Serviços</h3>
+        <ul>
+            <li>
+                Lucro Real ou Lucro Presumido → ambos poderão tomar crédito de <b>CBS</b>.
+            </li>
+            <li>
+                Hoje: Lucro Real → PIS/COFINS não cumulativos (com crédito). 
+                Lucro Presumido → PIS/COFINS cumulativos (sem crédito). 
+                <b>Com a CBS, essa diferença deixa de existir.</b>
+            </li>
+            <li>
+                Possibilidade de crédito <b>compensável</b> sobre despesas como 
+                aluguel, energia elétrica, internet, softwares, licenças e outros 
+                insumos vinculados à atividade.
+            </li>
+        </ul>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
     st.markdown(
         "<div class='card'>"
@@ -309,7 +320,7 @@ else:
         "</div>",
         unsafe_allow_html=True
     )
-#TESTE
+
 
 
 
