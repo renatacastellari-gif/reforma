@@ -189,12 +189,10 @@ else:
     # =========================
     st.markdown(
         "<div class='card'>"
-        "<h3>Para Empresa (prestação de serviços)</h3>"
+        "<h3>Empresa Prestadora de Serviços</h3>"
         "<ul>"
-        "<li><b>Obrigatoriedade de emitir documento fiscal eletrônico:</b><br>"
-        "Para qualquer operação com serviços em 2026, a empresa deve emitir <b>NFS-e</b> "
-        "(Nota Fiscal de Serviços Eletrônica) — exatamente o que vocês já fazem. "
-        "A NFS-e está listada como documento <b>recepcionado</b> pelo <b>IBS</b> e <b>CBS</b>."
+        "<li><b>Novos Campos ao emitir documento fiscal eletrônico:</b><br>"
+        "Campos do IBS e da CBS na <b>NFS-e</b> "
         "</li>"
         "<li><b>Campos do IBS e da CBS na NFS-e:</b><br>"
         "No início, <b>não haverá penalidade</b> se vocês ainda não preencherem os novos "
@@ -228,7 +226,6 @@ else:
         "<h3>NFS-e — layouts que poderão ser usados em 2026</h3>"
         "<p class='texto' style='margin-bottom:10px;'>"
         "Segundo comunicado de <b>15/12/2025</b>, o município permitirá duas modalidades de emissão da NFS-e: "
-        "<span style='opacity:0.7;'>[reformatri...utaria.com]</span>"
         "</p>"
         "<ul>"
         "<li><b>Layout 1 (atual)</b>"
