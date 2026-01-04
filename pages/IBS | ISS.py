@@ -106,37 +106,15 @@ if not st.session_state.logged_in:
 # =========================
 else:
 
-    # ---- LOGO ----
-    candidatos = [
-        Path("hines.svg"),
-        Path("hines.png"),
-        Path("hines.jpg"),
-        Path("hines.jpeg")
-    ]
-    logo_path = next((p for p in candidatos if p.exists()), None)
 
-    if logo_path:
-        st.image(str(logo_path), width=220)
-    else:
-        st.markdown(
-            "<h3 style='color:#B91E27;'>🟥 Painel Tributário</h3>",
-            unsafe_allow_html=True
-        )
+    # =========================
 
-    # ---- TÍTULO ----
-    st.markdown(
-        """
-        <h2 style="
-            text-align:center;
-            border-bottom:2px solid #B91E27;
-            padding-bottom:10px;
-            margin-bottom:30px;
-        ">
-            ISS → IBS
-        </h2>
-        """,
-        unsafe_allow_html=True
-    )
+    # TÍTULO
+
+    # =========================
+
+    st.markdown("<div class='titulo-principal'>Reforma Tributária</div>", unsafe_allow_html=True)
+ 
 
     # =========================
     # CARDS – IBS
