@@ -148,12 +148,13 @@ else:
     # =========================
     st.markdown("""
     <div class="card">
-        <h3>ISS – Imposto Sobre Serviços</h3>
+        <h3>IBS – Imposto Sobre Bens e Serviços</h3>
         <ul>
-            <li>Imposto <span class="highlight">municipal</span></li>
-            <li>Incide sobre <span class="highlight">prestação de serviços</span></li>
-            <li>Será <span class="highlight">extinto</span> com a reforma</li>
-            <li>Substituído pelo <span class="highlight">IBS</span></li>
+            <li>Substitui <span class="highlight">ISS</span></li>
+            <li>Incide sobre <span class="highlight">operações com bens materiais e imateriais, e com serviços. </span></li>
+            <li>ISS será <span class="highlight">extinto</span> com a reforma</li>
+            <li>Alíquotas: Cada estado e município fixará sua própria alíquota por lei específica, 
+            <li> embora a legislação geral do imposto seja uniforme em todo o país.  <span class="highlight">IBS até 2033</span></li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
@@ -168,7 +169,7 @@ else:
             <li>PIS + COFINS → <span class="highlight">CBS</span></li>
             <li>ISS + ICMS → <span class="highlight">IBS</span></li>
             <li>Menos impostos e <span class="highlight">regras unificadas</span></li>
-            <li>Mais <span class="highlight">transparência</span> e simplicidade</li>
+            <li>ISS extinção 2033. PIS - COFINS extinção em <span class="highlight">2027</span>
         </ul>
     </div>
     """, unsafe_allow_html=True)
