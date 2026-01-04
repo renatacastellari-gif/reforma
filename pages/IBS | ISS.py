@@ -113,15 +113,22 @@ else:
 
     # =========================
     
-    st.markdown(style_str, unsafe_allow_html=True)
-
-    # Wrapper
-    st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
-
-    # =========================
-    # TÍTULO
-    # =========================
-    st.markdown("<div class='titulo-principal'>Reforma Tributária</div>", unsafe_allow_html=True)
+    st.markdown(
+    """
+    <h2 style="
+        text-align:center;
+        border-bottom:2px solid #B91E27;
+        padding-bottom:10px;
+        margin-bottom:30px;
+        color:#B91E27;
+        font-weight:800;
+        letter-spacing:0.3px;
+    ">
+        Reforma Tributária
+    </h2>
+    """,
+    unsafe_allow_html=True
+)
 
   
 
