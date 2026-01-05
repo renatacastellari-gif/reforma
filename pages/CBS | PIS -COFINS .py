@@ -165,7 +165,7 @@ else:
     # =========================
     # TÍTULO
     # =========================
-    st.markdown("<div class='titulo-principal'>Reforma Tributária</div>", unsafe_allow_html=True)
+    st.markdown("<div class='titulo-principal'>Reforma Tributária | CBS </div>", unsafe_allow_html=True)
 
     # =========================
     # CARD: CBS
