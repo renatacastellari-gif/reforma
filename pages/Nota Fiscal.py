@@ -181,7 +181,7 @@ else:
         "zootecnistas, museólogos, químicos, profissionais de relações públicas, "
         "técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</b></li>"
         "<li>Código do Indicador de Operação: <b>20301 - Serviço de administração e intermediação de bem imóvel</b></li>"
-        "<li>Código NBS: <b>IVA</b> 114011100 - Serviços de consultoria em gestão estratégica</li>"
+        "<li>Código NBS: <b>114011100 - Serviços de consultoria em gestão estratégica</b> </li>"
         "</ul>"
         "</div>",
         unsafe_allow_html=True
