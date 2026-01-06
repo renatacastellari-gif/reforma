@@ -179,6 +179,18 @@ else:
         .negrito {{
             font-weight: 700;
         }}
+
+        /* Badge simples para alíquotas */
+        .badge {{
+            display: inline-block;
+            background: #111;
+            border: 1px solid #444;
+            color: #e6e6e6;
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-right: 8px;
+            font-size: 14px;
+        }}
     </style>
     """
     st.markdown(style_str, unsafe_allow_html=True)
@@ -281,6 +293,24 @@ else:
         unsafe_allow_html=True
     )
 
-    # Fecha wrapper
+    # =========================
+    # NOVO CARD — BASE LEGAL (NO FINAL)
+    # =========================
+    st.markdown("<div class='card'>", unsafe_allow_html=True)
+    st.markdown("<h3>✅ BASE LEGAL — REDUÇÃO DE 30% CBS E IBS</h3>", unsafe_allow_html=True)
+
+    base_legal_html = """
+    <div class="texto">
+        A Lei Complementar nº 214/2025, art. 127, determina:<br><br>
+        <i>“Ficam reduzidas em 30% as alíquotas do IBS e da CBS incidentes sobre a prestação de serviços por
+        profissionais que exerçam atividades intelectuais de natureza científica, literária ou artística,
+        submetidas à fiscalização por conselho profissional.”</i><br><br>
+        <span class="badge"><b>CBS:</b> 0,90%</span>
+        <span class="badge"><b>IBS:</b> 0,10%</span>
+    </div>
+    """
+    st.markdown(base_legal_html, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
+    # Fecha wrapper
+    st.markdown("</div>", unsafe_allow_html=True)
