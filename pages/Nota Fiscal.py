@@ -1,6 +1,7 @@
 
 import streamlit as st
 from pathlib import Path
+import pandas as pd
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
@@ -42,7 +43,6 @@ if not st.session_state.logged_in:
 # CONTEÚDO PROTEGIDO
 # =========================
 else:
- 
 
     # =========================
     # TIPOGRAFIA (ajuste aqui se quiser trocar)
@@ -168,18 +168,18 @@ else:
     st.markdown("<div class='titulo-principal'>Reforma Tributária | Emissão de Nota </div>", unsafe_allow_html=True)
 
     # =========================
-    # CARD: CBS
+    # CARD: CBS / IBS
     # =========================
     st.markdown(
         "<div class='card'>"
         "<h3>NF Prefeitura de São Paulo – CBS - IBS</h3>"
         "<ul>"
-        "<li>Código de Classificação Tributária Principal: <b>200052 - Prestação de serviços das seguintes profissões 
-        intelectuais de natureza científica, literária ou artística, submetidas à fiscalização por conselho profissional: 
-        administradores, advogados, arquitetos e urbanistas, assistentes sociais, bibliotecários, biólogos, contabilistas, 
-        economistas, economistas domésticos, profissionais de educação física, engenheiros e agrônomos, estatísticos, médicos veterinários e 
-        zootecnistas, museólogos, químicos, profissionais de relações públicas, 
-        técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</b></li>"
+        "<li>Código de Classificação Tributária Principal: <b>200052 - Prestação de serviços das seguintes profissões "
+        "intelectuais de natureza científica, literária ou artística, submetidas à fiscalização por conselho profissional: "
+        "administradores, advogados, arquitetos e urbanistas, assistentes sociais, bibliotecários, biólogos, contabilistas, "
+        "economistas, economistas domésticos, profissionais de educação física, engenheiros e agrônomos, estatísticos, médicos veterinários e "
+        "zootecnistas, museólogos, químicos, profissionais de relações públicas, "
+        "técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</b></li>"
         "<li>Código do Indicador de Operação: <b>20301 - Serviço de administração e intermediação de bem imóvel</b></li>"
         "<li>Código NBS: <b>IVA</b> 114011100 - Serviços de consultoria em gestão estratégica</li>"
         "</ul>"
@@ -187,4 +187,77 @@ else:
         unsafe_allow_html=True
     )
 
-    
+    # =========================
+    # IMAGEM: imagem.png
+    # =========================
+    img_path = Path("imagem.png")
+    st.markdown("<div class='card'>", unsafe_allow_html=True)
+    st.markdown("<h3>Visualização</h3>", unsafe_allow_html=True)
+
+    if img_path.exists():
+        # Exibe imagem centralizada
+        st.markdown("<div class='img-container'>", unsafe_allow_html=True)
+        st.image(str(img_path), caption="Imagem referência", use_column_width=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+    else:
+        st.warning("Arquivo 'imagem.png' não encontrado na pasta do aplicativo.")
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    # =========================
+    # TABELA MELHORADA (VALORES INFORMADOS)
+    # =========================
+    # Dados conforme solicitado
+    bruto = 287_870.13
+    linhas = [
+        {"Percentual": 0.0150, "Valor (R$)": 4318.05, "Tributo / Item": "IRRF"},
+        {"Percentual": 0.0465, "Valor (R$)": 13385.96, "Tributo / Item": "PCC"},
+        {"Percentual": 0.0500, "Valor (R$)": 14393.51, "Tributo / Item": "ISS"},
+        # Totais e itens sem percentual
+        {"Percentual": None,   "Valor (R$)": bruto,      "Tributo / Item": "VALOR BRUTO"},
+        {"Percentual": None,   "Valor (R$)": 255_772.61, "Tributo / Item": "VALOR LÍQUIDO"},
+        {"Percentual": 0.0007, "Valor (R$)": 0.62,       "Tributo / Item": "IBS"},
+        {"Percentual": 0.0063, "Valor (R$)": 5.60,       "Tributo / Item": "CBS"},
+    ]
+
+    df = pd.DataFrame(linhas, columns=["Tributo / Item", "Percentual", "Valor (R$)"])
+
+    # Ordena para ficar próximo da visualização do exemplo
+    ordem = ["VALOR BRUTO", "IRRF", "PCC", "ISS", "VALOR LÍQUIDO", "IBS", "CBS"]
+    df["ordem_aux"] = df["Tributo / Item"].apply(lambda x: ordem.index(x) if x in ordem else 999)
+    df = df.sort_values("ordem_aux").drop(columns=["ordem_aux"]).reset_index(drop=True)
+
+    st.markdown("<div class='card'>", unsafe_allow_html=True)
+    st.markdown("<h3>Tabela Resumo</h3>", unsafe_allow_html=True)
+
+    # Configuração de colunas com formatação
+    st.dataframe(
+        df,
+        use_container_width=True,
+        column_config={
+            "Tributo / Item": st.column_config.TextColumn("Tributo / Item"),
+            "Percentual": st.column_config.NumberColumn(
+                "Percentual",
+                format="%.2f%%",
+            ),
+            "Valor (R$)": st.column_config.NumberColumn(
+                "Valor (R$)",
+                format="R$ %.2f",
+            ),
+        }
+    )
+
+    # Callout com totais destacados
+    st.markdown(
+        f"""
+        <div class='callout'>
+            <b>Resumo</b><br>
+            Valor Bruto: <b>R$ {bruto:,.2f}</b><br>
+            Valor Líquido: <b>R$ {255_772.61:,.2f}</b>
+        </div>
+        """.replace(",", "X").replace(".", ",").replace("X", "."),
+        unsafe_allow_html=True
+    )
+
+    # Fecha wrapper
+    st.markdown("</div>", unsafe_allow_html=True)
