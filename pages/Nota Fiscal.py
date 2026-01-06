@@ -155,6 +155,30 @@ else:
             color: #dddddd;
             font-size: 16px;
         }}
+
+        /* Tabela Exemplo */
+        .tabela-exemplo {{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
+        }}
+        .tabela-exemplo td {{
+            padding: 8px 10px;
+            border-bottom: 1px solid #2a2a2a;
+            color: #e6e6e6;
+            font-size: 16px;
+        }}
+        .tabela-exemplo td:first-child {{
+            width: 160px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }}
+        .tabela-exemplo td:last-child {{
+            text-align: left;
+        }}
+        .negrito {{
+            font-weight: 700;
+        }}
     </style>
     """
     st.markdown(style_str, unsafe_allow_html=True)
@@ -205,59 +229,58 @@ else:
     st.markdown("</div>", unsafe_allow_html=True)
 
     # =========================
-    # TABELA MELHORADA (VALORES INFORMADOS)
+    # TABELA EXEMPLO (SUBSTITUI A TABELA RESUMO)
     # =========================
-    # Dados conforme solicitado
-    bruto = 287_870.13
-    linhas = [
-        {"Percentual": 0.0150, "Valor (R$)": 4318.05, "Tributo / Item": "IRRF"},
-        {"Percentual": 0.0465, "Valor (R$)": 13385.96, "Tributo / Item": "PCC"},
-        {"Percentual": 0.0500, "Valor (R$)": 14393.51, "Tributo / Item": "ISS"},
-        # Totais e itens sem percentual
-        {"Percentual": None,   "Valor (R$)": bruto,      "Tributo / Item": "VALOR BRUTO"},
-        {"Percentual": None,   "Valor (R$)": 255_772.61, "Tributo / Item": "VALOR LÍQUIDO"},
-        {"Percentual": 0.0007, "Valor (R$)": 0.62,       "Tributo / Item": "IBS"},
-        {"Percentual": 0.0063, "Valor (R$)": 5.60,       "Tributo / Item": "CBS"},
-    ]
-
-    df = pd.DataFrame(linhas, columns=["Tributo / Item", "Percentual", "Valor (R$)"])
-
-    # Ordena para ficar próximo da visualização do exemplo
-    ordem = ["VALOR BRUTO", "IRRF", "PCC", "ISS", "VALOR LÍQUIDO", "IBS", "CBS"]
-    df["ordem_aux"] = df["Tributo / Item"].apply(lambda x: ordem.index(x) if x in ordem else 999)
-    df = df.sort_values("ordem_aux").drop(columns=["ordem_aux"]).reset_index(drop=True)
-
     st.markdown("<div class='card'>", unsafe_allow_html=True)
-    st.markdown("<h3>Tabela Resumo</h3>", unsafe_allow_html=True)
+    st.markdown("<h3>Tabela Exemplo</h3>", unsafe_allow_html=True)
 
-    # Configuração de colunas com formatação
-    st.dataframe(
-        df,
-        use_container_width=True,
-        column_config={
-            "Tributo / Item": st.column_config.TextColumn("Tributo / Item"),
-            "Percentual": st.column_config.NumberColumn(
-                "Percentual",
-                format="%.2f%%",
-            ),
-            "Valor (R$)": st.column_config.NumberColumn(
-                "Valor (R$)",
-                format="R$ %.2f",
-            ),
-        }
-    )
+    # Conteúdo da tabela exatamente como solicitado, com 888,50 em negrito
+    tabela_html = """
+    <table class="tabela-exemplo">
+        <tr>
+            <td class="negrito">1.000,00</td>
+            <td class="negrito">VALOR BRUTO</td>
+        </tr>
+        <tr>
+            <td>15,00</td>
+            <td>IRRF 1,5%</td>
+        </tr>
+        <tr>
+            <td>46,50</td>
+            <td>PCC 4,65%</td>
+        </tr>
+        <tr>
+            <td>50,00</td>
+            <td>ISS 5%</td>
+        </tr>
+        <tr>
+            <td class="negrito">888,50</td>
+            <td class="negrito">Base de Calculo IBS CBS</td>
+        </tr>
+        <tr>
+            <td>0,62</td>
+            <td>IBS 0,07%</td>
+        </tr>
+        <tr>
+            <td>5,60</td>
+            <td>CBS 0,63%</td>
+        </tr>
+    </table>
+    """
+    st.markdown(tabela_html, unsafe_allow_html=True)
 
-    # Callout com totais destacados
+    # Callout opcional com destaque
     st.markdown(
-        f"""
+        """
         <div class='callout'>
             <b>Resumo</b><br>
-            Valor Bruto: <b>R$ {bruto:,.2f}</b><br>
-            Valor Líquido: <b>R$ {255_772.61:,.2f}</b>
+            Valor Bruto: <b>R$ 1.000,00</b><br>
+            Base de Cálculo IBS/CBS: <b>R$ 888,50</b>
         </div>
-        """.replace(",", "X").replace(".", ",").replace("X", "."),
+        """,
         unsafe_allow_html=True
     )
 
     # Fecha wrapper
     st.markdown("</div>", unsafe_allow_html=True)
+
