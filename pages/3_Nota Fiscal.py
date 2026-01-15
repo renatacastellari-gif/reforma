@@ -44,18 +44,9 @@ if not st.session_state.logged_in:
 # =========================
 else:
 
-    # =========================
-    # TIPOGRAFIA (ajuste aqui se quiser trocar)
-    # =========================
     BODY_FONT = "Consolas, Menlo, Monaco, 'Courier New', monospace"
     HEADING_FONT = "Consolas, Menlo, Monaco, 'Courier New', monospace"
-    # Ex.: para visual “clean”:
-    # BODY_FONT = "'Segoe UI', Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif"
-    # HEADING_FONT = "Consolas, Menlo, Monaco, 'Courier New', monospace"
 
-    # =========================
-    # CSS GLOBAL (FUNDO PRETO + CARDS + TIPOGRAFIA)
-    # =========================
     style_str = f"""
     <style>
         html, body, [class*="css"] {{
@@ -156,7 +147,6 @@ else:
             font-size: 16px;
         }}
 
-        /* Tabela Exemplo */
         .tabela-exemplo {{
             width: 100%;
             border-collapse: collapse;
@@ -180,7 +170,6 @@ else:
             font-weight: 700;
         }}
 
-        /* Badge simples para alíquotas */
         .badge {{
             display: inline-block;
             background: #111;
@@ -191,47 +180,63 @@ else:
             margin-right: 8px;
             font-size: 14px;
         }}
+
+        /* Estilo especial para o primeiro card */
+        .card-principal {{
+            background: linear-gradient(135deg, #B91E27, #7a0f14);
+            color: #fff;
+            padding: 30px;
+            border-radius: 18px;
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(185,30,39,0.4);
+            border: none;
+        }}
+        .card-principal h3 {{
+            font-size: 30px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            text-shadow: 1px 1px 2px #000;
+        }}
+        .card-principal ul li {{
+            font-size: 18px;
+            margin-bottom: 8px;
+        }}
     </style>
     """
     st.markdown(style_str, unsafe_allow_html=True)
 
-    # Wrapper
     st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
 
-    # =========================
-    # TÍTULO
-    # =========================
     st.markdown("<div class='titulo-principal'>Reforma Tributária | Emissão de Nota </div>", unsafe_allow_html=True)
 
     # =========================
-    # CARD: CBS / IBS
+    # CARD MELHORADO
     # =========================
     st.markdown(
-        "<div class='card'>"
+        "<div class='card-principal'>"
         "<h3>NF Prefeitura de São Paulo – CBS - IBS</h3>"
         "<ul>"
-        "<li>Código de Classificação Tributária Principal: <b>200052 - Prestação de serviços das seguintes profissões "
+        "<li><b>Código de Classificação Tributária Principal:</b> 200052 - Prestação de serviços das seguintes profissões "
         "intelectuais de natureza científica, literária ou artística, submetidas à fiscalização por conselho profissional: "
         "administradores, advogados, arquitetos e urbanistas, assistentes sociais, bibliotecários, biólogos, contabilistas, "
         "economistas, economistas domésticos, profissionais de educação física, engenheiros e agrônomos, estatísticos, médicos veterinários e "
         "zootecnistas, museólogos, químicos, profissionais de relações públicas, "
-        "técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</b></li>"
-        "<li>Código do Indicador de Operação: <b>20301 - Serviço de administração e intermediação de bem imóvel</b></li>"
-        "<li>Código NBS: <b>114011100 - Serviços de consultoria em gestão estratégica</b> </li>"
+        "técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</li>"
+        "<li><b>Código do Indicador de Operação:</b> 20301 - Serviço de administração e intermediação de bem imóvel</li>"
+        "<li><b>Código NBS:</b> 114011100 - Serviços de consultoria em gestão estratégica</li>"
         "</ul>"
         "</div>",
         unsafe_allow_html=True
     )
 
     # =========================
-    # IMAGEM: imagem.png
+    # RESTANTE IGUAL
     # =========================
     img_path = Path("imagem.png")
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.markdown("<h3>Visualização</h3>", unsafe_allow_html=True)
 
     if img_path.exists():
-        # Exibe imagem centralizada
         st.markdown("<div class='img-container'>", unsafe_allow_html=True)
         st.image(str(img_path), caption="Imagem referência", use_column_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
@@ -240,13 +245,9 @@ else:
 
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # =========================
-    # TABELA EXEMPLO (SUBSTITUI A TABELA RESUMO)
-    # =========================
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.markdown("<h3>Tabela Exemplo</h3>", unsafe_allow_html=True)
 
-    # Conteúdo da tabela exatamente como solicitado, com 888,50 em negrito
     tabela_html = """
     <table class="tabela-exemplo">
         <tr>
@@ -281,7 +282,6 @@ else:
     """
     st.markdown(tabela_html, unsafe_allow_html=True)
 
-    # Callout opcional com destaque
     st.markdown(
         """
         <div class='callout'>
@@ -293,9 +293,6 @@ else:
         unsafe_allow_html=True
     )
 
-    # =========================
-    # NOVO CARD — BASE LEGAL (NO FINAL)
-    # =========================
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.markdown("<h3>✅ BASE LEGAL — REDUÇÃO DE 30% CBS E IBS</h3>", unsafe_allow_html=True)
 
@@ -312,5 +309,4 @@ else:
     st.markdown(base_legal_html, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Fecha wrapper
     st.markdown("</div>", unsafe_allow_html=True)
