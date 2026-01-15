@@ -145,10 +145,12 @@ else:
             <p>
                 <b>Resumo:</b> Durante a palestra do CRC sobre a Reforma Tributária, foi abordado um ponto importante:
                 <br><br>
-                <span class="highlight">Não será necessário contabilizar separadamente CBS e IBS a partir de 2026.</span>
+                <span class="highlight">Não será necessário contabilizar  CBS e IBS em 2026.</span>
                 <br><br>
-                Essa mudança simplifica a escrituração, pois os tributos sobre bens e serviços deixam de ser divididos entre
-                impostos estaduais e municipais, passando a ter um tratamento unificado.
+               Em 2026 precisa destacar IBS e CBS nas notas fiscais, mas sem recolhimento 
+               efetivo (é ano-teste com alíquotas reduzidas e informativas). Não haverá contabilização desses impostos em 2026, pois não 
+               haverá desembolso. 
+               
             </p>
             <p>
                 Para mais detalhes, assista ao vídeo oficial do CRC. O trecho relevante está por volta de <b>1:53:18</b>.
