@@ -48,37 +48,19 @@ else:
             margin: 20px 0; border-left: 6px solid #B91E27;
         }
         .card h3 {color: #fff; font-size: 26px; margin-bottom: 10px;}
-        .highlight {color: #F2D5D7; font-weight: 600;}
         table {width:100%; border-collapse: collapse; margin-top:10px;}
         th, td {border:1px solid #3a3a3a; padding:8px;}
         th {background:#303030; color:#fff;}
         tr:nth-child(even) td {background:#252525;}
         tr:nth-child(odd) td {background:#202020;}
-        .list-item {margin-bottom:6px;}
+        .subtitulo {margin-top:15px; font-weight:600; color:#F2D5D7;}
     </style>
     """, unsafe_allow_html=True)
 
     st.markdown("<div class='titulo-principal'>Lucro Presumido | Alteração</div>", unsafe_allow_html=True)
 
     # =========================
-    # CARD PRESUNÇÃO
-    # =========================
-    st.markdown("""
-    <div class='card'>
-        <h3>📌 Presunção – CNAE 6822-6/00</h3>
-        <p>Para <b>prestação de serviços</b> (inclui Gestão e administração da propriedade imobiliária):</p>
-        <ul>
-            <li class='list-item'>Presunção padrão: <b>32%</b>.</li>
-            <li class='list-item'>Com PLP 128/2025: <b>35,2%</b> sobre a parcela que exceder <b>R$ 5 milhões/ano</b>.</li>
-            <li class='list-item'>No trimestre, limite proporcional: <b>R$ 1.250.000</b>.</li>
-        </ul>
-        <p class="highlight">Até R$ 1.250.000 → 32%; excedente → 35,2%.</p>
-        <p>Adicional IRPJ: 10% sobre lucro presumido que exceder <b>R$ 60 mil/trimestre</b>.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # =========================
-    # TABELA COMPARATIVA (igual à imagem)
+    # CARD COMPARATIVO + DUAS TABELAS
     # =========================
     st.markdown("""
     <div class='card'>
@@ -116,33 +98,49 @@ else:
                 </tr>
             </tfoot>
         </table>
-    </div>
-    """, unsafe_allow_html=True)
 
-    # =========================
-    # EXEMPLO PRÁTICO (igual à segunda imagem, melhorado)
-    # =========================
-    st.markdown("""
-    <div class='card'>
-        <h3>🧮 Exemplo prático – cálculo trimestral</h3>
-        <p>O cálculo considera cada trimestre isolado, aplicando a regra mista:</p>
-        <ul>
-            <li><b>Receita trimestral:</b> R$ 2.000.000</li>
-            <li><b>Limite proporcional do adicional:</b> R$ 1.250.000 (porque R$ 5 milhões ÷ 4 trimestres)</li>
-            <li><b>Cálculo:</b>
-                <ul>
-                    <li>Até R$ 1.250.000 → 32% = <b>R$ 400.000</b></li>
-                    <li>Excedente (R$ 750.000) → 35,2% = <b>R$ 264.000</b></li>
-                </ul>
-            </li>
-            <li><b>Base total:</b> R$ 664.000</li>
-        </ul>
-        <p>Se fosse <b>R$ 3.000.000</b> no trimestre, ficaria assim:</p>
-        <ul>
-            <li>Até R$ 1.250.000 → 32% = <b>R$ 400.000</b></li>
-            <li>Excedente (R$ 1.750.000) → 35,2% = <b>R$ 616.000</b></li>
-            <li><b>Base total:</b> R$ 1.016.000</li>
-        </ul>
-        <p class='highlight'>Depois aplica IRPJ (15% + adicional sobre excedente) e CSLL (9%).</p>
+        <p class='subtitulo'>Detalhamento IRPJ</p>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Presunção (receita bruta anual de até R$ 5 milhões)</td>
+                    <td>32%</td>
+                </tr>
+                <tr>
+                    <td>Presunção (parcela da receita bruta anual que excedeu R$ 5 milhões)</td>
+                    <td>35,2%</td>
+                </tr>
+                <tr>
+                    <td>Alíquota</td>
+                    <td>15%</td>
+                </tr>
+                <tr>
+                    <td>Código do DARF</td>
+                    <td>2089</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class='subtitulo'>Detalhamento CSLL</p>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Presunção (receita bruta anual de até R$ 5 milhões)</td>
+                    <td>32%</td>
+                </tr>
+                <tr>
+                    <td>Presunção (parcela da receita bruta anual que excedeu R$ 5 milhões)</td>
+                    <td>35,2%</td>
+                </tr>
+                <tr>
+                    <td>Alíquota</td>
+                    <td>9%</td>
+                </tr>
+                <tr>
+                    <td>Código do DARF</td>
+                    <td>2372</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     """, unsafe_allow_html=True)
