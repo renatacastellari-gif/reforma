@@ -116,7 +116,7 @@ else:
             font-weight: 700;
         }}
 
-        /* PRIMEIRO CARD MELHORADO */
+        /* PRIMEIRO CARD MELHORADO (somente fonte e negrito) */
         .card-principal {{
             background-color: #B91E27;
             color: #fff;
@@ -141,7 +141,7 @@ else:
         }}
         .card-principal li b {{
             font-weight: 700;
-            display: inline-block;
+            display: block;
             margin-bottom: 4px;
         }}
     </style>
@@ -163,17 +163,17 @@ else:
         <div class='card-principal'>
             <h3>NF Prefeitura de São Paulo – CBS - IBS</h3>
             <ul>
-                <li><b>Código de Classificação Tributária Principal:</b><br>
+                <li><b>Código de Classificação Tributária Principal:</b>
                 200052 - Prestação de serviços das seguintes profissões intelectuais de natureza científica, literária ou artística,
                 submetidas à fiscalização por conselho profissional: administradores, advogados, arquitetos e urbanistas, assistentes sociais,
                 bibliotecários, biólogos, contabilistas, economistas, economistas domésticos, profissionais de educação física, engenheiros e agrônomos,
                 estatísticos, médicos veterinários e zootecnistas, museólogos, químicos, profissionais de relações públicas, técnicos industriais e técnicos agrícolas,
                 observado o art. 127 da Lei Complementar nº 214, de 2025.</li>
                 
-                <li><b>Código do Indicador de Operação:</b><br>
+                <li><b>Código do Indicador de Operação:</b>
                 20301 - Serviço de administração e intermediação de bem imóvel</li>
                 
-                <li><b>Código NBS:</b><br>
+                <li><b>Código NBS:</b>
                 114011100 - Serviços de consultoria em gestão estratégica</li>
             </ul>
         </div>
