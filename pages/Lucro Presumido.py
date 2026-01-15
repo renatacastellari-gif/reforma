@@ -48,24 +48,19 @@ else:
             margin: 20px 0; border-left: 6px solid #B91E27;
         }
         .card h3 {color: #fff; font-size: 26px; margin-bottom: 14px;}
-        .highlight {color: #F2D5D7; font-weight: 600;}
         table {width:100%; border-collapse: collapse; margin-top:10px;}
         th, td {border:1px solid #3a3a3a; padding:10px;}
         th {background:#303030; color:#fff;}
         tr:nth-child(even) td {background:#252525;}
         tr:nth-child(odd) td {background:#202020;}
         tfoot td {font-weight:800; background:#2b2b2b;}
-        .info-block {margin-top:16px; padding:12px; background:#222; border-radius:8px;}
-        .info-block h4 {margin-bottom:8px; color:#F2D5D7;}
-        .info-block ul {margin:0; padding-left:18px;}
-        .info-block li {margin-bottom:6px;}
     </style>
     """, unsafe_allow_html=True)
 
     st.markdown("<div class='titulo-principal'>Lucro Presumido | Alteração</div>", unsafe_allow_html=True)
 
     # =========================
-    # CARD COMPARATIVO + INFORMAÇÕES ADICIONAIS
+    # CARD COMPARATIVO
     # =========================
     st.markdown("""
     <div class='card'>
@@ -103,27 +98,25 @@ else:
                 </tr>
             </tfoot>
         </table>
-
-        <!-- Informações adicionais -->
-        <div class="info-block">
-            <h4>Detalhamento IRPJ</h4>
-            <ul>
-                <li>Presunção até R$ 5 milhões: <b>32%</b></li>
-                <li>Presunção excedente: <b>35,2%</b></li>
-                <li>Alíquota: <b>15%</b></li>
-                <li>Código DARF: <b>2089</b></li>
-            </ul>
-        </div>
-
-        <div class="info-block">
-            <h4>Detalhamento CSLL</h4>
-            <ul>
-                <li>Presunção até R$ 5 milhões: <b>32%</b></li>
-                <li>Presunção excedente: <b>35,2%</b></li>
-                <li>Alíquota: <b>9%</b></li>
-                <li>Código DARF: <b>2372</b></li>
-            </ul>
-        </div>
     </div>
     """, unsafe_allow_html=True)
 
+    # =========================
+    # NOVO CARD COM AS INFORMAÇÕES (TEXTO NORMAL)
+    # =========================
+    st.markdown("""
+    <div class='card'>
+        <h3>ℹ️ Detalhamento das presunções e códigos DARF</h3>
+        <p><b>IRPJ:</b></p>
+        <p>- Presunção até R$ 5 milhões: 32%</p>
+        <p>- Presunção excedente: 35,2%</p>
+        <p>- Alíquota: 15%</p>
+        <p>- Código DARF: 2089</p>
+        <hr>
+        <p><b>CSLL:</b></p>
+        <p>- Presunção até R$ 5 milhões: 32%</p>
+        <p>- Presunção excedente: 35,2%</p>
+        <p>- Alíquota: 9%</p>
+        <p>- Código DARF: 2372</p>
+    </div>
+    """, unsafe_allow_html=True)
