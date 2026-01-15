@@ -92,20 +92,14 @@ else:
             letter-spacing: 0.2px;
         }}
 
-        .card ul {{
-            margin: 10px 0 0 18px;
-            padding: 0;
-            list-style-type: none;
+        .card p {{
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            color: #e6e6e6;
         }}
 
-        .card li {{
-            font-size: 18px;
-            line-height: 1.8;
-            margin-bottom: 18px; /* Espaçamento maior entre itens */
-            color: #ffffff;
-        }}
-
-        .card li b {{
+        .card p b {{
             font-weight: 700;
             color: #ffffff;
         }}
@@ -118,19 +112,21 @@ else:
     st.markdown("<div class='titulo-principal'>Reforma Tributária | Emissão de Nota </div>", unsafe_allow_html=True)
 
     # =========================
-    # PRIMEIRO CARD (CORRIGIDO)
+    # PRIMEIRO CARD (APENAS PULANDO LINHA)
     # =========================
     st.markdown(
         """
         <div class='card'>
             <h3>NF Prefeitura de São Paulo – CBS - IBS</h3>
-            <ul>
-                <li><b>Código de Classificação Tributária Principal:</b> <b>200052</b> - <b>Prestação de serviços das seguintes profissões intelectuais de natureza científica, literária ou artística, submetidas à fiscalização por conselho profissional:</b> administradores, advogados, arquitetos e urbanistas, assistentes sociais, bibliotecários, biólogos, contabilistas, economistas, economistas domésticos, profissionais de educação física, engenheiros e agrônomos, estatísticos, médicos veterinários e zootecnistas, museólogos, químicos, profissionais de relações públicas, técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</li>
-                
-                <li><b>Código do Indicador de Operação:</b> <b>20301</b> - <b>Serviço de administração e intermediação de bem imóvel</b></li>
-                
-                <li><b>Código NBS:</b> <b>114011100</b> - <b>Serviços de consultoria em gestão estratégica</b></li>
-            </ul>
+            <p><b>Código de Classificação Tributária Principal:</b> 200052 - <b>Prestação de serviços das seguintes profissões intelectuais de natureza científica, literária ou artística, submetidas à fiscalização por conselho profissional:</b> administradores, advogados, arquitetos e urbanistas, assistentes sociais, bibliotecários, biólogos, contabilistas, economistas, economistas domésticos, profissionais de educação física, engenheiros e agrônomos, estatísticos, médicos veterinários e zootecnistas, museólogos, químicos, profissionais de relações públicas, técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</p>
+            
+            <br><br>
+            
+            <p><b>Código do Indicador de Operação:</b> 20301 - <b>Serviço de administração e intermediação de bem imóvel</b></p>
+            
+            <br><br>
+            
+            <p><b>Código NBS:</b> 114011100 - <b>Serviços de consultoria em gestão estratégica</b></p>
         </div>
         """,
         unsafe_allow_html=True
