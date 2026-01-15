@@ -18,12 +18,17 @@ PASSWORD = "minhasenha123"
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
+# 🔒 Esconde a barra lateral se não estiver logado
 if not st.session_state.logged_in:
     st.markdown("<style>[data-testid='stSidebar']{display:none;}</style>", unsafe_allow_html=True)
 
+# =========================
+# TELA DE LOGIN
+# =========================
 if not st.session_state.logged_in:
     st.title("Acesso Restrito")
     senha = st.text_input("Digite a senha:", type="password")
+
     if st.button("Entrar", use_container_width=True):
         if senha == PASSWORD:
             st.session_state.logged_in = True
@@ -31,40 +36,109 @@ if not st.session_state.logged_in:
             st.rerun()
         else:
             st.error("Senha incorreta.")
+
+# =========================
+# CONTEÚDO PROTEGIDO
+# =========================
 else:
+
     # =========================
-    # CSS GLOBAL
+    # CSS GLOBAL (TEMA ESCURO + TÍTULO + CARDS + TABELAS)
     # =========================
     st.markdown("""
     <style>
-        html, body, [class*="css"] {background-color: #1b1b1b;}
-        body {color: #F9EEEF; font-family: Consolas, monospace;}
+        html, body, [class*="css"] { background-color: #1b1b1b; }
+        body { color: #F9EEEF; font-family: Consolas, Menlo, Monaco, 'Courier New', monospace; }
+
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+
+        .content-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.2rem;
+        }
+
         .titulo-principal {
-            font-size: 34px; font-weight: 800; color: #B91E27;
-            border-bottom: 2px solid #B91E27; padding-bottom: 8px;
+            font-size: 34px;
+            font-weight: 800;
+            color: #B91E27;
+            margin-bottom: 10px;
+            text-align: left;
+            border-bottom: 2px solid #B91E27;
+            padding-bottom: 8px;
+            letter-spacing: 0.2px;
         }
+
         .card {
-            background-color: #2a2a2a; padding: 20px; border-radius: 12px;
-            margin: 20px 0; border-left: 6px solid #B91E27;
+            background-color: #2a2a2a;
+            padding: 26px 28px;
+            border-radius: 14px;
+            margin: 22px 0;
+            border-left: 6px solid #B91E27;
+            box-shadow: 0 2px 0 #111111;
+            color: #f0f0f0;
         }
-        .card h3 {color: #fff; font-size: 26px; margin-bottom: 10px;}
-        table {width:100%; border-collapse: collapse; margin-top:10px;}
-        th, td {border:1px solid #3a3a3a; padding:8px;}
-        th {background:#303030; color:#fff;}
-        tr:nth-child(even) td {background:#252525;}
-        tr:nth-child(odd) td {background:#202020;}
-        .subtitulo {margin-top:15px; font-weight:600; color:#F2D5D7;}
+
+        .card h3 {
+            font-size: 26px;
+            font-weight: 800;
+            margin: 0 0 12px 0;
+            color: #ffffff;
+            letter-spacing: 0.2px;
+        }
+
+        .subtitulo {
+            margin-top: 16px;
+            font-weight: 700;
+            color: #F2D5D7;
+        }
+
+        /* TABELAS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 15px;
+        }
+        th, td {
+            border: 1px solid #3a3a3a;
+            padding: 10px 12px;
+        }
+        th {
+            background-color: #303030;
+            color: #fff;
+            text-align: left;
+        }
+        tr:nth-child(even) td { background-color: #252525; }
+        tr:nth-child(odd)  td { background-color: #202020; }
+        tfoot td {
+            font-weight: 800;
+            background-color: #2b2b2b;
+        }
+
+        .muted { color: #c9bfc0; font-size: 13px; }
+        .highlight { color: #F2D5D7; font-weight: 600; }
+        .list-item { margin-bottom: 6px; }
     </style>
     """, unsafe_allow_html=True)
 
+    # Wrapper para alinhar e controlar largura
+    st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
+
+    # =========================
+    # TÍTULO
+    # =========================
     st.markdown("<div class='titulo-principal'>Lucro Presumido | Alteração</div>", unsafe_allow_html=True)
 
     # =========================
-    # CARD COMPARATIVO + DUAS TABELAS
+    # CARD – COMPARATIVO + DUAS TABELINHAS
     # =========================
     st.markdown("""
     <div class='card'>
         <h3>📊 Comparativo de alíquotas efetivas</h3>
+
+        <!-- Tabela principal -->
         <table>
             <thead>
                 <tr>
@@ -99,6 +173,7 @@ else:
             </tfoot>
         </table>
 
+        <!-- Tabelinha IRPJ -->
         <p class='subtitulo'>Detalhamento IRPJ</p>
         <table>
             <tbody>
@@ -107,40 +182,9 @@ else:
                     <td>32%</td>
                 </tr>
                 <tr>
-                    <td>Presunção (parcela da receita bruta anual que excedeu R$ 5 milhões)</td>
+                    <td>Presunção (parcela da receita bruta anual que exceder R$ 5 milhões)</td>
                     <td>35,2%</td>
                 </tr>
                 <tr>
                     <td>Alíquota</td>
                     <td>15%</td>
-                </tr>
-                <tr>
-                    <td>Código do DARF</td>
-                    <td>2089</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <p class='subtitulo'>Detalhamento CSLL</p>
-        <table>
-            <tbody>
-                <tr>
-                    <td>Presunção (receita bruta anual de até R$ 5 milhões)</td>
-                    <td>32%</td>
-                </tr>
-                <tr>
-                    <td>Presunção (parcela da receita bruta anual que excedeu R$ 5 milhões)</td>
-                    <td>35,2%</td>
-                </tr>
-                <tr>
-                    <td>Alíquota</td>
-                    <td>9%</td>
-                </tr>
-                <tr>
-                    <td>Código do DARF</td>
-                    <td>2372</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    """, unsafe_allow_html=True)
