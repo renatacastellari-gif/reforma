@@ -45,13 +45,13 @@ if not st.session_state.logged_in:
 else:
 
     # =========================
-    # TIPOGRAFIA (ajuste aqui se quiser trocar)
+    # TIPOGRAFIA
     # =========================
     BODY_FONT = "'Segoe UI', Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif"
     HEADING_FONT = "'Segoe UI', Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif"
 
     # =========================
-    # CSS GLOBAL (FUNDO PRETO + CARDS + TIPOGRAFIA)
+    # CSS GLOBAL
     # =========================
     style_str = f"""
     <style>
@@ -201,20 +201,20 @@ else:
     st.markdown("<div class='titulo-principal'>Reforma Tributária | Emissão de Nota </div>", unsafe_allow_html=True)
 
     # =========================
-    # CARD: CBS / IBS (invertendo negrito)
+    # CARD: CBS / IBS (corrigindo negrito conforme imagem)
     # =========================
     st.markdown(
         "<div class='card'>"
         "<h3>NF Prefeitura de São Paulo – CBS - IBS</h3>"
         "<ul>"
-        "<li><b>Código de Classificação Tributária Principal:</b> 200052 - <b>Prestação de serviços das seguintes profissões "
+        "<li><b>Código de Classificação Tributária Principal:</b> 200052 - Prestação de serviços das seguintes profissões "
         "intelectuais de natureza científica, literária ou artística, submetidas à fiscalização por conselho profissional: "
         "administradores, advogados, arquitetos e urbanistas, assistentes sociais, bibliotecários, biólogos, contabilistas, "
         "economistas, economistas domésticos, profissionais de educação física, engenheiros e agrônomos, estatísticos, médicos veterinários e "
         "zootecnistas, museólogos, químicos, profissionais de relações públicas,<br> "
-        "técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</b></li>"
-        "<li><b>Código do Indicador de Operação:</b> 20301 - <b>Serviço de administração e intermediação de bem imóvel</b></li>"
-        "<li><b>Código NBS:</b> 114011100 - <b>Serviços de consultoria em gestão estratégica</b></li>"
+        "técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</li>"
+        "<li><b>Código do Indicador de Operação:</b> 20301 - Serviço de administração e intermediação de bem imóvel</li>"
+        "<li><b>Código NBS:</b> 114011100 - Serviços de consultoria em gestão estratégica</li>"
         "</ul>"
         "</div>",
         unsafe_allow_html=True
@@ -307,4 +307,3 @@ else:
     st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
-
