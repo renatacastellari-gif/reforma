@@ -165,7 +165,7 @@ else:
     # =========================
     # TÍTULO (EXATO AO SEU ESTILO)
     # =========================
-    st.markdown("<div class='titulo-principal'>Reforma Tributária | IBS</div>", unsafe_allow_html=True)
+    st.markdown("<div class='titulo-principal'>Lucro Presumido | Altereação</div>", unsafe_allow_html=True)
 
     # =========================
     # CARDS – IBS
@@ -173,14 +173,12 @@ else:
     st.markdown(
         """
         <div class='card'>
-            <h3>🟦 IBS – Imposto sobre Bens e Serviços</h3>
+            <h3>🟦 Presunção </h3>
             <p>
-                O <b>IBS</b> é o tributo criado pela Reforma Tributária para substituir
-                os impostos sobre o consumo.
+                O <b>IBS</b> 6822-6/00	Gestão e administração da propriedade imobiliária.
             </p>
             <p class="highlight">
-                Acaba a divisão entre imposto estadual e municipal
-                sobre bens e serviços.
+              Alteração: Presunção 35,2% (parcela da receita bruta anual que excedeu R$ 5 milhões)
             </p>
         </div>
         """,
