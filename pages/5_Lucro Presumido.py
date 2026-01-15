@@ -119,7 +119,7 @@ else:
     # =========================
     # TÍTULO (AGORA MONO E SUBLINHADO)
     # =========================
-    st.markdown("<div class='titulo-principal'>Reforma Tributária | CBS</div>", unsafe_allow_html=True)
+    st.markdown("<div class='titulo-principal'>Lucro Presumido | Alteração</div>", unsafe_allow_html=True)
 
     # =========================
     # CARD PRESUNÇÃO
