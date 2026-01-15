@@ -48,6 +48,7 @@ else:
             margin: 20px 0; border-left: 6px solid #B91E27;
         }
         .card h3 {color: #fff; font-size: 26px; margin-bottom: 14px;}
+        .highlight {color: #F2D5D7; font-weight: 600;}
         table {width:100%; border-collapse: collapse; margin-top:10px;}
         th, td {border:1px solid #3a3a3a; padding:10px;}
         th {background:#303030; color:#fff;}
@@ -58,6 +59,23 @@ else:
     """, unsafe_allow_html=True)
 
     st.markdown("<div class='titulo-principal'>Lucro Presumido | Alteração</div>", unsafe_allow_html=True)
+
+    # =========================
+    # CARD PRESUNÇÃO
+    # =========================
+    st.markdown("""
+    <div class='card'>
+        <h3>📌 Presunção – CNAE 6822-6/00</h3>
+        <p>Para <b>prestação de serviços</b> (inclui Gestão e administração da propriedade imobiliária):</p>
+        <ul>
+            <li>Presunção padrão: <b>32%</b>.</li>
+            <li>Com PLP 128/2025: <b>35,2%</b> sobre a parcela que exceder <b>R$ 5 milhões/ano</b>.</li>
+            <li>No trimestre, limite proporcional: <b>R$ 1.250.000</b>.</li>
+        </ul>
+        <p class="highlight">Até R$ 1.250.000 → 32%; excedente → 35,2%.</p>
+        <p>Adicional IRPJ: 10% sobre lucro presumido que exceder <b>R$ 60 mil/trimestre</b>.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     # =========================
     # CARD COMPARATIVO
@@ -102,7 +120,35 @@ else:
     """, unsafe_allow_html=True)
 
     # =========================
-    # NOVO CARD COM AS INFORMAÇÕES (TEXTO NORMAL)
+    # CARD EXEMPLO PRÁTICO
+    # =========================
+    st.markdown("""
+    <div class='card'>
+        <h3>🧮 Exemplo prático – cálculo trimestral</h3>
+        <p>O cálculo considera cada trimestre isolado, aplicando a regra mista:</p>
+        <ul>
+            <li><b>Receita trimestral:</b> R$ 2.000.000</li>
+            <li><b>Limite proporcional:</b> R$ 1.250.000 (R$ 5 milhões ÷ 4 trimestres)</li>
+            <li><b>Cálculo:</b>
+                <ul>
+                    <li>Até R$ 1.250.000 → 32% = <b>R$ 400.000</b></li>
+                    <li>Excedente (R$ 750.000) → 35,2% = <b>R$ 264.000</b></li>
+                </ul>
+            </li>
+            <li><b>Base total:</b> R$ 664.000</li>
+        </ul>
+        <p>Se fosse <b>R$ 3.000.000</b> no trimestre:</p>
+        <ul>
+            <li>Até R$ 1.250.000 → 32% = <b>R$ 400.000</b></li>
+            <li>Excedente (R$ 1.750.000) → 35,2% = <b>R$ 616.000</b></li>
+            <li><b>Base total:</b> R$ 1.016.000</li>
+        </ul>
+        <p class="highlight">Depois aplica IRPJ (15% + adicional) e CSLL (9%).</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # =========================
+    # NOVO CARD COM INFORMAÇÕES ADICIONAIS (TEXTO SIMPLES)
     # =========================
     st.markdown("""
     <div class='card'>
