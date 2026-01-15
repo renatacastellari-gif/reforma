@@ -144,13 +144,14 @@ else:
             <h3>🟦 Pronunciamento CRC</h3>
             <p>
                 <b>Resumo:</b> Durante a palestra do CRC sobre a Reforma Tributária, foi abordado um ponto importante:
-                <br><br>
-                <span class="highlight">Não será necessário contabilizar  CBS e IBS em 2026.</span>
-                <br><br>
-               Em 2026 precisa destacar IBS e CBS nas notas fiscais, mas sem recolhimento 
-               efetivo (é ano-teste com alíquotas reduzidas e informativas). Não haverá contabilização desses impostos em 2026, pois não 
-               haverá desembolso. 
-               
+            </p>
+            <p class="highlight">
+                Não será necessário contabilizar CBS e IBS em 2026.
+            </p>
+            <p>
+                Em 2026 será obrigatório destacar IBS e CBS nas notas fiscais, mas sem recolhimento efetivo.
+                Esse será um ano-teste com alíquotas reduzidas e caráter informativo. Não haverá contabilização
+                desses impostos em 2026, pois não haverá desembolso.
             </p>
             <p>
                 Para mais detalhes, assista ao vídeo oficial do CRC. O trecho relevante está por volta de <b>1:53:18</b>.
