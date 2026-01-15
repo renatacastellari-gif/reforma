@@ -79,6 +79,7 @@ else:
             letter-spacing: 0.2px;
         }}
 
+        /* CARD PADRÃO */
         .card {{
             background-color: #1e1e1e;
             color: #f0f0f0;
@@ -98,25 +99,7 @@ else:
             letter-spacing: 0.2px;
         }}
 
-        .card ul {{
-            margin: 10px 0 0 18px;
-            padding: 0;
-            list-style-type: disc;
-        }}
-
-        .card li {{
-            font-size: 17px;
-            line-height: 1.7;
-            margin-bottom: 6px;
-            color: #e6e6e6;
-        }}
-
-        .card li b {{
-            color: #ffffff;
-            font-weight: 700;
-        }}
-
-        /* PRIMEIRO CARD MELHORADO (somente fonte e negrito) */
+        /* PRIMEIRO CARD MELHORADO */
         .card-principal {{
             background-color: #B91E27;
             color: #fff;
@@ -129,6 +112,7 @@ else:
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 16px;
+            color: #fff;
         }}
         .card-principal ul {{
             list-style-type: disc;
@@ -138,9 +122,11 @@ else:
             font-size: 18px;
             line-height: 1.8;
             margin-bottom: 10px;
+            color: #fff;
         }}
         .card-principal li b {{
             font-weight: 700;
+            color: #ffff66; /* Destaque em amarelo */
             display: block;
             margin-bottom: 4px;
         }}
