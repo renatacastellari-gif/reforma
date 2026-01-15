@@ -45,16 +45,19 @@ if not st.session_state.logged_in:
 else:
 
     # =========================
-    # TIPOGRAFIA
+    # TIPOGRAFIA (mantém como estava para o resto; título do card não muda)
     # =========================
-    BODY_FONT = "'Segoe UI', Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif"
-    HEADING_FONT = "'Segoe UI', Roboto, Helvetica, Arial, system-ui, -apple-system, sans-serif"
+    BODY_FONT = "Consolas, Menlo, Monaco, 'Courier New', monospace"
+    HEADING_FONT = "Consolas, Menlo, Monaco, 'Courier New', monospace"  # mantém para o h3 do card
 
     # =========================
-    # CSS GLOBAL
+    # CSS GLOBAL (FUNDO PRETO + CARDS + TIPOGRAFIA)
     # =========================
     style_str = f"""
     <style>
+        /* Importa Montserrat (e mantém fallback caso bloqueado) */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
         html, body, [class*="css"] {{
             background-color: #000000;
         }}
@@ -102,6 +105,7 @@ else:
             box-shadow: 0 2px 0 #111111;
         }}
 
+        /* Título do card: mantém exatamente como estava (mesma fonte/estilo) */
         .card h3 {{
             font-family: {HEADING_FONT};
             font-size: 28px;
@@ -115,6 +119,8 @@ else:
             margin: 10px 0 0 18px;
             padding: 0;
             list-style-type: disc;
+            /* Texto do card em Montserrat */
+            font-family: Montserrat, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }}
 
         .card li {{
@@ -122,6 +128,8 @@ else:
             line-height: 1.7;
             margin-bottom: 6px;
             color: #e6e6e6;
+            /* Texto do card em Montserrat */
+            font-family: Montserrat, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }}
 
         .card li b {{
@@ -134,6 +142,8 @@ else:
             color: #dcdcdc;
             font-size: 16px;
             line-height: 1.65;
+            /* Texto do card em Montserrat */
+            font-family: Montserrat, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }}
 
         .img-container {{
@@ -201,7 +211,8 @@ else:
     st.markdown("<div class='titulo-principal'>Reforma Tributária | Emissão de Nota </div>", unsafe_allow_html=True)
 
     # =========================
-    # CARD: CBS / IBS (corrigindo negrito conforme imagem)
+    # CARD: CBS / IBS
+    # (negrito SOMENTE nos rótulos destacados; título do card inalterado)
     # =========================
     st.markdown(
         "<div class='card'>"
@@ -237,11 +248,12 @@ else:
     st.markdown("</div>", unsafe_allow_html=True)
 
     # =========================
-    # TABELA EXEMPLO
+    # TABELA EXEMPLO (SUBSTITUI A TABELA RESUMO)
     # =========================
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.markdown("<h3>Tabela Exemplo</h3>", unsafe_allow_html=True)
 
+    # Conteúdo da tabela exatamente como solicitado, com 888,50 em negrito
     tabela_html = """
     <table class="tabela-exemplo">
         <tr>
@@ -276,6 +288,7 @@ else:
     """
     st.markdown(tabela_html, unsafe_allow_html=True)
 
+    # Callout opcional com destaque
     st.markdown(
         """
         <div class='callout'>
@@ -288,7 +301,7 @@ else:
     )
 
     # =========================
-    # NOVO CARD — BASE LEGAL
+    # NOVO CARD — BASE LEGAL (NO FINAL)
     # =========================
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.markdown("<h3>✅ BASE LEGAL — REDUÇÃO DE 30% CBS E IBS</h3>", unsafe_allow_html=True)
@@ -306,4 +319,5 @@ else:
     st.markdown(base_legal_html, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
+    # Fecha wrapper
     st.markdown("</div>", unsafe_allow_html=True)
