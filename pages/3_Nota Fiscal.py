@@ -214,8 +214,8 @@ else:
         "intelectuais de natureza científica, literária ou artística, submetidas à fiscalização por conselho profissional: "
         "administradores, advogados, arquitetos e urbanistas, assistentes sociais, bibliotecários, biólogos, contabilistas, "
         "economistas, economistas domésticos, profissionais de educação física, engenheiros e agrônomos, estatísticos, médicos veterinários e "
-        "zootecnistas, museólogos, químicos, profissionais de relações públicas, "
-        "técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</b></li>"
+        "zootecnistas, museólogos, químicos, profissionais de relações públicas, " <br>
+        "técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</b></li>" <br>
         "<li>Código do Indicador de Operação: <b>20301 - Serviço de administração e intermediação de bem imóvel</b></li>"
         "<li>Código NBS: <b>114011100 - Serviços de consultoria em gestão estratégica</b> </li>"
         "</ul>"
