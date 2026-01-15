@@ -116,13 +116,6 @@ else:
             color: #F2D5D7;
             font-weight: 600;
         }}
-
-        iframe {{
-            width: 100%;
-            height: 400px;
-            border-radius: 12px;
-            margin-top: 16px;
-        }}
     </style>
     """
     st.markdown(style_str, unsafe_allow_html=True)
@@ -133,45 +126,31 @@ else:
     # =========================
     # TÍTULO
     # =========================
-    st.markdown("<div class='titulo-principal'>Reforma Tributária | Aluguéis</div>", unsafe_allow_html=True)
+    st.markdown("<div class='titulo-principal'>Reforma Tributária | Locação de Imóveis</div>", unsafe_allow_html=True)
 
     # =========================
-    # CARD COM VÍDEO E TEXTO MELHORADO
+    # CARD COM TEXTO SOBRE LOCACÃO DE IMÓVEIS EM 2026
     # =========================
     st.markdown(
         """
         <div class='card'>
-            <h3>🟦 Pronunciamento CRC</h3>
+            <h3>✅ Como funciona em 2026 para locação de imóveis</h3>
             <p>
-                <b>Resumo:</b> Durante a palestra do CRC sobre a Reforma Tributária, foi abordado um ponto importante:
+                • Locação de imóveis não é considerada operação com bens ou serviços para fins da CBS (nem IBS), pois é uma obrigação de dar, não de fazer.<br>
+                • Portanto, não há incidência da CBS sobre receitas de aluguel.<br>
+                • Em 2026, mesmo sendo ano-teste, não será necessário emitir nota fiscal para locação nem destacar CBS, porque a operação continua fora do campo de incidência.
             </p>
+            <h3>✅ Procedimento em 2026</h3>
+            <p>
+                • Nenhum recolhimento de CBS ou IBS sobre locação.<br>
+                • Nenhuma obrigação de destacar CBS/IBS em contratos ou recibos de aluguel.<br>
+                • Apenas manter a escrituração normal do aluguel como receita, seguindo as regras contábeis e fiscais atuais (IRPJ, CSLL, PIS/Cofins, etc.).<br>
+                • CBS e IBS só serão aplicados a operações com bens e serviços tributáveis.
+            </p>
+            <h3>📌 Resumo prático</h3>
             <p class="highlight">
-                Não será necessário contabilizar CBS e IBS em 2026.
+                Se você administra imóveis ou faz locação, não muda nada em 2026 quanto à CBS/IBS. Não há emissão de nota nem cálculo desses tributos para aluguel.
             </p>
-            <p>
-             📌 Artigo que estabelece a incidência da CBS e IBS:  
-> Art. 4º — O IBS e a CBS incidem sobre operações onerosas com bens ou com serviços.  
-> (Inclui qualquer operação com bem ou serviço realizada pelo contribuinte.) [1]
-
-👉 O texto completo e atualizado está na Lei Complementar nº 214, de 16 de janeiro de 2025. [2]
-
-📘 Trecho no site oficial:  
-📄 [Lei Complementar nº 214/2025 — texto integral](https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm?utm_source=chatgpt.com)
-
-No Art. 4º, a lei define a regra geral de incidência tributária para os dois novos tributos:
-
-🔹 “O IBS e a CBS incidem sobre operações onerosas com bens ou com serviços.” [1]
-
-Esse artigo é a base legal que substitui a antiga regra de PIS/COFINS e estabelece o novo conceito de tributação por consumo (IVA dual) no Brasil.
-
-👉 Importante: a lei não diz que aluguéis são automaticamente isentos — ela define a regra geral de incidência. 
-Os detalhes de isenções, reduções e regimes específicos (como para aluguéis residenciais ou condições de locadores) estão distribuídos 
-mais adiante no texto (capítulos e artigos específicos) ou poderão ser regulamentados posteriormente.
-            </p>
-            <p>
-                Para mais detalhes, assista ao vídeo oficial do CRC. O trecho relevante está por volta de <b>1:53:18</b>.
-            </p>
-            <iframe src="https://www.youtube.com/embed/PL2BatYvbic" frameborder="0" allowfullscreen></iframe>
         </div>
         """,
         unsafe_allow_html=True
