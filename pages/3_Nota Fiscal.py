@@ -95,7 +95,7 @@ else:
         .card p {{
             font-size: 17px;
             line-height: 1.7;
-            margin-bottom: 12px;
+            margin-bottom: 18px; /* Espaçamento entre parágrafos */
             color: #e6e6e6;
         }}
 
@@ -112,20 +112,16 @@ else:
     st.markdown("<div class='titulo-principal'>Reforma Tributária | Emissão de Nota </div>", unsafe_allow_html=True)
 
     # =========================
-    # PRIMEIRO CARD (APENAS PULANDO LINHA)
+    # PRIMEIRO CARD (CORRETO)
     # =========================
     st.markdown(
         """
         <div class='card'>
             <h3>NF Prefeitura de São Paulo – CBS - IBS</h3>
             <p><b>Código de Classificação Tributária Principal:</b> 200052 - <b>Prestação de serviços das seguintes profissões intelectuais de natureza científica, literária ou artística, submetidas à fiscalização por conselho profissional:</b> administradores, advogados, arquitetos e urbanistas, assistentes sociais, bibliotecários, biólogos, contabilistas, economistas, economistas domésticos, profissionais de educação física, engenheiros e agrônomos, estatísticos, médicos veterinários e zootecnistas, museólogos, químicos, profissionais de relações públicas, técnicos industriais e técnicos agrícolas, observado o art. 127 da Lei Complementar nº 214, de 2025.</p>
-            
-            <br><br>
-            
+
             <p><b>Código do Indicador de Operação:</b> 20301 - <b>Serviço de administração e intermediação de bem imóvel</b></p>
-            
-            <br><br>
-            
+
             <p><b>Código NBS:</b> 114011100 - <b>Serviços de consultoria em gestão estratégica</b></p>
         </div>
         """,
