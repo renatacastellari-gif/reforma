@@ -188,3 +188,76 @@ else:
                 <tr>
                     <td>Alíquota</td>
                     <td>15%</td>
+                </tr>
+                <tr>
+                    <td>Código do DARF</td>
+                    <td>2089</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Tabelinha CSLL -->
+        <p class='subtitulo'>Detalhamento CSLL</p>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Presunção (receita bruta anual de até R$ 5 milhões)</td>
+                    <td>32%</td>
+                </tr>
+                <tr>
+                    <td>Presunção (parcela da receita bruta anual que exceder R$ 5 milhões)</td>
+                    <td>35,2%</td>
+                </tr>
+                <tr>
+                    <td>Alíquota</td>
+                    <td>9%</td>
+                </tr>
+                <tr>
+                    <td>Código do DARF</td>
+                    <td>2372</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # =========================
+    # CARD – EXEMPLO PRÁTICO (cálculo trimestral)
+    # =========================
+    st.markdown("""
+    <div class='card'>
+        <h3>🧮 Exemplo prático – cálculo trimestral</h3>
+        <p>O cálculo considera cada trimestre <b>isoladamente</b> e aplica a regra mista:</p>
+        <ul>
+            <li><b>Limite proporcional de presunção reduzida por trimestre:</b> R$ 1.250.000 (R$ 5 milhões ÷ 4).</li>
+            <li>Até <b>R$ 1.250.000</b> → presunção <b>32%</b> (base de IRPJ/CSLL).</li>
+            <li>Excedente do trimestre → presunção <b>35,2%</b>.</li>
+            <li><b>IRPJ</b> = 15% sobre a base presumida + adicional de 10% sobre o <i>lucro presumido</i> que exceder <b>R$ 60.000</b> no trimestre.</li>
+            <li><b>CSLL</b> = 9% sobre a base presumida.</li>
+        </ul>
+
+        <p class="subtitulo">Cenário A — Receita trimestral: <b>R$ 2.000.000</b></p>
+        <ul>
+            <li>Até R$ 1.250.000 → 32% = <b>R$ 400.000</b></li>
+            <li>Excedente (R$ 750.000) → 35,2% = <b>R$ 264.000</b></li>
+            <li><b>Base total do trimestre:</b> <b>R$ 664.000</b></li>
+            <li>Depois aplica IRPJ (15% + adicional sobre o que exceder R$ 60 mil) e CSLL (9%).</li>
+        </ul>
+
+        <p class="subtitulo">Cenário B — Receita trimestral: <b>R$ 3.000.000</b></p>
+        <ul>
+            <li>Até R$ 1.250.000 → 32% = <b>R$ 400.000</b></li>
+            <li>Excedente (R$ 1.750.000) → 35,2% = <b>R$ 616.000</b></li>
+            <li><b>Base total do trimestre:</b> <b>R$ 1.016.000</b></li>
+            <li>Depois aplica IRPJ (15% + adicional sobre o que exceder R$ 60 mil) e CSLL (9%).</li>
+        </ul>
+
+        <p class="muted">
+            Observação: este card ilustra apenas a formação da <b>base presumida trimestral</b>.
+            A apuração oficial do IRPJ/CSLL é trimestral; adicional do IRPJ incide sobre o lucro presumido que ultrapassar R$ 60 mil no trimestre.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Fecha o wrapper
+    st.markdown("</div>", unsafe_allow_html=True)
