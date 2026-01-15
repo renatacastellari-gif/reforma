@@ -44,15 +44,9 @@ if not st.session_state.logged_in:
 # =========================
 else:
 
-    # =========================
-    # TIPOGRAFIA
-    # =========================
-    BODY_FONT = "'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
-    HEADING_FONT = "'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    BODY_FONT = "Consolas, Menlo, Monaco, 'Courier New', monospace"
+    HEADING_FONT = "Consolas, Menlo, Monaco, 'Courier New', monospace"
 
-    # =========================
-    # CSS GLOBAL
-    # =========================
     style_str = f"""
     <style>
         html, body, [class*="css"] {{
@@ -98,7 +92,6 @@ else:
             letter-spacing: 0.2px;
         }}
 
-        /* Ajuste para espaçamento e fonte do primeiro card */
         .card ul {{
             margin: 10px 0 0 18px;
             padding: 0;
@@ -120,15 +113,12 @@ else:
     """
     st.markdown(style_str, unsafe_allow_html=True)
 
-    # =========================
-    # CONTEÚDO
-    # =========================
     st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
 
     st.markdown("<div class='titulo-principal'>Reforma Tributária | Emissão de Nota </div>", unsafe_allow_html=True)
 
     # =========================
-    # PRIMEIRO CARD (MELHORADO)
+    # PRIMEIRO CARD (CORRIGIDO)
     # =========================
     st.markdown(
         """
