@@ -54,6 +54,7 @@ else:
         th {background:#303030; color:#fff;}
         tr:nth-child(even) td {background:#252525;}
         tr:nth-child(odd) td {background:#202020;}
+        .list-item {margin-bottom:6px;}
     </style>
     """, unsafe_allow_html=True)
 
@@ -67,9 +68,9 @@ else:
         <h3>📌 Presunção – CNAE 6822-6/00</h3>
         <p>Para <b>prestação de serviços</b> (inclui Gestão e administração da propriedade imobiliária):</p>
         <ul>
-            <li>Presunção padrão: <b>32%</b>.</li>
-            <li>Com PLP 128/2025: <b>35,2%</b> sobre a parcela que exceder <b>R$ 5 milhões/ano</b>.</li>
-            <li>No trimestre, limite proporcional: <b>R$ 1.250.000</b>.</li>
+            <li class='list-item'>Presunção padrão: <b>32%</b>.</li>
+            <li class='list-item'>Com PLP 128/2025: <b>35,2%</b> sobre a parcela que exceder <b>R$ 5 milhões/ano</b>.</li>
+            <li class='list-item'>No trimestre, limite proporcional: <b>R$ 1.250.000</b>.</li>
         </ul>
         <p class="highlight">Até R$ 1.250.000 → 32%; excedente → 35,2%.</p>
         <p>Adicional IRPJ: 10% sobre lucro presumido que exceder <b>R$ 60 mil/trimestre</b>.</p>
@@ -77,64 +78,71 @@ else:
     """, unsafe_allow_html=True)
 
     # =========================
-    # FUNÇÕES AUXILIARES
+    # TABELA COMPARATIVA (igual à imagem)
     # =========================
-    def brl(v): return f"R$ {v:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
-    def pct(v): return f"{v*100:.2f}%"
-
-    # =========================
-    # EXEMPLO PRÁTICO TRIMESTRAL
-    # =========================
-    def calcula_trimestre(receita):
-        limite = 1_250_000
-        presuncao_32 = min(receita, limite) * 0.32
-        presuncao_352 = max(0, receita - limite) * 0.352
-        base = presuncao_32 + presuncao_352
-        irpj15 = base * 0.15
-        adicional = max(0, base - 60_000) * 0.10
-        csll = base * 0.09
-        total = irpj15 + adicional + csll
-        return {
-            "receita": receita, "base": base,
-            "irpj15": irpj15, "adicional": adicional,
-            "csll": csll, "total": total,
-            "aliq": total / receita
-        }
-
-    exemplo1 = calcula_trimestre(2_000_000)
-    exemplo2 = calcula_trimestre(3_000_000)
-
-    st.markdown("<div class='card'><h3>🧮 Exemplo prático – cálculo trimestral</h3>", unsafe_allow_html=True)
     st.markdown("""
-    <p>O cálculo considera cada trimestre isolado:</p>
-    <ul>
-        <li>Até R$ 1.250.000 → presunção 32%.</li>
-        <li>Excedente → presunção 35,2%.</li>
-        <li>IRPJ = 15% + adicional sobre lucro presumido acima de R$ 60 mil/trimestre.</li>
-        <li>CSLL = 9% sobre base presumida.</li>
-    </ul>
+    <div class='card'>
+        <h3>📊 Comparativo de alíquotas efetivas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tributo</th>
+                    <th>Atual (32%)</th>
+                    <th>Novo (35,2%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>IRPJ (15%)</td>
+                    <td>4,80%</td>
+                    <td>5,28%</td>
+                </tr>
+                <tr>
+                    <td>Adicional IRPJ (10% sobre lucro presumido acima de R$ 60 mil/mês)</td>
+                    <td>3,20%</td>
+                    <td>3,52%</td>
+                </tr>
+                <tr>
+                    <td>CSLL (9%)</td>
+                    <td>2,88%</td>
+                    <td>3,17%</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><b>Total</b></td>
+                    <td><b>10,88%</b></td>
+                    <td><b>11,97%</b></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
     """, unsafe_allow_html=True)
 
-    # Tabela com dois exemplos
-    st.markdown(f"""
-    <table>
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>R$ 2.000.000</th>
-                <th>R$ 3.000.000</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>Base presumida</td><td>{brl(exemplo1['base'])}</td><td>{brl(exemplo2['base'])}</td></tr>
-            <tr><td>IRPJ (15%)</td><td>{brl(exemplo1['irpj15'])}</td><td>{brl(exemplo2['irpj15'])}</td></tr>
-            <tr><td>Adicional IRPJ</td><td>{brl(exemplo1['adicional'])}</td><td>{brl(exemplo2['adicional'])}</td></tr>
-            <tr><td>CSLL (9%)</td><td>{brl(exemplo1['csll'])}</td><td>{brl(exemplo2['csll'])}</td></tr>
-        </tbody>
-        <tfoot>
-            <tr><td><b>Total tributos</b></td><td><b>{brl(exemplo1['total'])}</b></td><td><b>{brl(exemplo2['total'])}</b></td></tr>
-            <tr><td>Alíquota efetiva</td><td>{pct(exemplo1['aliq'])}</td><td>{pct(exemplo2['aliq'])}</td></tr>
-        </tfoot>
-    </table>
+    # =========================
+    # EXEMPLO PRÁTICO (igual à segunda imagem, melhorado)
+    # =========================
+    st.markdown("""
+    <div class='card'>
+        <h3>🧮 Exemplo prático – cálculo trimestral</h3>
+        <p>O cálculo considera cada trimestre isolado, aplicando a regra mista:</p>
+        <ul>
+            <li><b>Receita trimestral:</b> R$ 2.000.000</li>
+            <li><b>Limite proporcional do adicional:</b> R$ 1.250.000 (porque R$ 5 milhões ÷ 4 trimestres)</li>
+            <li><b>Cálculo:</b>
+                <ul>
+                    <li>Até R$ 1.250.000 → 32% = <b>R$ 400.000</b></li>
+                    <li>Excedente (R$ 750.000) → 35,2% = <b>R$ 264.000</b></li>
+                </ul>
+            </li>
+            <li><b>Base total:</b> R$ 664.000</li>
+        </ul>
+        <p>Se fosse <b>R$ 3.000.000</b> no trimestre, ficaria assim:</p>
+        <ul>
+            <li>Até R$ 1.250.000 → 32% = <b>R$ 400.000</b></li>
+            <li>Excedente (R$ 1.750.000) → 35,2% = <b>R$ 616.000</b></li>
+            <li><b>Base total:</b> R$ 1.016.000</li>
+        </ul>
+        <p class='highlight'>Depois aplica IRPJ (15% + adicional sobre excedente) e CSLL (9%).</p>
+    </div>
     """, unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
