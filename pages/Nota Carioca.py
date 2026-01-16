@@ -177,7 +177,7 @@ else:
     st.markdown(
         """
         <div class='card'>
-            <h3>🔰 Obrigatoriedade emissão pela Nota Nacional</h3>
+            <h3>🔰 Nota Nacional</h3>
             <p>
                 A <b>a partir de 01/01/2026</b> os contribuintes são obrigados a emitir suas notas no Emissor Nacional.
             </p>
