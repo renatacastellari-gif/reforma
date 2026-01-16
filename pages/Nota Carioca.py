@@ -179,7 +179,7 @@ else:
         <div class='card'>
             <h3>🔰 Nota Nacional</h3>
             <p>
-                A <b>a partir de 01/01/2026</b> os contribuintes são obrigados a emitir suas notas no Emissor Nacional.
+                A <b> partir de 01/01/2026</b> os contribuintes são obrigados a emitir suas notas no Emissor Nacional.
             </p>
             <p class="highlight">
                Para possibilitar a emissão das guias de recolhimento do ISS a partir do período de apuração 01/2026, 
