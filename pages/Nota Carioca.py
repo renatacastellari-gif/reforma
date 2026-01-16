@@ -1,7 +1,6 @@
 
 import streamlit as st
 from pathlib import Path
-# import pandas as pd  # remova se não usar
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
@@ -23,7 +22,11 @@ if "logged_in" not in st.session_state:
 # 🔒 Esconde a barra lateral se não estiver logado
 if not st.session_state.logged_in:
     st.markdown(
-        "<style>[data-testid='stSidebar']{display:none;}</style>",
+        """
+        <style>
+            [data-testid="stSidebar"] { display: none; }
+        </style>
+        """,
         unsafe_allow_html=True
     )
 
@@ -59,7 +62,7 @@ else:
     style_str = f"""
     <style>
         html, body, [class*="css"] {{
-            background-color: #1b1b1b; /* mantém seu fundo escuro do app original */
+            background-color: #1b1b1b;
         }}
         body {{
             font-family: {BODY_FONT};
@@ -72,10 +75,10 @@ else:
         .content-wrapper {{
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 1.2rem; /* respira nas laterais */
+            padding: 0 1.2rem;
         }}
 
-        /* Título exatamente como o seu exemplo */
+        /* Título principal */
         .titulo-principal {{
             font-family: {HEADING_FONT};
             font-size: 34px;
@@ -88,7 +91,7 @@ else:
             letter-spacing: 0.2px;
         }}
 
-        /* Inputs e botões mantidos no tema escuro */
+        /* Inputs e botões */
         input, textarea {{
             background-color: #2a2a2a !important;
             color: #F9EEEF !important;
@@ -164,26 +167,50 @@ else:
     st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
 
     # =========================
-    # TÍTULO (EXATO AO SEU ESTILO)
+    # TÍTULO
     # =========================
     st.markdown("<div class='titulo-principal'>Nota Nacional | Nota Carioca</div>", unsafe_allow_html=True)
 
     # =========================
-    # CARDS – IBS
+    # CARD – Obrigatoriedade Nota Nacional (IBS)
     # =========================
     st.markdown(
         """
         <div class='card'>
             <h3>🟦 Obrigatoriedade emissão pela Nota Nacional</h3>
             <p>
-                A <b>partir de 01/01/2026</b> os contribuintes são obrigados a emitir suas notas no Emissor Nacional. 
-            
+                A <b>a partir de 01/01/2026</b> os contribuintes são obrigados a emitir suas notas no Emissor Nacional.
             </p>
             <p class="highlight">
-                Para conseguir gerar guia de ISS no Rio de Janeiro, vai precisar gerar 
-                escrituração de serviço prestado na NF Carioca consolidada por serviço.
+                Para conseguir gerar guia de ISS no Rio de Janeiro, vai precisar gerar
+                escrituração de serviço prestado na NF Carioca <b>consolidada por serviço</b>.
             </p>
         </div>
         """,
         unsafe_allow_html=True
     )
+
+    # =========================
+    # NOVO CARD – NFS-e individual & Declaração consolidada
+    # =========================
+    st.markdown(
+        """
+        <div class='card'>
+            <h3>🟥 NFS‑e individual & Declaração consolidada</h3>
+            <ul>
+                <li><b>NFS‑e individual</b><br/>
+                    <span class="highlight">Onde?</span> ➜ Sistema Nacional da NFS‑e
+                </li>
+                <li><b>Declaração consolidada</b><br/>
+                    <span class="highlight">Onde?</span> ➜ Nota Carioca &nbsp;|&nbsp;
+                    <span class="highlight">Como?</span> ➜ Consolidada mensal
+                    <br/>Uma declaração para cada código de serviço.
+                </li>
+            </ul>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Fecha o wrapper
+    st.markdown("</div>", unsafe_allow_html=True)
