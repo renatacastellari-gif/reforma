@@ -182,8 +182,10 @@ else:
                 A <b>a partir de 01/01/2026</b> os contribuintes são obrigados a emitir suas notas no Emissor Nacional.
             </p>
             <p class="highlight">
-                Para conseguir gerar guia de ISS no Rio de Janeiro, vai precisar gerar
-                escrituração de serviço prestado na NF Carioca <b>consolidada por serviço</b>.
+               Para possibilitar a emissão das guias de recolhimento do ISS a partir do período de apuração 01/2026, 
+                os contribuintes deverão, além da emissão da NFS-e individualizada no padrão nacional, emitir, de forma consolidada, 
+                a Declaração Mensal de Serviços Prestados. A emissão será realizada na forma de NFS-e - Nota Carioca.
+                Deverá ser emitida uma declaração mensal para cada serviço prestado,</b>.
             </p>
         </div>
         """,
