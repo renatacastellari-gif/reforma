@@ -38,18 +38,19 @@ else:
     # =========================
     st.markdown("""
     <style>
-        /* Importa JetBrains Mono para o TÍTULO */
+        /* ====== IMPORTS DE FONTES ====== */
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
 
         html, body, [class*="css"] {
             background-color: #1b1b1b;
         }
         body {
             color: #F9EEEF;
-            font-family: 'Open Sans', Arial, sans-serif; /* Fonte para corpo */
+            font-family: 'Open Sans', Arial, sans-serif; /* Fonte padrão do corpo */
         }
 
-        /* ====== TÍTULO ESTILO EXATO ====== */
+        /* ====== TÍTULO ESTILO EXATO (mantém JetBrains Mono) ====== */
         .titulo-principal {
             font-family: 'JetBrains Mono', 'Fira Mono', 'Consolas', monospace !important; /* monoespaçada */
             font-size: 38px;
@@ -69,7 +70,7 @@ else:
             width: 95%;                 /* comprimento da linha */
         }
 
-        /* ====== CARDS ====== */
+        /* ====== CARDS (agora usando Montserrat) ====== */
         .card {
             background-color: #2a2a2a;
             padding: 26px 28px;
@@ -78,17 +79,20 @@ else:
             border-left: 6px solid #B91E27;
             box-shadow: 0 2px 0 #111111;
             color: #f0f0f0;
-            font-family: 'Open Sans', Arial, sans-serif; /* Fonte para conteúdo dos cards */
+            font-family: 'Montserrat', 'Open Sans', Arial, sans-serif; /* <- Montserrat aplicada */
             font-size: 18px;
             line-height: 1.8; /* Mais espaçamento para leitura */
         }
         .card h3 {
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: 'Montserrat', 'Segoe UI', Roboto, Arial, sans-serif; /* <- Montserrat nos títulos dos cards */
             font-size: 28px;
             font-weight: 800;
             margin: 0 0 12px 0;
             color: #ffffff;
             letter-spacing: 0.3px;
+        }
+        .card p, .card li, .card ul {
+            font-family: 'Montserrat', 'Open Sans', Arial, sans-serif; /* garante Montserrat no conteúdo */
         }
         .highlight {
             color: #F2D5D7;
