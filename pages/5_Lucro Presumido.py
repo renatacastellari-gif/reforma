@@ -209,6 +209,37 @@ else:
     """, unsafe_allow_html=True)
 
     # =========================
+    # NOVO CARD 1: EXCEDEU OS 5 MILHÕES NO ANO
+    # =========================
+    st.markdown("""
+    <div class='card'>
+        <h3>🚩 Excedeu os R$ 5 milhões acumulados no ano</h3>
+        <p>Quando o <b>faturamento acumulado no ano ultrapassa R$ 5.000.000</b>, os <b>trimestres restantes</b> do ano-calendário passam a aplicar a <b>presunção majorada</b>, <i>mesmo que algum trimestre isolado não passe de R$ 1,25 mi</i>.</p>
+        <ul>
+            <li>Gatilho anual: <b>R$ 5.000.000</b>.</li>
+            <li>Após o gatilho, aplica-se <b>+10%</b> sobre a base de presunção (ex.: serviços de 32% → <b>35,2%</b>).</li>
+            <li>Vigência: vale para <b>todos os períodos seguintes</b> dentro do mesmo ano-calendário.</li>
+        </ul>
+        <p class="highlight">Conclusão: o acompanhamento é <b>anual</b>. O limite trimestral ajuda no cálculo, mas não isola o efeito após o gatilho anual.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # =========================
+    # NOVO CARD 2: RESUMO DAS REGRAS (TRIMESTRE x ANO)
+    # =========================
+    st.markdown("""
+    <div class='card'>
+        <h3>🧭 Resumo das Regras (trimestre × ano)</h3>
+        <ul>
+            <li><b>Limite trimestral:</b> R$ 1.250.000/trimestre para aplicar as bases sem acréscimo.</li>
+            <li><b>Acima do limite trimestral:</b> a <i>parcela excedente</i> já recebe presunção majorada (ex.: serviços 35,2%).</li>
+            <li><b>Atingiu R$ 5 milhões no ano:</b> todos os <i>períodos seguintes</i> usam presunção majorada, <i>independentemente</i> do valor do trimestre.</li>
+        </ul>
+        <p class="highlight">Até R$ 1,25 mi no trimestre → presunção padrão. Excedente do trimestre → majorada. Ultrapassou R$ 5 mi no ano → majorada nos trimestres seguintes.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # =========================
     # NOVO CARD: EXEMPLO PRÁTICO 2
     # =========================
     st.markdown("""
