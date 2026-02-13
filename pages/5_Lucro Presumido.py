@@ -243,30 +243,15 @@ else:
     </div>
     """, unsafe_allow_html=True)
 
-    # =========================
-    # NOVO CARD: EXEMPLO PRÁTICO 2
-    # =========================
-    st.markdown("""
-    <div class='card'>
-        <h3>🧮 Exemplo prático 2 – cálculo trimestral</h3>
-        <p><b>Receita do Trimestre:</b> R$ 3.580.000,00</p>
-        <p>(-) Limite: R$ 1.250.000,00</p>
-        <p>(=) Excedente: R$ 2.330.000,00</p>
-        <hr>
-        <p><b>Receita até o limite:</b> R$ 1.250.000,00<br>
-        (x) % Presunção: 32%<br>
-        (=) Base de Cálculo: <b>R$ 400.000,00</b></p>
-        <p><b>Receita após o limite:</b> R$ 2.330.000,00<br>
-        (x) % Presunção: 35,2%<br>
-        (=) Base de Cálculo: <b>R$ 820.160,00</b></p>
-        <hr>
-        <p><b>Base de Cálculo Total:</b> R$ 1.220.160,00 (R$ 400.000,00 + R$ 820.160,00)</p>
-        <hr>
-        <p>(x) Alíquota IRPJ: 15%<br>
-        (=) Valor IRPJ: R$ 183.024,00<br>
-        (+) Adicional IRPJ: R$ 116.016,00<br>
-        (=) <b>IRPJ Total:</b> R$ 299.040,00</p>
-        <p>(x) Alíquota CSLL: 9%<br>
-        (=) <b>CSLL Total:</b> R$ 109.814,40</p>
-    </div>
-    """, unsafe_allow_html=True)
+    
+# =========================
+# NOVO CARD: VÍDEO
+# =========================
+st.markdown("""
+&lt;div class='card'&gt;
+    &lt;h3&gt;🎥 Nova regra – explicação em vídeo&lt;/h3&gt;
+&lt;/div&gt;
+""", unsafe_allow_html=True)
+
+# Vídeo do YouTube (embed oficial do Streamlit)
+st.video("https://www.youtube.com/live/lCdcBlPqBxk")
