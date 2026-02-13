@@ -147,6 +147,14 @@ else:
                 • Apenas manter a escrituração normal do aluguel como receita, seguindo as regras contábeis e fiscais atuais (IRPJ, CSLL, PIS/Cofins, etc.).<br>
                 • CBS e IBS só serão aplicados a operações com bens e serviços tributáveis.
             </p>
+            <h3>✅ Emissão de Nota </h3>
+            <p>
+                • A obrigação de emitir nota fiscal de locação foi criada, porém ainda não é possível fazer a emissão dessas notas fiscais, 
+                 conforme item 3.a da Nota Técnica 007, recentemente divulgada (07.fev.2026).<br>
+                • Portanto, não tem como emitir ainda a Nota Fiscal de Locação de Imóveis, tampouco o Comitê Gestor definiu a data para o início dessa obrigação.<br>
+                
+                
+            </p>
             <h3>📌 Resumo prático</h3>
             <p class="highlight">
                 Se você administra imóveis ou faz locação, não muda nada em 2026 quanto à CBS/IBS. Não há emissão de nota nem cálculo desses tributos para aluguel.
