@@ -1,4 +1,3 @@
-
 import streamlit as st
 
 # =========================
@@ -18,10 +17,20 @@ PASSWORD = "minhasenha123"
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
+# Esconde sidebar até logar
 if not st.session_state.logged_in:
-    # Esconde sidebar até logar
-    st.markdown("<style>[data-testid='stSidebar']{display:none;}</style>", unsafe_allow_html=True)
+    st.markdown(
+        """
+        <style>
+            [data-testid='stSidebar']{display:none;}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
+# =========================
+# TELA DE LOGIN
+# =========================
 if not st.session_state.logged_in:
     st.title("Acesso Restrito")
     senha = st.text_input("Digite a senha:", type="password")
@@ -29,12 +38,20 @@ if not st.session_state.logged_in:
         if senha == PASSWORD:
             st.session_state.logged_in = True
             st.success("Acesso liberado!")
-            st.rerun()
+            # Use APENAS UM dos comandos abaixo, conforme sua versão do Streamlit:
+            try:
+                st.rerun()  # versões recentes
+            except AttributeError:
+                st.experimental_rerun()  # versões mais antigas
         else:
             st.error("Senha incorreta.")
+
+# =========================
+# CONTEÚDO PROTEGIDO
+# =========================
 else:
     # =========================
-    # CSS GLOBAL COM FONTES MELHORADAS
+    # CSS GLOBAL COM FONTES MELHORADAS (HTML REAL)
     # =========================
     st.markdown("""
     <style>
@@ -48,6 +65,13 @@ else:
         body {
             color: #F9EEEF;
             font-family: 'Open Sans', Arial, sans-serif; /* Fonte padrão do corpo */
+        }
+
+        /* ====== WRAPPER PARA CONTROLAR LARGURA ====== */
+        .content-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 12px;
         }
 
         /* ====== TÍTULO ESTILO EXATO (mantém JetBrains Mono) ====== */
@@ -79,12 +103,12 @@ else:
             border-left: 6px solid #B91E27;
             box-shadow: 0 2px 0 #111111;
             color: #f0f0f0;
-            font-family: 'Montserrat', 'Open Sans', Arial, sans-serif; /* <- Montserrat aplicada */
+            font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
             font-size: 18px;
             line-height: 1.8; /* Mais espaçamento para leitura */
         }
         .card h3 {
-            font-family: 'Montserrat', 'Segoe UI', Roboto, Arial, sans-serif; /* <- Montserrat nos títulos dos cards */
+            font-family: 'Montserrat', 'Segoe UI', Roboto, Arial, sans-serif;
             font-size: 28px;
             font-weight: 800;
             margin: 0 0 12px 0;
@@ -117,8 +141,17 @@ else:
         tr:nth-child(even) td {background:#252525;}
         tr:nth-child(odd) td {background:#202020;}
         tfoot td {font-weight:800; background:#2b2b2b;}
+
+        /* ====== WRAPPER VISUAL PARA O VÍDEO (mesma largura dos cards) ====== */
+        .video-wrapper {
+            background-color: transparent; /* deixa o fundo do vídeo “limpo”, só o título fica em card */
+            margin: 0 0 22px 0;
+        }
     </style>
     """, unsafe_allow_html=True)
+
+    # Abre wrapper de conteúdo
+    st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
 
     # =========================
     # TÍTULO (AGORA MONO E SUBLINHADO)
@@ -243,15 +276,20 @@ else:
     </div>
     """, unsafe_allow_html=True)
 
-    
-# =========================
-# NOVO CARD: VÍDEO
-# =========================
-st.markdown("""
-&lt;div class='card'&gt;
-    &lt;h3&gt;🎥 Nova regra – explicação em vídeo&lt;/h3&gt;
-&lt;/div&gt;
-""", unsafe_allow_html=True)
+    # =========================
+    # ÚLTIMO CARD: TÍTULO + VÍDEO (apenas título no card)
+    # =========================
+    st.markdown("""
+    <div class='card'>
+        <h3>🎥 Nova regra – explicação em vídeo</h3>
+    </div>
+    """, unsafe_allow_html=True)
 
-# Vídeo do YouTube (embed oficial do Streamlit)
-st.video("https://www.youtube.com/live/lCdcBlPqBxk")
+    # Wrapper visual (mantém a mesma largura do conteúdo)
+    st.markdown("<div class='video-wrapper'>", unsafe_allow_html=True)
+    # Vídeo do YouTube
+    st.video("https://www.youtube.com/live/lCdcBlPqBxk")
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    # Fecha wrapper de conteúdo
+    st.markdown("</div>", unsafe_allow_html=True)
