@@ -151,9 +151,9 @@ else:
             <p>
                 • A obrigação de emitir nota fiscal de locação foi criada, porém ainda não é possível fazer a emissão dessas notas fiscais, 
                  conforme item 3.a da Nota Técnica 007, recentemente divulgada (07.fev.2026).<br>
-                • Portanto, não tem como emitir ainda a Nota Fiscal de Locação de Imóveis, tampouco o Comitê Gestor definiu a data para o início dessa obrigação.<br>
-                
-                
+                • Portanto, não tem como emitir ainda a Nota Fiscal de Locação de Imóveis, tampouco o 
+                Comitê Gestor definiu a data para o início dessa obrigação.<br>
+                 
             </p>
             <h3>📌 Resumo prático</h3>
             <p class="highlight">
