@@ -40,7 +40,7 @@ if not st.session_state.logged_in:
         if senha == PASSWORD:
             st.session_state.logged_in = True
             st.success("Acesso liberado!")
-            # Use APENAS UM dos comandos abaixo conforme sua versão do Streamlit:
+            # Use apenas um dos comandos abaixo conforme sua versão do Streamlit:
             # st.experimental_rerun()  # versões mais antigas
             st.rerun()  # versões recentes
         else:
@@ -121,6 +121,19 @@ else:
             color: #F2D5D7;
             font-weight: 600;
         }}
+
+        .download-row {{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }}
+
+        .file-meta {{
+            color: #cfcfcf;
+            font-size: 14px;
+        }}
     </style>
     """
     st.markdown(style_str, unsafe_allow_html=True)
@@ -134,7 +147,7 @@ else:
     st.markdown("<div class='titulo-principal'>Reforma Tributária | Locação de Imóveis</div>", unsafe_allow_html=True)
 
     # =========================
-    # CARD COM TEXTO SOBRE LOCAÇÃO DE IMÓVEIS EM 2026
+    # CARD 1 — TEXTO SOBRE LOCAÇÃO DE IMÓVEIS EM 2026
     # =========================
     st.markdown(
         """
@@ -154,19 +167,70 @@ else:
             </p>
             <h3>✅ Emissão de Nota</h3>
             <p>
-                • A obrigação de emitir nota fiscal de locação foi criada, porém ainda não é possível fazer a emissão dessas notas fiscais, 
+                • A obrigação de emitir nota fiscal de locação foi criada, porém ainda não é possível fazer a emissão dessas notas fiscais,
                 conforme item 3.a da Nota Técnica 007, recentemente divulgada (07.fev.2026).<br>
-                • Portanto, não tem como emitir ainda a Nota Fiscal de Locação de Imóveis, tampouco o 
+                • Portanto, não tem como emitir ainda a Nota Fiscal de Locação de Imóveis, tampouco o
                 Comitê Gestor definiu a data para o início dessa obrigação.<br>
             </p>
             <h3>📌 Resumo prático</h3>
             <p class="highlight">
-                Se você administra imóveis ou faz locação, não muda nada em 2026 quanto à CBS/IBS. Não há emissão de nota nem cálculo desses tributos para aluguel.
+                Se você administra imóveis ou faz locação, não muda nada em 2026 quanto à CBS/IBS.
+                Não há emissão de nota nem cálculo desses tributos para aluguel.
             </p>
         </div>
         """,
         unsafe_allow_html=True
     )
+
+    # =========================
+    # CARD 2 — DOWNLOAD PDF "NOTA TÉCNICA 07"
+    # =========================
+    # Caminho do PDF: coloque o arquivo "nota_tecnica_07.pdf" na mesma pasta do script
+    PDF_PATH = Path(__file__).resolve().parent / "nota_tecnica_07.pdf"
+
+    st.markdown(
+        """
+        <div class='card'>
+            <h3>📄 Nota Técnica 07</h3>
+            <p>
+                Baixe o documento completo em PDF com os detalhes e orientações oficiais.
+            </p>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Linha com metadados + botão de download
+    col1, col2 = st.columns([0.65, 0.35])
+    with col1:
+        if PDF_PATH.exists():
+            size_mb = PDF_PATH.stat().st_size / (1024 * 1024)
+            st.markdown(
+                f"<div class='file-meta'>Arquivo: <b>{PDF_PATH.name}</b> • Tamanho: {size_mb:.2f} MB</div>",
+                unsafe_allow_html=True
+            )
+        else:
+            st.markdown(
+                "<div class='file-meta' style='color:#ffb4b4;'>Arquivo não encontrado. "
+                "Coloque <b>nota_tecnica_07.pdf</b> na mesma pasta do aplicativo.</div>",
+                unsafe_allow_html=True
+            )
+
+    with col2:
+        if PDF_PATH.exists():
+            with open(PDF_PATH, "rb") as f:
+                st.download_button(
+                    label="⬇️ Baixar PDF",
+                    data=f.read(),
+                    file_name=PDF_PATH.name,
+                    mime="application/pdf",
+                    use_container_width=True,
+                    type="primary",
+                )
+        else:
+            st.button("⬇️ Baixar PDF", disabled=True, use_container_width=True)
+
+    # Fecha o card 2
+    st.markdown("</div>", unsafe_allow_html=True)
 
     # Fecha o wrapper
     st.markdown("</div>", unsafe_allow_html=True)
