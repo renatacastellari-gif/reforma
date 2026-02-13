@@ -299,12 +299,13 @@ else:
     video_id = "lCdcBlPqBxk"
     embed_url = f"https://www.youtube.com/embed/{video_id}"
 
-    # Contêiner responsivo com 16:9
-    st.markdown("<div class='video-container'>", unsafe_allow_html=True)
+    # Renderiza o iframe diretamente (sem wrapper responsivo)
     components.iframe(
-        src=f"{embed_url}?rel=0&modestbranding=1&playsinline=1",
-        height=315,  # altura será sobrescrita pela responsividade, mas precisa de um valor
-        scrolling=False
+    src=f"{embed_url}?rel=0&modestbranding=1&playsinline=1",
+    height=420,    # ajuste a altura como preferir (ex.: 360, 420, 480)
+    scrolling=False
+)
+
     )
     st.markdown("</div>", unsafe_allow_html=True)
 
