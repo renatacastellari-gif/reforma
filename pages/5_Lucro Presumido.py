@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
@@ -38,11 +39,11 @@ if not st.session_state.logged_in:
         if senha == PASSWORD:
             st.session_state.logged_in = True
             st.success("Acesso liberado!")
-            # Use APENAS UM dos comandos abaixo, conforme sua versão do Streamlit:
+            # Use APENAS UM, conforme sua versão:
             try:
                 st.rerun()  # versões recentes
             except AttributeError:
-                st.experimental_rerun()  # versões mais antigas
+                st.experimental_rerun()  # versões antigas
         else:
             st.error("Senha incorreta.")
 
@@ -51,7 +52,7 @@ if not st.session_state.logged_in:
 # =========================
 else:
     # =========================
-    # CSS GLOBAL COM FONTES MELHORADAS (HTML REAL)
+    # CSS GLOBAL + WRAPPERS
     # =========================
     st.markdown("""
     <style>
@@ -64,37 +65,37 @@ else:
         }
         body {
             color: #F9EEEF;
-            font-family: 'Open Sans', Arial, sans-serif; /* Fonte padrão do corpo */
+            font-family: 'Open Sans', Arial, sans-serif;
         }
 
-        /* ====== WRAPPER PARA CONTROLAR LARGURA ====== */
+        /* ====== WRAPPER DE LARGURA ====== */
         .content-wrapper {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 12px;
         }
 
-        /* ====== TÍTULO ESTILO EXATO (mantém JetBrains Mono) ====== */
+        /* ====== TÍTULO ====== */
         .titulo-principal {
-            font-family: 'JetBrains Mono', 'Fira Mono', 'Consolas', monospace !important; /* monoespaçada */
+            font-family: 'JetBrains Mono', 'Fira Mono', 'Consolas', monospace !important;
             font-size: 38px;
             font-weight: 800;
-            color: #B91E27; /* vermelho do print */
-            letter-spacing: 0.06em; /* leve espaçamento entre letras */
+            color: #B91E27;
+            letter-spacing: 0.06em;
             margin: 0 0 12px 0;
             position: relative;
-            display: inline-block; /* para o sublinhado acompanhar o conteúdo */
+            display: inline-block;
         }
         .titulo-principal::after {
             content: "";
             display: block;
-            height: 2px;                /* espessura da linha */
-            background-color: #B91E27;  /* mesma cor do texto */
-            margin-top: 10px;           /* espaço entre texto e linha */
-            width: 95%;                 /* comprimento da linha */
+            height: 2px;
+            background-color: #B91E27;
+            margin-top: 10px;
+            width: 95%;
         }
 
-        /* ====== CARDS (agora usando Montserrat) ====== */
+        /* ====== CARD ====== */
         .card {
             background-color: #2a2a2a;
             padding: 26px 28px;
@@ -105,7 +106,7 @@ else:
             color: #f0f0f0;
             font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
             font-size: 18px;
-            line-height: 1.8; /* Mais espaçamento para leitura */
+            line-height: 1.8;
         }
         .card h3 {
             font-family: 'Montserrat', 'Segoe UI', Roboto, Arial, sans-serif;
@@ -116,7 +117,7 @@ else:
             letter-spacing: 0.3px;
         }
         .card p, .card li, .card ul {
-            font-family: 'Montserrat', 'Open Sans', Arial, sans-serif; /* garante Montserrat no conteúdo */
+            font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
         }
         .highlight {
             color: #F2D5D7;
@@ -134,18 +135,27 @@ else:
             border:1px solid #3a3a3a;
             padding:12px;
         }
-        th {
-            background:#303030;
-            color:#fff;
-        }
+        th { background:#303030; color:#fff; }
         tr:nth-child(even) td {background:#252525;}
         tr:nth-child(odd) td {background:#202020;}
         tfoot td {font-weight:800; background:#2b2b2b;}
 
-        /* ====== WRAPPER VISUAL PARA O VÍDEO (mesma largura dos cards) ====== */
-        .video-wrapper {
-            background-color: transparent; /* deixa o fundo do vídeo “limpo”, só o título fica em card */
+        /* ====== VÍDEO RESPONSIVO (16:9) ====== */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 */
             margin: 0 0 22px 0;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 0 #111111;
+            background: #000; /* fundo para quando o player carrega */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
         }
     </style>
     """, unsafe_allow_html=True)
@@ -154,7 +164,7 @@ else:
     st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
 
     # =========================
-    # TÍTULO (AGORA MONO E SUBLINHADO)
+    # TÍTULO
     # =========================
     st.markdown("<div class='titulo-principal'>Lucro Presumido | Alteração</div>", unsafe_allow_html=True)
 
@@ -246,7 +256,7 @@ else:
     """, unsafe_allow_html=True)
 
     # =========================
-    # NOVO CARD 1: EXCEDEU OS 5 MILHÕES NO ANO
+    # NOVO CARD 1
     # =========================
     st.markdown("""
     <div class='card'>
@@ -262,7 +272,7 @@ else:
     """, unsafe_allow_html=True)
 
     # =========================
-    # NOVO CARD 2: RESUMO DAS REGRAS (TRIMESTRE x ANO)
+    # NOVO CARD 2
     # =========================
     st.markdown("""
     <div class='card'>
@@ -277,19 +287,30 @@ else:
     """, unsafe_allow_html=True)
 
     # =========================
-    # ÚLTIMO CARD: TÍTULO + VÍDEO (apenas título no card)
+    # ÚLTIMO CARD: APENAS TÍTULO + VÍDEO
     # =========================
     st.markdown("""
     <div class='card'>
-        <h3> Nova regra só se aplica a CSLL no segundo trimestre de 2026 </h3>
+        <h4>Nova regra só se aplica a CSLL no 2º trimestre de 2026.</h4>
     </div>
     """, unsafe_allow_html=True)
 
-    # Wrapper visual (mantém a mesma largura do conteúdo)
-    st.markdown("<div class='video-wrapper'>", unsafe_allow_html=True)
-    # Vídeo do YouTube
-    st.video("https://www.youtube.com/live/lCdcBlPqBxk")
+    # Player via iframe (robusto p/ lives/encerradas)
+    video_id = "lCdcBlPqBxk"
+    embed_url = f"https://www.youtube.com/embed/{video_id}"
+
+    # Contêiner responsivo com 16:9
+    st.markdown("<div class='video-container'>", unsafe_allow_html=True)
+    components.iframe(
+        src=f"{embed_url}?rel=0&modestbranding=1&playsinline=1",
+        height=315,  # altura será sobrescrita pela responsividade, mas precisa de um valor
+        scrolling=False
+    )
     st.markdown("</div>", unsafe_allow_html=True)
+
+    # Fallback visível (link) caso a rede bloqueie o player
+    with st.expander("Não conseguiu reproduzir? Clique para abrir no YouTube ▶️"):
+        st.markdown(f"https://www.youtube.com/watch?v={video_id}", unsafe_allow_html=True)
 
     # Fecha wrapper de conteúdo
     st.markdown("</div>", unsafe_allow_html=True)
