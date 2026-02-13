@@ -281,7 +281,7 @@ else:
     # =========================
     st.markdown("""
     <div class='card'>
-        <h3>🎥 Nova regra – explicação em vídeo</h3>
+        <h3> Nova regra só se aplica a CSLL no segundo trimestre de 2026 </h3>
     </div>
     """, unsafe_allow_html=True)
 
