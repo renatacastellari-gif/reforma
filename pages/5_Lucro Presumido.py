@@ -52,7 +52,7 @@ if not st.session_state.logged_in:
 # =========================
 else:
     # =========================
-    # CSS GLOBAL + WRAPPERS
+    # CSS GLOBAL + WRAPPERS (HTML REAL)
     # =========================
     st.markdown("""
     <style>
@@ -60,13 +60,8 @@ else:
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
 
-        html, body, [class*="css"] {
-            background-color: #1b1b1b;
-        }
-        body {
-            color: #F9EEEF;
-            font-family: 'Open Sans', Arial, sans-serif;
-        }
+        html, body, [class*="css"] { background-color: #1b1b1b; }
+        body { color: #F9EEEF; font-family: 'Open Sans', Arial, sans-serif; }
 
         /* ====== WRAPPER DE LARGURA ====== */
         .content-wrapper {
@@ -108,14 +103,15 @@ else:
             font-size: 18px;
             line-height: 1.8;
         }
-        .card h3 {
+        .card h3, .card h4 {
             font-family: 'Montserrat', 'Segoe UI', Roboto, Arial, sans-serif;
-            font-size: 28px;
             font-weight: 800;
             margin: 0 0 12px 0;
             color: #ffffff;
             letter-spacing: 0.3px;
         }
+        .card h3 { font-size: 28px; }
+        .card h4 { font-size: 22px; }
         .card p, .card li, .card ul {
             font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
         }
@@ -125,38 +121,12 @@ else:
         }
 
         /* ====== TABELAS ====== */
-        table {
-            width:100%;
-            border-collapse: collapse;
-            margin-top:10px;
-            font-size: 16px;
-        }
-        th, td {
-            border:1px solid #3a3a3a;
-            padding:12px;
-        }
+        table { width:100%; border-collapse: collapse; margin-top:10px; font-size: 16px; }
+        th, td { border:1px solid #3a3a3a; padding:12px; }
         th { background:#303030; color:#fff; }
         tr:nth-child(even) td {background:#252525;}
         tr:nth-child(odd) td {background:#202020;}
         tfoot td {font-weight:800; background:#2b2b2b;}
-
-        /* ====== VÍDEO RESPONSIVO (16:9) ====== */
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 */
-            margin: 0 0 22px 0;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 2px 0 #111111;
-            background: #000; /* fundo para quando o player carrega */
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border: 0;
-        }
     </style>
     """, unsafe_allow_html=True)
 
@@ -295,19 +265,14 @@ else:
     </div>
     """, unsafe_allow_html=True)
 
-    # Player via iframe (robusto p/ lives/encerradas)
+    # Player via iframe DIRETO (sem wrapper responsivo → não gera bloco preto)
     video_id = "lCdcBlPqBxk"
     embed_url = f"https://www.youtube.com/embed/{video_id}"
-
-    # Renderiza o iframe diretamente (sem wrapper responsivo)
     components.iframe(
-    src=f"{embed_url}?rel=0&modestbranding=1&playsinline=1",
-    height=420,    # ajuste a altura como preferir (ex.: 360, 420, 480)
-    scrolling=False
-)
-
+        src=f"{embed_url}?rel=0&modestbranding=1&playsinline=1",
+        height=420,  # ajuste se quiser: 360, 420, 480
+        scrolling=False
     )
-    st.markdown("</div>", unsafe_allow_html=True)
 
     # Fallback visível (link) caso a rede bloqueie o player
     with st.expander("Não conseguiu reproduzir? Clique para abrir no YouTube ▶️"):
