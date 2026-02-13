@@ -1,4 +1,3 @@
-
 import streamlit as st
 from pathlib import Path
 
@@ -22,7 +21,11 @@ if "logged_in" not in st.session_state:
 # 🔒 Esconde a barra lateral se não estiver logado
 if not st.session_state.logged_in:
     st.markdown(
-        "<style>[data-testid='stSidebar']{display:none;}</style>",
+        """
+        <style>
+            [data-testid='stSidebar'] { display: none; }
+        </style>
+        """,
         unsafe_allow_html=True
     )
 
@@ -37,7 +40,9 @@ if not st.session_state.logged_in:
         if senha == PASSWORD:
             st.session_state.logged_in = True
             st.success("Acesso liberado!")
-            st.rerun()
+            # Use APENAS UM dos comandos abaixo conforme sua versão do Streamlit:
+            # st.experimental_rerun()  # versões mais antigas
+            st.rerun()  # versões recentes
         else:
             st.error("Senha incorreta.")
 
@@ -65,8 +70,8 @@ else:
             color: #F9EEEF;
         }}
 
-        #MainMenu {{visibility: hidden;}}
-        footer {{visibility: hidden;}}
+        #MainMenu {{ visibility: hidden; }}
+        footer {{ visibility: hidden; }}
 
         .content-wrapper {{
             max-width: 1100px;
@@ -129,7 +134,7 @@ else:
     st.markdown("<div class='titulo-principal'>Reforma Tributária | Locação de Imóveis</div>", unsafe_allow_html=True)
 
     # =========================
-    # CARD COM TEXTO SOBRE LOCACÃO DE IMÓVEIS EM 2026
+    # CARD COM TEXTO SOBRE LOCAÇÃO DE IMÓVEIS EM 2026
     # =========================
     st.markdown(
         """
@@ -147,13 +152,12 @@ else:
                 • Apenas manter a escrituração normal do aluguel como receita, seguindo as regras contábeis e fiscais atuais (IRPJ, CSLL, PIS/Cofins, etc.).<br>
                 • CBS e IBS só serão aplicados a operações com bens e serviços tributáveis.
             </p>
-            <h3>✅ Emissão de Nota </h3>
+            <h3>✅ Emissão de Nota</h3>
             <p>
                 • A obrigação de emitir nota fiscal de locação foi criada, porém ainda não é possível fazer a emissão dessas notas fiscais, 
-                 conforme item 3.a da Nota Técnica 007, recentemente divulgada (07.fev.2026).<br>
+                conforme item 3.a da Nota Técnica 007, recentemente divulgada (07.fev.2026).<br>
                 • Portanto, não tem como emitir ainda a Nota Fiscal de Locação de Imóveis, tampouco o 
                 Comitê Gestor definiu a data para o início dessa obrigação.<br>
-                 
             </p>
             <h3>📌 Resumo prático</h3>
             <p class="highlight">
