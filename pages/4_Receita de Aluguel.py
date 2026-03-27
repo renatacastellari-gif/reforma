@@ -40,9 +40,7 @@ if not st.session_state.logged_in:
         if senha == PASSWORD:
             st.session_state.logged_in = True
             st.success("Acesso liberado!")
-            # Use apenas um dos comandos abaixo conforme sua versão do Streamlit:
-            # st.experimental_rerun()  # versões mais antigas
-            st.rerun()  # versões recentes
+            st.rerun()
         else:
             st.error("Senha incorreta.")
 
@@ -58,7 +56,7 @@ else:
     HEADING_FONT = "Consolas, Menlo, Monaco, 'Courier New', monospace"
 
     # =========================
-    # CSS GLOBAL (TEMA ESCURO + TÍTULO + CARDS)
+    # CSS GLOBAL
     # =========================
     style_str = f"""
     <style>
@@ -122,14 +120,6 @@ else:
             font-weight: 600;
         }}
 
-        .download-row {{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
-        }}
-
         .file-meta {{
             color: #cfcfcf;
             font-size: 14px;
@@ -138,7 +128,7 @@ else:
     """
     st.markdown(style_str, unsafe_allow_html=True)
 
-    # Wrapper para alinhar e controlar largura
+    # Wrapper
     st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
 
     # =========================
@@ -147,7 +137,7 @@ else:
     st.markdown("<div class='titulo-principal'>Reforma Tributária | Locação de Imóveis</div>", unsafe_allow_html=True)
 
     # =========================
-    # CARD 1 — TEXTO SOBRE LOCAÇÃO DE IMÓVEIS EM 2026
+    # CARD 1 — TEXTO
     # =========================
     st.markdown(
         """
@@ -162,15 +152,13 @@ else:
             <p>
                 • Nenhum recolhimento de CBS ou IBS sobre locação.<br>
                 • Nenhuma obrigação de destacar CBS/IBS em contratos ou recibos de aluguel.<br>
-                • Apenas manter a escrituração normal do aluguel como receita, seguindo as regras contábeis e fiscais atuais (IRPJ, CSLL, PIS/Cofins, etc.).<br>
+                • Apenas manter a escrituração normal do aluguel como receita, seguindo as regras contábeis e fiscais atuais.<br>
                 • CBS e IBS só serão aplicados a operações com bens e serviços tributáveis.
             </p>
             <h3>✅ Emissão de Nota</h3>
             <p>
-                • A obrigação de emitir nota fiscal de locação foi criada, porém ainda não é possível fazer a emissão dessas notas fiscais,
-                conforme item 3.a da Nota Técnica 007, recentemente divulgada (07.fev.2026).<br>
-                • Portanto, não tem como emitir ainda a Nota Fiscal de Locação de Imóveis, tampouco o
-                Comitê Gestor definiu a data para o início dessa obrigação.<br>
+                • A obrigação de emitir nota fiscal de locação foi criada, porém ainda não é possível fazer a emissão dessas notas fiscais.<br>
+                • Não tem como emitir ainda a Nota Fiscal de Locação de Imóveis.<br>
             </p>
             <h3>📌 Resumo prático</h3>
             <p class="highlight">
@@ -183,9 +171,8 @@ else:
     )
 
     # =========================
-    # CARD 2 — DOWNLOAD PDF "NOTA TÉCNICA 07"
+    # CARD 2 — DOWNLOAD PDF
     # =========================
-    # Caminho do PDF: coloque o arquivo "nota_tecnica_07.pdf" na mesma pasta do script
     PDF_PATH = Path(__file__).resolve().parent / "nota_tecnica_07.pdf"
 
     st.markdown(
@@ -199,7 +186,6 @@ else:
         unsafe_allow_html=True
     )
 
-    # Linha com metadados + botão de download
     col1, col2 = st.columns([0.65, 0.35])
     with col1:
         if PDF_PATH.exists():
@@ -229,8 +215,25 @@ else:
         else:
             st.button("⬇️ Baixar PDF", disabled=True, use_container_width=True)
 
-    # Fecha o card 2
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Fecha o wrapper
+    # =========================
+    # ✅ CARD 3 — VÍDEO DO YOUTUBE
+    # =========================
+    st.markdown(
+        """
+        <div class='card'>
+            <h3>🎥 Nota Fiscal — Explicação em Vídeo</h3>
+            <p>
+                Assista ao vídeo explicativo sobre a Nota Fiscal no contexto da Reforma Tributária.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Embed do vídeo
+    st.video("https://www.youtube.com/watch?v=D8WwmbtFGiE")
+
+    # Fecha wrapper
     st.markdown("</div>", unsafe_allow_html=True)
