@@ -115,36 +115,34 @@ else:
     # CARD FINAL ATUALIZADO
     # =========================
     st.markdown("""
-    <div class='card'>
-        <h4>Nova regra só se aplica a CSLL no 2º trimestre de 2026.</h4>
+<div class='card'>
+<p><b>Nota ECONET:</b></p>
 
-        <p><b>Nota ECONET:</b></p>
+<ul>
+<li>
+A partir de <b>01/04/2026</b>, será aplicado um acréscimo de <b>10%</b>
+nos percentuais de presunção sobre a receita bruta, se esta exceder
+<b>R$ 5.000.000,00 no ano-calendário</b>.
+</li>
 
-        <ul>
-            <li>
-                A partir de <b>01/04/2026</b>, será aplicado um acréscimo de <b>10%</b>
-                nos percentuais de presunção sobre a receita bruta, se esta exceder
-                <b>R$ 5.000.000,00 no ano-calendário</b>.
-            </li>
+<li>
+Esse limite será proporcionalizado por trimestre:
+<b>R$ 1.250.000,00 por trimestre</b>.
+</li>
 
-            <li>
-                Esse limite será proporcionalizado por trimestre:
-                <b>R$ 1.250.000,00 por trimestre</b>.
-            </li>
+<li>
+No ano-calendário de <b>2026</b>, o limite proporcional será de
+<b>R$ 3.750.000,00</b>, pois a regra passa a valer
+<b>a partir do 2º trimestre para a CSLL</b>.
+</li>
+</ul>
 
-            <li>
-                No ano-calendário de <b>2026</b>, o limite proporcional será de
-                <b>R$ 3.750.000,00</b>, pois a regra passa a valer
-                <b>a partir do 2º trimestre para a CSLL</b>.
-            </li>
-        </ul>
-
-        <p class="highlight">
-            Base legal: LC 224/2025 e IN RFB 2.305/2025 (alterada pela IN RFB 2.306/2026).
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
+<p class="highlight">
+Base legal: LC 224/2025 e IN RFB 2.305/2025 (alterada pela IN RFB 2.306/2026).
+</p>
+</div>
+""", unsafe_allow_html=True)
+    
     # VÍDEO
     video_id = "lCdcBlPqBxk"
     components.iframe(
