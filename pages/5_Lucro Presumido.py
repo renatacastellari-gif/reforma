@@ -259,11 +259,31 @@ else:
     # =========================
     # ÚLTIMO CARD: APENAS TÍTULO + VÍDEO
     # =========================
-    st.markdown("""
-    <div class='card'>
-        <h4>Nova regra só se aplica a CSLL no 2º trimestre de 2026.</h4>
-    </div>
-    """, unsafe_allow_html=True)
+st.markdown("""
+<div class='card'>
+    <h4>Nova regra só se aplica a CSLL no 2º trimestre de 2026.</h4>
+
+    <p><b>Nota ECONET:</b></p>
+
+    <p>
+    A partir de <b>01.04.2026</b>, será aplicado um acréscimo de <b>10%</b> nos percentuais de presunção sobre a receita bruta,
+    se esta exceder <b>R$ 5 milhões no ano-calendário</b>.
+    </p>
+
+    <p>
+    Esse limite será proporcionalizado por trimestre, ou seja, <b>R$ 1.250.000,00 por trimestre</b>.
+    </p>
+
+    <p>
+    No ano-calendário de <b>2026</b>, o limite anual proporcional aplicável corresá a <b>R$ 3.750.000,00</b>,
+    pois o acréscimo será aplicado <b>a partir do 2º trimestre para a CSLL</b>.
+    </p>
+
+    <p class="highlight">
+    Base legal: art. 4º, §5º da LC 224/2025 e art. 15 da IN RFB 2.305/2025 (alterada pela IN RFB 2.306/2026).
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
     # Player via iframe DIRETO (sem wrapper responsivo → não gera bloco preto)
     video_id = "lCdcBlPqBxk"
