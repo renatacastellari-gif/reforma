@@ -244,23 +244,17 @@ else:
     # =========================
     # NOVO CARD 2
     # =========================
-      st.markdown("""
+    st.markdown("""
     <div class='card'>
-    <h4>Nova regra só se aplica a CSLL no 2º trimestre de 2026.</h4>
-
-    <p><b>Nota ECONET:</b><br><br>
-    A partir de 01.04.2026, será aplicado um acréscimo de 10% nos percentuais de presunção sobre receita bruta, se esta exceder R$ 5 milhões no ano-calendário.<br><br>
-
-    Esse limite será proporcionalizado por trimestre, ou seja, será de R$ 1.250.000,00 por trimestre.<br><br>
-
-    No ano-calendário de 2026, o limite anual proporcional aplicável corresponderá a R$ 3.750.000,00, pois o acréscimo será aplicado a partir do segundo trimestre para a CSLL.
-    </p>
-
-    <p class="highlight">
-    (artigo 4°, § 5°, da Lei Complementar n° 224/2025; artigo 15, §§ 1°, 2° e 9°, da IN RFB n° 2.305/2025, alterado pelo artigo 1° da IN RFB n° 2.306/2026)
-    </p>
-</div>
-""", unsafe_allow_html=True)
+        <h3>🧭 Resumo das Regras (trimestre × ano)</h3>
+        <ul>
+            <li><b>Limite trimestral:</b> R$ 1.250.000/trimestre para aplicar as bases sem acréscimo.</li>
+            <li><b>Acima do limite trimestral:</b> a <i>parcela excedente</i> já recebe presunção majorada (ex.: serviços 35,2%).</li>
+            <li><b>Atingiu R$ 5 milhões no ano:</b> todos os <i>períodos seguintes</i> usam presunção majorada, <i>independentemente</i> do valor do trimestre.</li>
+        </ul>
+        <p class="highlight">Até R$ 1,25 mi no trimestre → presunção padrão. Excedente do trimestre → majorada. Ultrapassou R$ 5 mi no ano → majorada nos trimestres seguintes.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     # =========================
     # ÚLTIMO CARD: APENAS TÍTULO + VÍDEO
