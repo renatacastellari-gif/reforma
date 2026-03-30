@@ -176,7 +176,7 @@ else:
         <div class='card'>
             <h3>🟦 O RET (Regime Especial de Tributação)</h3>
             <p>
-                O <b>IBS</b> Empreendimentos que optarem pelo RET até 31/12/2028:
+                O <b>Empreendimentos</b> que optarem pelo RET até 31/12/2028:
 Podem continuar no regime atual (alíquota de 4%) até o fim da obra/incorporação.
 Depois dessa data:
 Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adaptadas.
@@ -200,35 +200,8 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
         unsafe_allow_html=True
     )
 
-    st.markdown(
-        """
-        <div class='card'>
-            <h3>🧾 Exemplos de crédito de IBS para prestador de serviços</h3>
-            <ul>
-                <li>Aluguel</li>
-                <li>Energia elétrica</li>
-                <li>Internet e telefonia</li>
-                <li>Softwares e licenças</li>
-                <li>Serviços de terceiros</li>
-                <li>Equipamentos e bens do ativo imobilizado</li>
-            </ul>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 
-    st.markdown(
-        """
-        <div class='card'>
-            <h3>⏳ Quando entra em vigor?</h3>
-            <ul>
-                <li><b>2026 a 2032</b>: fase de transição</li>
-                <li><b>2033</b>: IBS plenamente vigente, com extinção definitiva do ICMS e ISS</li>
-            </ul>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+
 
     st.markdown(
         """
@@ -236,9 +209,8 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
             <h3>⚠️ O que é? </h3>
             <ul>
                 <li>O RET (Regime Especial de Tributação) é um regime fiscal simplificado para incorporadoras imobiliárias no Brasil, aplicado sobre o patrimônio de afetação. Ele unifica impostos (IRPJ, CSLL, PIS, Cofins) 
-                em uma alíquota única de 4% sobre a receita mensal, reduzindo custos e facilitando obrigações contábeis</li>
-                <li>Setores com benefícios fiscais podem perder incentivos</li>
-                <li>Estados e Municípios terão adaptação gradual</li>
+                em uma alíquota única de 4% sobre a receita mensal, reduzindo custos e facilitando obrigações contábeis.</li>
+               
             </ul>
         </div>
         """,
