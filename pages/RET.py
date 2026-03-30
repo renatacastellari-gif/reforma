@@ -217,22 +217,9 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
         unsafe_allow_html=True
     )
 
-    # Player via iframe DIRETO (sem wrapper responsivo → não gera bloco preto)
-    video_id = "lCdcBlPqBxk"
-    embed_url = f"https://www.youtube.com/watch?v=I5gB0uMCWZ4/{video_id}"
-    components.iframe(
-        src=f"{embed_url}?rel=0&modestbranding=1&playsinline=1",
-        height=420,  # ajuste se quiser: 360, 420, 480
-        scrolling=False
-    )
-
-    # Fallback visível (link) caso a rede bloqueie o player
-    with st.expander("Não conseguiu reproduzir? Clique para abrir no YouTube ▶️"):
-        st.markdown(f"https://www.youtube.com/watch?v={video_id}", unsafe_allow_html=True)
-    
 
 
-
+        
     
     # Fecha o wrapper
     st.markdown("</div>", unsafe_allow_html=True)
