@@ -211,7 +211,7 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
                 <li>O RET (Regime Especial de Tributação) é um regime fiscal simplificado para incorporadoras imobiliárias no Brasil, aplicado sobre o patrimônio de afetação. Ele unifica impostos (IRPJ, CSLL, PIS, Cofins) 
                 em uma alíquota única de 4% sobre a receita mensal, reduzindo custos e facilitando obrigações contábeis.</li>
                
-            </ul>
+          
         </div>
         """,
         unsafe_allow_html=True
