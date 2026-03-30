@@ -180,10 +180,7 @@ else:
 Podem continuar no regime atual (alíquota de 4%) até o fim da obra/incorporação.
 Depois dessa data:
 Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adaptadas.
-📊 Resumo direto:
-Até 31/12/2028 → ainda dá pra entrar no RET “antigo”
-Depois disso → tende a acabar a entrada no modelo atual
-              Quem entrou antes → mantém o RET até concluir o empreendimento
+
 
             </p>
             <p class="highlight">
@@ -212,9 +209,9 @@ Depois disso → tende a acabar a entrada no modelo atual
         <div class='card'>
             <h3>💳 Créditos do IBS</h3>
             <ul>
-                <li>Gera crédito em praticamente todas as aquisições ligadas à atividade econômica</li>
-                <li>Crédito <b>integral</b> e <b>não cumulativo</b></li>
-                <li>Reduz o efeito de <b>“imposto sobre imposto”</b></li>
+                <li>📊 Resumo direto: Depois disso → tende a acabar a entrada no modelo atual</li>
+                <li>Até 31/12/2028 → ainda dá pra entrar no RET “antigo”</b></li>
+                <li>Quem entrou antes → mantém o RET até concluir o empreendimento</b></li>
             </ul>
         </div>
         """,
