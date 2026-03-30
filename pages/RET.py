@@ -217,7 +217,19 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
         unsafe_allow_html=True
     )
 
+    # =========================
+    # VÍDEO EXPLICATIVO
+    # =========================
+    st.markdown(
+        """
+        <div class='card'>
+            <h3>🎥 Vídeo Explicativo</h3>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
+    st.video("https://www.youtube.com/watch?v=I5gB0uMCWZ4")
 
         
     
