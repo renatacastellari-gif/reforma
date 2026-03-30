@@ -176,7 +176,7 @@ else:
         <div class='card'>
             <h3>🟦 O RET (Regime Especial de Tributação)</h3>
             <p>
-                O <b>Empreendimentos</b> que optarem pelo RET até 31/12/2028:
+                Os <b>Empreendimentos</b> que optarem pelo RET até 31/12/2028:
 Podem continuar no regime atual (alíquota de 4%) até o fim da obra/incorporação.
 Depois dessa data:
 Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adaptadas.
