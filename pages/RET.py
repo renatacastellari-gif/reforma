@@ -218,15 +218,7 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
     )
 
 
-    st.markdown(
-        """
-        <div class='card'>
-     
-            <iframe src="https://www.youtube.com/watch?v=I5gB0uMCWZ4" frameborder="0" allowfullscreen></iframe>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    
 
 
 
