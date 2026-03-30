@@ -174,7 +174,7 @@ else:
     st.markdown(
         """
         <div class='card'>
-            <h3>🟦 IBS – Imposto sobre Bens e Serviços</h3>
+            <h3>🟦 O RET (Regime Especial de Tributação)</h3>
             <p>
                 O <b>IBS</b> Empreendimentos que optarem pelo RET até 31/12/2028:
 Podem continuar no regime atual (alíquota de 4%) até o fim da obra/incorporação.
@@ -182,11 +182,12 @@ Depois dessa data:
 Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adaptadas.
 📊 Resumo direto:
 Até 31/12/2028 → ainda dá pra entrar no RET “antigo”
+Depois disso → tende a acabar a entrada no modelo atual
+              Quem entrou antes → mantém o RET até concluir o empreendimento
 
             </p>
             <p class="highlight">
-               Depois disso → tende a acabar a entrada no modelo atual
-              Quem entrou antes → mantém o RET até concluir o empreendimento
+               
             </p>
         </div>
         """,
