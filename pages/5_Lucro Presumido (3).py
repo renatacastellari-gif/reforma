@@ -263,6 +263,9 @@ else:
     <div class='card'>
         <h4>Nova regra só se aplica a CSLL no 2º trimestre de 2026.</h4>
     </div>
+    <h4>Nota ECONET: A partir de 01.04.2026, será aplicado um acréscimo de 10% nos percentuais de presunção sobre receita bruta, se esta exceder R$ 5 milhões no ano-calendário. Esse limite será proporcionalizado por trimestre, ou seja, será de R$ 1.250.000,00 por trimestre. No ano-calendário de 2026, o limite anual proporcional aplicável corresponderá a R$ 3.750.000,00, pois o acréscimo será aplicado a partir do segundo trimestre para a CSLL. (artigo 4°, § 5°, da Lei Complementar n° 224/2025; artigo 15, §§ 1°, 2° e 9°, 
+    da IN RFB n° 2.305/2025, 
+    alterado pelo artigo 1° da IN RFB n° 2.306/2026)</h4>
     """, unsafe_allow_html=True)
 
     # Player via iframe DIRETO (sem wrapper responsivo → não gera bloco preto)
