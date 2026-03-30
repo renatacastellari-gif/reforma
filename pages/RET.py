@@ -221,21 +221,7 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
     st.markdown(
         """
         <div class='card'>
-            <h3>🟦 Pronunciamento CRC</h3>
-            <p>
-                <b>Resumo:</b> Durante a palestra do CRC sobre a Reforma Tributária, foi abordado um ponto importante:
-            </p>
-            <p class="highlight">
-                Não será necessário contabilizar CBS e IBS em 2026.
-            </p>
-            <p>
-                Em 2026 será obrigatório destacar IBS e CBS nas notas fiscais, mas sem recolhimento efetivo.
-                Esse será um ano-teste com alíquotas reduzidas e caráter informativo. Não haverá contabilização
-                desses impostos em 2026, pois não haverá desembolso.
-            </p>
-            <p>
-                Para mais detalhes, assista ao vídeo oficial do CRC. O trecho relevante está por volta de <b>1:53:18</b>.
-            </p>
+     
             <iframe src="https://www.youtube.com/watch?v=I5gB0uMCWZ4" frameborder="0" allowfullscreen></iframe>
         </div>
         """,
