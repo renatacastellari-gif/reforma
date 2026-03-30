@@ -166,7 +166,7 @@ else:
     # =========================
     # TÍTULO (EXATO AO SEU ESTILO)
     # =========================
-    st.markdown("<div class='titulo-principal'>Reforma Tributária | IBS</div>", unsafe_allow_html=True)
+    st.markdown("<div class='titulo-principal'>Reforma Tributária | RET</div>", unsafe_allow_html=True)
 
     # =========================
     # CARDS – IBS
@@ -181,33 +181,15 @@ Podem continuar no regime atual (alíquota de 4%) até o fim da obra/incorporaç
 Depois dessa data:
 Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adaptadas.
 
-
-            </p>
-            <p class="highlight">
-               
-            </p>
-        </div>
         """,
         unsafe_allow_html=True
     )
 
+   
     st.markdown(
         """
         <div class='card'>
-            <h3>📌 Quais impostos o IBS substitui?</h3>
-            <ul>
-                <li><b>ICMS</b> (estadual)</li>
-                <li><b>ISS</b> (municipal)</li>
-            </ul>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-        """
-        <div class='card'>
-            <h3>💳 Créditos do IBS</h3>
+            <h3>Prazos</h3>
             <ul>
                 <li>📊 Resumo direto: Depois disso → tende a acabar a entrada no modelo atual</li>
                 <li>Até 31/12/2028 → ainda dá pra entrar no RET “antigo”</b></li>
@@ -251,9 +233,10 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
     st.markdown(
         """
         <div class='card'>
-            <h3>⚠️ Pontos de atenção</h3>
+            <h3>⚠️ O que é? </h3>
             <ul>
-                <li>Alíquotas ainda dependem de regulamentação</li>
+                <li>O RET (Regime Especial de Tributação) é um regime fiscal simplificado para incorporadoras imobiliárias no Brasil, aplicado sobre o patrimônio de afetação. Ele unifica impostos (IRPJ, CSLL, PIS, Cofins) 
+                em uma alíquota única de 4% sobre a receita mensal, reduzindo custos e facilitando obrigações contábeis</li>
                 <li>Setores com benefícios fiscais podem perder incentivos</li>
                 <li>Estados e Municípios terão adaptação gradual</li>
             </ul>
