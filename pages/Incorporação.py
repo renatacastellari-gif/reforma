@@ -195,12 +195,12 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
                 <li>📊Uma incorporadora (ou empresa de incorporação imobiliária) é uma empresa responsável por planejar, desenvolver e viabilizar 
                 projetos imobiliários, como prédios residenciais, comerciais ou condomínios.</li>
                 <li>O que uma incorporadora faz:</b></li>
-                <li>Compra ou negocia terrenos
-Desenvolve o projeto (arquitetura, engenharia, legalização)
-Obtém aprovações da prefeitura
-Define o conceito do empreendimento (ex: apartamentos, salas comerciais)
-Contrata a construtora para executar a obra
-Comercializa as unidades (às vezes junto com imobiliárias)</b></li>
+                <li>Compra ou negocia terrenos <li>
+                <li>Desenvolve o projeto (arquitetura, engenharia, legalização) <li>
+ <li>Obtém aprovações da prefeitura <li>
+ <li>Define o conceito do empreendimento (ex: apartamentos, salas comerciais) <li>
+ <li>Contrata a construtora para executar a obra <li>
+ <li>Comercializa as unidades (às vezes junto com imobiliárias)</b></li>
             </ul>
         </div>
         """,
