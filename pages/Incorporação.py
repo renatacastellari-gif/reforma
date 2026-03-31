@@ -194,7 +194,7 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
             <ul>
                 Uma incorporadora (ou empresa de incorporação imobiliária) é uma empresa responsável por planejar, desenvolver e viabilizar 
                 projetos imobiliários, como prédios residenciais, comerciais ou condomínios.</li>
-                <li>O que uma incorporadora faz:</b></li>
+                O que uma incorporadora faz:</b></li>
                 <li>Compra ou negocia terrenos 
                 <li>Desenvolve o projeto (arquitetura, engenharia, legalização) 
  <li>Obtém aprovações da prefeitura 
@@ -210,19 +210,6 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
 
 
 
-    st.markdown(
-        """
-        <div class='card'>
-            <h3>❓ O que é? </h3>
-            <ul>
-                <li>O RET (Regime Especial de Tributação) é um regime fiscal simplificado para incorporadoras imobiliárias no Brasil, aplicado sobre o patrimônio de afetação. Ele unifica impostos (IRPJ, CSLL, PIS, Cofins) 
-                em uma alíquota única de 4% sobre a receita mensal, reduzindo custos e facilitando obrigações contábeis.</li>
-               
-          
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 
     # =========================
     # VÍDEO EXPLICATIVO
