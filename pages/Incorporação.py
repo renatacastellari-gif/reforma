@@ -154,22 +154,7 @@ else:
     # =========================
     # CARD INCORPORADORA
     # =========================
-    st.markdown(
-        """
-        <div class='card'>
-            <h3>Incorporadora</h3>
-            <ul>
-                <li>Compra ou negocia terrenos</li>
-                <li>Desenvolve o projeto</li>
-                <li>Obtém aprovações</li>
-                <li>Define o conceito</li>
-                <li>Contrata construtora</li>
-                <li>Comercializa unidades</li>
-            </ul>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown( """ <div class='card'> <h3>Incorporadora</h3> <ul> Uma incorporadora (ou empresa de incorporação imobiliária) é uma empresa responsável por planejar, desenvolver e viabilizar projetos imobiliários, como prédios residenciais, comerciais ou condomínios.</li> O que uma incorporadora faz:</b></li> <li>Compra ou negocia terrenos <li>Desenvolve o projeto (arquitetura, engenharia, legalização) <li>Obtém aprovações da prefeitura <li>Define o conceito do empreendimento (ex: apartamentos, salas comerciais) <li>Contrata a construtora para executar a obra <li>Comercializa as unidades (às vezes junto com imobiliárias)</b></li> </ul> </div> """, unsafe_allow_html=True )
 
     # =========================
     # VÍDEO CORRIGIDO
