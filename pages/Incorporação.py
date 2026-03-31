@@ -167,7 +167,7 @@ else:
     # =========================
     # TÍTULO (EXATO AO SEU ESTILO)
     # =========================
-    st.markdown("<div class='titulo-principal'>Reforma Tributária – Impactos nas Incorporações Imobiliárias</div>", unsafe_allow_html=True)
+    st.markdown("<div class='titulo-principal'>Reforma Tributária | Impactos nas Incorporações Imobiliárias</div>", unsafe_allow_html=True)
 
     # =========================
     # CARDS – IBS
@@ -192,9 +192,15 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
         <div class='card'>
             <h3>Prazos</h3>
             <ul>
-                <li>📊 Resumo direto: Depois disso → tende a acabar a entrada no modelo atual</li>
-                <li>Até 31/12/2028 → ainda dá pra entrar no RET “antigo”</b></li>
-                <li>Quem entrou antes → mantém o RET até concluir o empreendimento</b></li>
+                <li>📊Uma incorporadora (ou empresa de incorporação imobiliária) é uma empresa responsável por planejar, desenvolver e viabilizar 
+                projetos imobiliários, como prédios residenciais, comerciais ou condomínios.</li>
+                <li>O que uma incorporadora faz:</b></li>
+                <li>Compra ou negocia terrenos
+Desenvolve o projeto (arquitetura, engenharia, legalização)
+Obtém aprovações da prefeitura
+Define o conceito do empreendimento (ex: apartamentos, salas comerciais)
+Contrata a construtora para executar a obra
+Comercializa as unidades (às vezes junto com imobiliárias)</b></li>
             </ul>
         </div>
         """,
