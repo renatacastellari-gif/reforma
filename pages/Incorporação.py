@@ -142,7 +142,7 @@ else:
         unsafe_allow_html=True
     )
 
-    with open("seu_arquivo.pdf", "rb") as f:
+    with open("rf.pdf", "rb") as f:
         st.download_button(
             label="📥 Baixar PDF",
             data=f,
