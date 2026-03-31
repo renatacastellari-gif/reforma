@@ -1,8 +1,5 @@
-
-
 import streamlit as st
 from pathlib import Path
-# import pandas as pd  # remova se não usar
 
 # =========================
 # CONFIGURAÇÃO DA PÁGINA
@@ -55,12 +52,12 @@ else:
     HEADING_FONT = "Consolas, Menlo, Monaco, 'Courier New', monospace"
 
     # =========================
-    # CSS GLOBAL (TEMA ESCURO + TÍTULO + CARDS)
+    # CSS GLOBAL
     # =========================
     style_str = f"""
     <style>
         html, body, [class*="css"] {{
-            background-color: #1b1b1b; /* mantém seu fundo escuro do app original */
+            background-color: #1b1b1b;
         }}
         body {{
             font-family: {BODY_FONT};
@@ -73,10 +70,9 @@ else:
         .content-wrapper {{
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 1.2rem; /* respira nas laterais */
+            padding: 0 1.2rem;
         }}
 
-        /* Título exatamente como o seu exemplo */
         .titulo-principal {{
             font-family: {HEADING_FONT};
             font-size: 34px;
@@ -86,10 +82,8 @@ else:
             text-align: left;
             border-bottom: 2px solid #B91E27;
             padding-bottom: 8px;
-            letter-spacing: 0.2px;
         }}
 
-        /* Inputs e botões mantidos no tema escuro */
         input, textarea {{
             background-color: #2a2a2a !important;
             color: #F9EEEF !important;
@@ -103,12 +97,11 @@ else:
             border: none;
             font-weight: 600;
         }}
+
         .stButton > button:hover {{
             background-color: #8f1620;
-            color: #F9EEEF;
         }}
 
-        /* Cards */
         .card {{
             background-color: #2a2a2a;
             padding: 26px 28px;
@@ -116,63 +109,31 @@ else:
             margin: 22px 0;
             border-left: 6px solid #B91E27;
             box-shadow: 0 2px 0 #111111;
-            color: #f0f0f0;
         }}
 
         .card h3 {{
-            font-family: {HEADING_FONT};
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
-            margin: 0 0 12px 0;
-            color: #ffffff;
-            letter-spacing: 0.2px;
-        }}
-
-        .card ul {{
-            margin: 10px 0 0 18px;
-            padding: 0;
-            list-style-type: disc;
-        }}
-
-        .card li {{
-            font-size: 17px;
-            line-height: 1.7;
-            margin-bottom: 6px;
-            color: #e6e6e6;
-        }}
-
-        .card li b {{
-            color: #ffffff;
-            font-weight: 700;
-        }}
-
-        .card p {{
-            margin: 0;
-            color: #dcdcdc;
-            font-size: 16px;
-            line-height: 1.65;
-        }}
-
-        .highlight {{
-            color: #F2D5D7;
-            font-weight: 600;
+            margin-bottom: 12px;
         }}
     </style>
     """
     st.markdown(style_str, unsafe_allow_html=True)
 
-    # Wrapper para alinhar e controlar largura
     st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
 
     # =========================
-    # TÍTULO (EXATO AO SEU ESTILO)
+    # TÍTULO
     # =========================
-    st.markdown("<div class='titulo-principal'>Reforma Tributária | Impactos nas Incorporações Imobiliárias</div>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='titulo-principal'>Reforma Tributária | Impactos nas Incorporações Imobiliárias</div>",
+        unsafe_allow_html=True
+    )
 
     # =========================
-    # CARDS – IBS
+    # CARD PDF (SIMPLES)
     # =========================
-st.markdown(
+    st.markdown(
         """
         <div class='card'>
             <h3>📄 Documento</h3>
@@ -189,33 +150,29 @@ st.markdown(
             mime="application/pdf",
             use_container_width=True
         )
-   
+
+    # =========================
+    # CARD INCORPORADORA
+    # =========================
     st.markdown(
         """
         <div class='card'>
             <h3>Incorporadora</h3>
             <ul>
-                Uma incorporadora (ou empresa de incorporação imobiliária) é uma empresa responsável por planejar, desenvolver e viabilizar 
-                projetos imobiliários, como prédios residenciais, comerciais ou condomínios.</li>
-                O que uma incorporadora faz:</b></li>
-                <li>Compra ou negocia terrenos 
-                <li>Desenvolve o projeto (arquitetura, engenharia, legalização) 
- <li>Obtém aprovações da prefeitura 
- <li>Define o conceito do empreendimento (ex: apartamentos, salas comerciais) 
- <li>Contrata a construtora para executar a obra 
- <li>Comercializa as unidades (às vezes junto com imobiliárias)</b></li>
+                <li>Compra ou negocia terrenos</li>
+                <li>Desenvolve o projeto</li>
+                <li>Obtém aprovações</li>
+                <li>Define o conceito</li>
+                <li>Contrata construtora</li>
+                <li>Comercializa unidades</li>
             </ul>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-
-
-
-
     # =========================
-    # VÍDEO EXPLICATIVO
+    # VÍDEO CORRIGIDO
     # =========================
     st.markdown(
         """
@@ -226,9 +183,6 @@ st.markdown(
         unsafe_allow_html=True
     )
 
-    st.video("https://https://www.youtube.com/watch?v=ITUei7wDPH4")
+    st.video("https://www.youtube.com/watch?v=ITUei7wDPH4")
 
-        
-    
-    # Fecha o wrapper
     st.markdown("</div>", unsafe_allow_html=True)
