@@ -190,12 +190,12 @@ Novos projetos tendem a entrar já no novo sistema (CBS/IBS) ou em regras adapta
     st.markdown(
         """
         <div class='card'>
-            <h3>Prazos</h3>
+            <h3>Incorporadora</h3>
             <ul>
-                <li>📊Uma incorporadora (ou empresa de incorporação imobiliária) é uma empresa responsável por planejar, desenvolver e viabilizar 
+                Uma incorporadora (ou empresa de incorporação imobiliária) é uma empresa responsável por planejar, desenvolver e viabilizar 
                 projetos imobiliários, como prédios residenciais, comerciais ou condomínios.</li>
                 <li>O que uma incorporadora faz:</b></li>
-                <li>Compra ou negocia terrenos <li>
+                <li>Compra ou negocia terrenos 
                 <li>Desenvolve o projeto (arquitetura, engenharia, legalização) 
  <li>Obtém aprovações da prefeitura 
  <li>Define o conceito do empreendimento (ex: apartamentos, salas comerciais) 
