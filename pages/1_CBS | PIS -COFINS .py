@@ -340,3 +340,29 @@ else:
         st.error("⚠️ Arquivo 'tabela.png' não encontrado.")
 
     st.markdown("</div>", unsafe_allow_html=True)
+    # imagem antiga continua aqui
+if img_path.exists():
+    st.markdown("<div class='img-container'>", unsafe_allow_html=True)
+    st.image(str(img_path), caption="Linha do Tempo — PIS/COFINS → CBS", width=650)
+    st.markdown("</div>", unsafe_allow_html=True)
+else:
+    st.error("⚠️ Arquivo 'tabela.png' não encontrado.")
+
+
+# NOVA IMAGEM
+st.markdown("<div class='subtitulo'>🗂️ Imagem Complementar</div>", unsafe_allow_html=True)
+
+img_path_2 = Path("Screenshot_3.png")
+
+if img_path_2.exists():
+    st.markdown("<div class='img-container'>", unsafe_allow_html=True)
+    st.image(str(img_path_2), caption="Screenshot_3", width=650)
+    st.markdown("</div>", unsafe_allow_html=True)
+else:
+    st.error("⚠️ Arquivo 'Screenshot_3.png' não encontrado.")
+
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+
+
