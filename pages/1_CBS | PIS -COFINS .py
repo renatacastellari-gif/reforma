@@ -331,6 +331,7 @@ else:
     st.markdown("<div class='subtitulo'>🗂️ Tabela – Linha do Tempo</div>", unsafe_allow_html=True)
 
     img_path = Path("tabela.png")
+    img_path = Path("08_regras_transicao_pis_cofins_img.png")
     if img_path.exists():
         st.markdown("<div class='img-container'>", unsafe_allow_html=True)
         st.image(str(img_path), caption="Linha do Tempo — PIS/COFINS → CBS", width=650)
